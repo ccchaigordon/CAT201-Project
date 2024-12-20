@@ -9,7 +9,7 @@ const faqs: FAQ[] = [
   {
     question: "Can I pre-order an item if it's currently unavailable?",
     answer:
-      "Yes! Apart from custom orders, all pre-orders/reservations require a 100% deposit or a 30% deposit with 70% Balance payment upon item arrival. Speak to our friendly Sales & Support Team about a possible reservation/pre-order today!",
+      "No! Apart from custom orders, all pre-orders/reservations require a 100% deposit or a 30% deposit with 70% Balance payment upon item arrival. Speak to our friendly Sales & Support Team about a possible reservation/pre-order today!",
   },
   {
     question: "Does my order come with a warranty?",
