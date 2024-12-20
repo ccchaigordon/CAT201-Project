@@ -37,6 +37,3 @@ coverage/
 
 # Build
 out/
-
-# Version tracking
-version.txt
