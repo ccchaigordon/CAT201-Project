@@ -12,8 +12,8 @@ import Footer from "../../global/Footer";
 function MainPage() {
   return (
     <>
-      <NavBar />
       <div className="section-1">
+        <NavBar />
         <SearchBar />
         <Carousel />
         <AboutUs />
