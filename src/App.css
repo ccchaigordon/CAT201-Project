@@ -13,7 +13,9 @@ body, html {
 }
 
 body {
-    min-height: 100vh;
+    scroll-snap-type: y mandatory; /* Enable vertical scroll snapping */
+    overflow-y: scroll; /* Allow vertical scrolling */
+    height: 100vh;
 }
 
 header {
@@ -190,8 +192,16 @@ input#search-bar:-ms-input-placeholder {
     height: auto;
 }
 
+.section-1, .section-2, .section-3 {
+    height: 100vh;
+    scroll-snap-align: start;
+}
+
+.footer {
+    scroll-snap-align: start;
+}
+
 .section-1 {
-    height: calc(100vh - 6rem);
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -203,7 +213,6 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .section-2 {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -213,7 +222,6 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .section-3 {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -231,13 +239,12 @@ input#search-bar:-ms-input-placeholder {
     flex-grow: 1;
     font-family: "Poppins", sans-serif;
     color: #FFFFFF;
-    padding: 0 2rem;
+    padding: 0;
     margin: 0 auto;
     width: 60%;
     height: 100%;
     text-align: center;
     justify-content: center;
-    align-items: center;
 }
 
 .about-us h2 {
@@ -247,8 +254,7 @@ input#search-bar:-ms-input-placeholder {
 .about-us p {
     font-size: 1rem;
     line-height: 1.6;
-    margin: 0 auto 2rem 0;
-    padding: 0 2vw;
+    margin: 0 auto;
 }
 
 .shop-by-category {
