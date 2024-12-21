@@ -260,13 +260,14 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .shop-by-category h2 {
+    margin-top: 3rem;
     text-align: center;
     font-size: 2rem;
     color: #000000;
 }
 
 .categories {
-    margin: 1.5rem auto;
+    margin: 0 auto;
     width: 60%;
     display: flex;
     justify-content: space-around;
@@ -336,6 +337,7 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .slide-container h2 {
+    margin-top: 3rem;
     font-size: 2rem;
 }
 
