@@ -6,9 +6,9 @@ function NavBar() {
       <header>
         <div className="header-container">
           <div className="logo">
-            <Link to="/">
+            <a href="/">
               <img src="./src/assets/logo.svg" alt="Logo" />
-            </Link>
+            </a>
           </div>
           <nav className="navbar">
             <ul>
