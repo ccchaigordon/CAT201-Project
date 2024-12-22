@@ -15,6 +15,7 @@
 ```bash
 git clone https://github.com/ccchaigordon/CAT201-Project.git
 cd CAT201-Project
+cd frontend
 ```
 
 ### Start development server
