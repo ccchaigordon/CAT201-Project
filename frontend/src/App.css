@@ -13,8 +13,8 @@ body, html {
 }
 
 body {
-    scroll-snap-type: y mandatory; /* Enable vertical scroll snapping */
-    overflow-y: scroll; /* Allow vertical scrolling */
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
     height: 100vh;
 }
 
@@ -41,6 +41,8 @@ div h2 {
     font-size: 2rem;
     text-align: center;
 }
+
+/* MainPage.tsx */
 
 .header-container {
     display: flex;
@@ -194,11 +196,6 @@ input#search-bar:-ms-input-placeholder {
 
 .section-1, .section-2, .section-3 {
     height: 100vh;
-    scroll-snap-align: start;
-}
-
-.footer {
-    scroll-snap-align: start;
 }
 
 .section-1 {
@@ -312,6 +309,7 @@ input#search-bar:-ms-input-placeholder {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .product-info {
@@ -400,8 +398,9 @@ input#search-bar:-ms-input-placeholder {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40vh;
-    margin: 2rem 0 0 0;
+    max-height: 40vh;
+    margin: 0 auto;
+    padding-top: 2.5rem;
 }
 
 .brand-container h2 {
@@ -426,18 +425,25 @@ input#search-bar:-ms-input-placeholder {
 .brand {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.brand-link {
+    display: flex;
+    flex-direction: row;
     width: 15%;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
 }
 
-.brand img {
+.brand-link img {
     width: 75%;
     cursor: grab;
 }
 
-.brand img:hover {
+.brand-link img:hover {
     transform: scale(1.1);
     transition: transform 0.75s;
 }
@@ -471,6 +477,7 @@ input#search-bar:-ms-input-placeholder {
 
 .accordian-container h2 {
     font-size: 2rem;
+    margin-top: 0.75rem;
 }
 
 .accordion {
@@ -612,20 +619,146 @@ input#search-bar:-ms-input-placeholder {
 	padding-left: 8px;
 }
 
-.footer-col .social-links a {
-	display: inline-block;
-	height: 40px;
-	width: 40px;
-	background-color: rgba(255,255,255,0.2);
-	margin:0 10px 10px 0;
-	text-align: center;
-	line-height: 40px;
-	border-radius: 50%;
-	color: #ffffff;
-	transition: all 0.5s ease;
+/* Fender.tsx */
+
+.intro-container {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 5rem;
+    font-family: "Poppins", sans-serif;
 }
 
-.footer-col .social-links a:hover {
-	color: #24262b;
-	background-color: #ffffff;
+.intro-container p {
+    padding: 0 0 0 2rem;
+    font-size: 1rem;
+    text-align: justify;
+}
+
+.intro-container img {
+    height: 115%;
+    width: auto;
+}
+
+.filter {
+    width: 100%;
+    margin: 2rem 30% 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.filter p {
+    margin-right: 1.25rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    color: #383838;
+}
+
+.sort {
+    padding: 8px 15px;
+    background-color: #FFFFFF;
+    border: 1px solid #4b4949;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+    transition: border-color 0.3s ease;
+}
+  
+.sort:hover {
+    opacity: 0.8;
+}
+  
+.sort::-ms-expand {
+    display: none;
+}
+  
+.sort::after {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.product-section {
+    background-color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+  
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 75%;
+    margin: 20px 0;
+    color: #000000;
+    text-align: center;
+}
+  
+.product-section-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 20px;
+    cursor: grab
+}
+
+.product-section-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s;
+}
+
+ .product-grid-info h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.product-grid-info h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.2rem;
+}
+  
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+  
+.pagination button {
+    padding: 10px 20px;
+    margin: 0 0.55rem 3rem 0.55rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    opacity: 0.6;
+}
+  
+.pagination button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    border: 1px solid rgb(0, 0, 0, 60%);
 }

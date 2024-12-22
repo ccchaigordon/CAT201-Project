@@ -12,21 +12,23 @@ import Footer from "../../global/Footer";
 function MainPage() {
   return (
     <>
-      <div className="section-1">
+      <div className="section-1" style={{ scrollSnapAlign: "start" }}>
         <NavBar />
         <SearchBar />
         <Carousel />
         <AboutUs />
       </div>
-      <div className="section-2">
+      <div className="section-2" style={{ scrollSnapAlign: "start" }}>
         <ShopByCategory />
         <TopSellers />
       </div>
-      <div className="section-3">
+      <div className="section-3" style={{ scrollSnapAlign: "start" }}>
         <ShopByBrand />
         <Faq />
       </div>
-      <Footer />
+      <div style={{ scrollSnapAlign: "start" }}>
+        <Footer />
+      </div>
     </>
   );
 }

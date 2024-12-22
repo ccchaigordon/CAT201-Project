@@ -9,43 +9,43 @@ type ProductInfo = {
 
 const products: ProductInfo[] = [
   {
-    imgSrc: "./src/assets/top_seller_1.png",
+    imgSrc: "./src/assets/fender_p2_st_white.png",
     name: "Fender Player II Stratocaster HSS Electric Guitar, RW FB, Polar White",
     price: "RM 4799.00",
     rating: 5,
   },
   {
-    imgSrc: "./src/assets/top_seller_2.png",
+    imgSrc: "./src/assets/fender_p2_tl_blue.png",
     name: "Fender Player II Telecaster Electric Guitar, RW FB, Aquatone Blue",
     price: "RM 4599.00",
     rating: 5,
   },
   {
-    imgSrc: "./src/assets/top_seller_3.png",
+    imgSrc: "./src/assets/fender_p2_st_blue.png",
     name: "Fender Player II Stratocaster HSS Electric Guitar, Maple FB, Aquatone Blue",
     price: "RM 4799.00",
     rating: 4,
   },
   {
-    imgSrc: "./src/assets/top_seller_4.png",
+    imgSrc: "./src/assets/fender_p2_prec_black.png",
     name: "Fender Player II Precision Bass Guitar, Maple FB, Black",
     price: "RM 4599.00",
     rating: 4,
   },
   {
-    imgSrc: "./src/assets/top_seller_5.png",
+    imgSrc: "./src/assets/squier_helkit_st_pink.png",
     name: "Fender Squier Limited Edition Hello Kitty Stratocaster Electric Guitar, Maple FB, Pink",
     price: "RM 2799.00",
     rating: 4,
   },
   {
-    imgSrc: "./src/assets/top_seller_6.png",
+    imgSrc: "./src/assets/squier_debut_prec_red.png",
     name: "Squier Debut Series Precision Bass Guitar, Laurel FB, Dakota Red",
     price: "RM 799.00",
     rating: 4,
   },
   {
-    imgSrc: "./src/assets/top_seller_7.png",
+    imgSrc: "./src/assets/focusrite_solo_3rd.png",
     name: "Focusrite Scarlett Solo Studio Pack (3rd Generation)",
     price: "RM 876.75",
     rating: 4,
