@@ -21,6 +21,14 @@ function ShopByCategory() {
             <img src="src/assets/keyboard.svg" alt="Keyboards" />
             <span>Keyboards</span>
           </a>
+          <a href="#" className="category">
+            <img
+              src="src/assets/accessory.svg"
+              alt="Accessories"
+              style={{ filter: "invert(100%)" }}
+            />
+            <span>Accessories</span>
+          </a>
         </div>
       </div>
     </>
