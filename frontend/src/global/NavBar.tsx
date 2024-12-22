@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function NavBar() {
   return (
     <>
@@ -13,24 +11,24 @@ function NavBar() {
           <nav className="navbar">
             <ul>
               <li>
-                <Link to="/new-arrivals">WHAT'S NEW</Link>
+                <a href="/new-arrivals">WHAT'S NEW</a>
               </li>
               <li>
-                <Link to="/deals">DEALS</Link>
+                <a href="/deals">DEALS</a>
               </li>
               <li>
-                <Link to="/brands">BRANDS</Link>
+                <a href="/brands">BRANDS</a>
               </li>
               <li>
-                <Link to="/categories">CATEGORIES</Link>
+                <a href="/categories">CATEGORIES</a>
               </li>
               <li>
-                <Link to="/about-us">ABOUT US</Link>
+                <a href="/about-us">ABOUT US</a>
               </li>
             </ul>
           </nav>
           <div className="cart-profile">
-            <img src="./src/assets/cart.svg" alt="Add to cart" />
+            <img src="./src/assets/cart.svg" alt="Add href cart" />
             <img src="./src/assets/profile.svg" alt="Profile" />
           </div>
         </div>
