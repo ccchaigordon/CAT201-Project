@@ -1,0 +1,102 @@
+[
+    {
+        "name": "Fender Player II Series",
+        "price": 4599.0,
+        "rating": 5
+    },
+    {
+        "name": "Ibanez",
+        "price": 3799.56,
+        "rating": 5
+    },
+    {
+        "name": "Gibson Les Paul Classic",
+        "price": 5250.0,
+        "rating": 5
+    },
+    {
+        "name": "Yamaha PSR-E373",
+        "price": 1200.0,
+        "rating": 4
+    },
+    {
+        "name": "Roland TD-1DMK",
+        "price": 4500.0,
+        "rating": 5
+    },
+    {
+        "name": "Korg Minilogue",
+        "price": 2800.0,
+        "rating": 4
+    },
+    {
+        "name": "Martin D-28",
+        "price": 6600.0,
+        "rating": 5
+    },
+    {
+        "name": "Taylor 214ce",
+        "price": 4800.0,
+        "rating": 5
+    },
+    {
+        "name": "Epiphone SG Standard",
+        "price": 2100.0,
+        "rating": 4
+    },
+    {
+        "name": "Casio CT-X700",
+        "price": 850.0,
+        "rating": 4
+    },
+    {
+        "name": "Fender American Ultra Stratocaster",
+        "price": 7500.0,
+        "rating": 5
+    },
+    {
+        "name": "PRS SE Custom 24",
+        "price": 3000.0,
+        "rating": 5
+    },
+    {
+        "name": "Gretsch G5420T",
+        "price": 3700.0,
+        "rating": 4
+    },
+    {
+        "name": "Boss Katana-50 MkII",
+        "price": 1150.0,
+        "rating": 5
+    },
+    {
+        "name": "Warwick Streamer LX",
+        "price": 7200.0,
+        "rating": 5
+    },
+    {
+        "name": "Orange Crush 20",
+        "price": 650.0,
+        "rating": 4
+    },
+    {
+        "name": "Moog Subsequent 25",
+        "price": 3200.0,
+        "rating": 5
+    },
+    {
+        "name": "Pioneer DJ DDJ-400",
+        "price": 1300.0,
+        "rating": 4
+    },
+    {
+        "name": "Nord Stage 3 88",
+        "price": 15500.0,
+        "rating": 5
+    },
+    {
+        "name": "Jackson Soloist SLX",
+        "price": 2900.0,
+        "rating": 4
+    }
+]
