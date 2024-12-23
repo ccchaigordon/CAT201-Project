@@ -24,19 +24,19 @@ const products: ProductInfo[] = [
     imgSrc: "./src/assets/products/fender_p2_st_blue.png",
     name: "Fender Player II Stratocaster HSS Electric Guitar, Maple FB, Aquatone Blue",
     price: "RM 4799.00",
-    rating: 4,
+    rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_p2_prec_black.png",
     name: "Fender Player II Precision Bass Guitar, Maple FB, Black",
     price: "RM 4599.00",
-    rating: 4,
+    rating: 5,
   },
   {
     imgSrc: "./src/assets/products/squier_helkit_st_pink.png",
     name: "Fender Squier Limited Edition Hello Kitty Stratocaster Electric Guitar, Maple FB, Pink",
     price: "RM 2799.00",
-    rating: 4,
+    rating: 3,
   },
   {
     imgSrc: "./src/assets/products/squier_debut_prec_red.png",
@@ -48,9 +48,30 @@ const products: ProductInfo[] = [
     imgSrc: "./src/assets/products/focusrite_solo_3rd.png",
     name: "Focusrite Scarlett Solo Studio Pack (3rd Generation)",
     price: "RM 876.75",
-    rating: 4,
+    rating: 5,
   },
 ];
+
+function renderStars(rating: number) {
+  const totalStars = 5;
+  const stars = [];
+  for (let i = 1; i <= totalStars; i++) {
+    if (i <= rating) {
+      stars.push(
+        <span key={i} className="filled-star">
+          ★
+        </span>
+      );
+    } else {
+      stars.push(
+        <span key={i} className="unfilled-star">
+          ☆
+        </span>
+      );
+    }
+  }
+  return stars;
+}
 
 function TopSellers() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -84,7 +105,7 @@ function TopSellers() {
                 <div className="product-info">
                   <h3>{product.name}</h3>
                   <p>{product.price}</p>
-                  <div className="rating">{"★".repeat(product.rating)}</div>
+                  <div className="rating">{renderStars(product.rating)}</div>
                 </div>
               </div>
             </div>

@@ -39,7 +39,7 @@ const products: ProductInfo[] = [
     imgSrc: "./src/assets/products/squier_helkit_st_pink.png",
     name: "Fender Squier Limited Edition Hello Kitty Stratocaster Electric Guitar, Maple FB, Pink",
     price: "RM 2799.00",
-    rating: 4,
+    rating: 3,
   },
   {
     imgSrc: "./src/assets/products/fender_p_st_maple_fb_sunburst.png",
@@ -124,6 +124,27 @@ const products: ProductInfo[] = [
 
 const PRODUCTS_PER_PAGE = 16;
 
+function renderStars(rating: number) {
+  const totalStars = 5;
+  const stars = [];
+  for (let i = 1; i <= totalStars; i++) {
+    if (i <= rating) {
+      stars.push(
+        <span key={i} className="filled-star">
+          ★
+        </span>
+      );
+    } else {
+      stars.push(
+        <span key={i} className="unfilled-star">
+          ☆
+        </span>
+      );
+    }
+  }
+  return stars;
+}
+
 function Fender() {
   const [currentPage, setCurrentPage] = useState(1);
   const [userClicked, setUserClicked] = useState(false);
@@ -198,7 +219,7 @@ function Fender() {
               <div className="product-grid-info">
                 <h2>{product.name}</h2>
                 <h3>{product.price}</h3>
-                <div className="rating">{"★".repeat(product.rating)}</div>
+                <div className="rating">{renderStars(product.rating)}</div>
               </div>
             </div>
           ))}
