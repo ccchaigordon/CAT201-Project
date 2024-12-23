@@ -678,16 +678,6 @@ input#search-bar:-ms-input-placeholder {
 .sort::-ms-expand {
     display: none;
 }
-  
-.sort::after {
-    content: "▼";
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    font-size: 12px;
-}
 
 .product-section {
     background-color: #FFFFFF;
