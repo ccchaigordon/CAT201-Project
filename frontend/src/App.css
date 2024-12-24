@@ -321,13 +321,21 @@ input#search-bar:-ms-input-placeholder {
     border-radius: 5px;
 }
 
-.product-info h3, p {
+.product-info h3, h4 {
     margin: 0 auto;
 }
 
 .product-info h3 {
     margin: 0 0.5rem;
     font-size: 0.82rem;
+    text-align: center;
+    font-weight: 400;
+}
+
+.product-info h4 {
+    margin: 0 0.5rem;
+    padding: 0.25rem 0 0;
+    font-size: 1rem;
     text-align: center;
 }
 

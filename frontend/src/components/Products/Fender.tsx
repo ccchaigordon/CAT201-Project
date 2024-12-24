@@ -6,7 +6,9 @@ import Footer from "../../global/Footer";
 type ProductInfo = {
   imgSrc: string;
   name: string;
-  price: string;
+  category: string;
+  brand: string;
+  price: number;
   rating: number;
 };
 
@@ -14,110 +16,146 @@ const products: ProductInfo[] = [
   {
     imgSrc: "./src/assets/products/fender_p2_st_white.png",
     name: "Fender Player II Stratocaster HSS Electric Guitar, RW FB, Polar White",
-    price: "RM 4799.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 4799,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_p2_tl_blue.png",
     name: "Fender Player II Telecaster Electric Guitar, RW FB, Aquatone Blue",
-    price: "RM 4599.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 4599,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_p2_st_blue.png",
     name: "Fender Player II Stratocaster HSS Electric Guitar, Maple FB, Aquatone Blue",
-    price: "RM 4799.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 4799,
     rating: 4,
   },
   {
     imgSrc: "./src/assets/products/fender_p2_prec_black.png",
     name: "Fender Player II Precision Bass Guitar, Maple FB, Black",
-    price: "RM 4599.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 4599,
     rating: 4,
   },
   {
     imgSrc: "./src/assets/products/squier_helkit_st_pink.png",
     name: "Fender Squier Limited Edition Hello Kitty Stratocaster Electric Guitar, Maple FB, Pink",
-    price: "RM 2799.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 2799,
     rating: 3,
   },
   {
     imgSrc: "./src/assets/products/fender_p_st_maple_fb_sunburst.png",
     name: "Fender Ltd Ed Player Stratocaster Electric Guitar, Maple FB, 3-Tone Sunburst",
-    price: "RM 3608.10",
+    category: "Guitar",
+    brand: "Fender",
+    price: 3608.1,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_ p_tl_maple_fb_sunburst.png",
     name: "Fender Ltd Ed Player Telecaster Electric Guitar, Roasted Maple FB, Sienna Sunburst",
-    price: "RM 3815.10",
+    category: "Guitar",
+    brand: "Fender",
+    price: 3815.1,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_p_jm_pau_ferro_fb_orange.png",
     name: "Fender Player Jazzmaster Electric Guitar, Pau Ferro FB, Capri Orange",
-    price: "RM 3923.10",
+    category: "Guitar",
+    brand: "Fender",
+    price: 3923.1,
     rating: 4,
   },
   {
     imgSrc: "./src/assets/products/fender_custom_tl_amber.png",
     name: "Fender Special Edition Custom Telecaster FMT HH Electric Guitar, Amber",
-    price: "RM 4039.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 4039,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_p_tl_pau_ferro_fb_white.png",
     name: "Fender Player Telecaster Electric Guitar, Pau Ferro FB, Polar White",
-    price: "RM 4130.10",
+    category: "Guitar",
+    brand: "Fender",
+    price: 4130.1,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_jp_h2_tl_rw_fb_forest_blue.png",
     name: "Fender Japan Hybrid II Telecaster Electric Guitar, RW FB, Forest Blue",
-    price: "RM 4489.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 4489,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_cw_st_rw_fb_surf_green.png",
     name: "Fender Limited Edition Cory Wong Stratocaster Electric Guitar, RW FB, Surf Green",
-    price: "RM 12649.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 12649,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_fsr_american_ult_st_ebony_fb.png",
     name: "Fender FSR American Ultra HSS Stratocaster Electric Guitar, Ebony FB, Tiger",
-    price: "RM 13449.10",
+    category: "Guitar",
+    brand: "Fender",
+    price: 13449.1,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_custom_ml_1968_relic_st_sunburst.png",
     name: "Fender Custom Shop Michael Landau Signature 1968 Relic Stratocaster Electric Guitar, 3-Tone Sunburst",
-    price: "RM 26549.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 26549,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_am_ult2_tl_ebony_fb_solar_flare.png",
     name: "Fender American Ultra II Telecaster Electric Guitar, Ebony FB, Solar Flare",
-    price: "RM 12339.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 12339,
     rating: 5,
   },
   {
     imgSrc:
       "./src/assets/products/fender_custom_db_1951_relic_tl_aged_natural.png",
     name: "Fender Custom Shop David Brown Masterbuilt 1951 Loaded CuNiFe Heavy Relic Telecaster, Aged Natural",
-    price: "RM 47569.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 47569,
     rating: 5,
   },
   {
     imgSrc: "./src/assets/products/fender_acous_p_tl_arctic_white.png",
     name: "Fender Acoustasonic Player Telecaster Electric Guitar, Arctic White",
-    price: "RM 6029.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 6029,
     rating: 4,
   },
   {
     imgSrc: "./src/assets/products/fender_am_acous_st_natural.png",
     name: "Fender American Acoustasonic Stratocaster w/Bag, Natural",
-    price: "RM 10109.00",
+    category: "Guitar",
+    brand: "Fender",
+    price: 10109,
     rating: 5,
   },
 ];
@@ -160,11 +198,9 @@ function Fender() {
 
   const sortProducts = (products: ProductInfo[]) => {
     return products.sort((a, b) => {
-      const priceA = parseFloat(a.price.replace("RM ", "").replace(",", ""));
-      const priceB = parseFloat(b.price.replace("RM ", "").replace(",", ""));
       return sortOrder === "Price (Low to High)"
-        ? priceA - priceB
-        : priceB - priceA;
+        ? a.price - b.price
+        : b.price - a.price;
     });
   };
 
@@ -218,7 +254,7 @@ function Fender() {
               />
               <div className="product-grid-info">
                 <h2>{product.name}</h2>
-                <h3>{product.price}</h3>
+                <h3>RM {product.price.toFixed(2)}</h3> {/* Format price */}
                 <div className="rating">{renderStars(product.rating)}</div>
               </div>
             </div>
