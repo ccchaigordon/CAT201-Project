@@ -422,7 +422,7 @@ input#search-bar:-ms-input-placeholder {
 .brands-wrapper {
     display: flex;
     justify-content: center;
-    margin: 3rem 0 0 0;
+    margin: 2rem 0 0 0;
     width: 60%;
     align-items: center;
     background-color: #000000;
@@ -481,11 +481,12 @@ input#search-bar:-ms-input-placeholder {
     text-align: center;
     font-family: "Poppins", sans-serif;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .accordian-container h2 {
     font-size: 2rem;
-    margin-top: 0.75rem;
+    margin-top: 0.25rem;
 }
 
 .accordion {
