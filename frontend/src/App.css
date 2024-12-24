@@ -916,9 +916,3 @@ input#search-bar:-ms-input-placeholder {
 .add-to-cart:hover {
     background-color: #c09730;
 }
-  
-.availability {
-    font-size: 0.9rem;
-    text-align: left;
-    margin-top: 20px;
-}
