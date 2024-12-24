@@ -129,7 +129,7 @@ input#search-bar {
     padding: 0 20px;
     font-size: 1rem;
     border: 1px solid #D0CFCE;
-    background-color: #12181f;
+    background-color: #CCCCCC;
     color: #FFFFFF;
     border-radius: 10px;
     outline: none;
@@ -143,14 +143,13 @@ input#search-bar {
     width: 3rem;
     height: auto;
     cursor: pointer;
-    filter: invert(100%);
 }
 
 
 input#search-bar:focus {
-    border: 1px solid #008ABF;
+    border: 1px solid #000000;
     transition: 0.35s ease;
-    color: #FFFFFF;
+    color: #000000;
     opacity: 100%;
 }
 
