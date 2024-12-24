@@ -854,10 +854,9 @@ input#search-bar:-ms-input-placeholder {
   
 .price {
     margin: 0 auto;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
+    color: #000000;
     text-align: center;
 }
   
