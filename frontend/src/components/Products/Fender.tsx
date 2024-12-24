@@ -188,7 +188,7 @@ const products: ProductInfo[] = [
   },
   {
     imgSrc: "/products/fender_am_acous_st_natural.png",
-    name: "Fender American Acoustasonic Stratocaster w/Bag, Natural",
+    name: "Fender American Acoustasonic Stratocaster with Bag, Natural",
     category: "Guitar",
     brand: "Fender",
     description:
@@ -262,7 +262,6 @@ function Fender() {
       <SearchBar />
       <h2 style={{ marginTop: "3rem" }}>Fender</h2>
       <div className="intro-container">
-        {/* Your existing Fender intro sections */}
         <img src="/assets/fender.png" alt="Fender Logo" />
         <p>
           Discover the legendary sound of Fender, a hallmark of quality and

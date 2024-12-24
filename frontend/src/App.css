@@ -816,7 +816,7 @@ input#search-bar:-ms-input-placeholder {
     align-items: flex-start;
     margin: 0 auto;
     width: 70%;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .product-details-desc {
@@ -838,7 +838,7 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .price-cart {
-    width: 30vw;
+    width: 40vw;
 }
 
 .price-cart-card {
@@ -850,14 +850,6 @@ input#search-bar:-ms-input-placeholder {
     font-family: Arial, sans-serif;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-}
-  
-.price {
-    margin: 0 auto;
-    font-size: 2rem;
-    font-weight: 600;
-    color: #000000;
-    text-align: center;
 }
   
 .quantity-control {
@@ -904,7 +896,7 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .quantity-control input:focus {
-    border-color: #d4af37; /* Highlighted border color */
+    border-color: #d4af37;
     outline: none;
 }
   

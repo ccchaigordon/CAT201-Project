@@ -49,7 +49,10 @@ function ProductPage() {
           </div>
           <div className="price-cart">
             <div className="price-cart-card">
-              <h2 className="price">
+              <h2
+                className="price"
+                style={{ fontFamily: "Poppins", fontSize: "1.85rem" }}
+              >
                 RM{" "}
                 {product.price.toLocaleString("en-US", {
                   minimumFractionDigits: 2,

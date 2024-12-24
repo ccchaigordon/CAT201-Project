@@ -11,7 +11,7 @@ type ProductInfo = {
 
 const products: ProductInfo[] = [
   {
-    imgSrc: "./public/products/fender_p2_st_white.png",
+    imgSrc: "/products/fender_p2_st_white.png",
     name: "Fender Player II Stratocaster HSS Electric Guitar, RW FB, Polar White",
     category: "Guitar",
     brand: "Fender",
@@ -19,7 +19,7 @@ const products: ProductInfo[] = [
     rating: 5,
   },
   {
-    imgSrc: "./public/products/fender_p2_tl_blue.png",
+    imgSrc: "/products/fender_p2_tl_blue.png",
     name: "Fender Player II Telecaster Electric Guitar, RW FB, Aquatone Blue",
     category: "Guitar",
     brand: "Fender",
@@ -27,7 +27,7 @@ const products: ProductInfo[] = [
     rating: 5,
   },
   {
-    imgSrc: "./public/products/fender_p2_st_blue.png",
+    imgSrc: "/products/fender_p2_st_blue.png",
     name: "Fender Player II Stratocaster HSS Electric Guitar, Maple FB, Aquatone Blue",
     category: "Guitar",
     brand: "Fender",
@@ -35,7 +35,7 @@ const products: ProductInfo[] = [
     rating: 5,
   },
   {
-    imgSrc: "./public/products/fender_p2_prec_black.png",
+    imgSrc: "/products/fender_p2_prec_black.png",
     name: "Fender Player II Precision Bass Guitar, Maple FB, Black",
     category: "Bass",
     brand: "Fender",
@@ -43,7 +43,7 @@ const products: ProductInfo[] = [
     rating: 5,
   },
   {
-    imgSrc: "./public/products/squier_helkit_st_pink.png",
+    imgSrc: "/products/squier_helkit_st_pink.png",
     name: "Fender Squier Limited Edition Hello Kitty Stratocaster Electric Guitar, Maple FB, Pink",
     category: "Guitar",
     brand: "Fender",
@@ -51,7 +51,7 @@ const products: ProductInfo[] = [
     rating: 3,
   },
   {
-    imgSrc: "./public/products/squier_debut_prec_red.png",
+    imgSrc: "/products/squier_debut_prec_red.png",
     name: "Squier Debut Series Precision Bass Guitar, Laurel FB, Dakota Red",
     category: "Bass",
     brand: "Squier",
@@ -59,7 +59,7 @@ const products: ProductInfo[] = [
     rating: 4,
   },
   {
-    imgSrc: "./public/products/focusrite_solo_3rd.png",
+    imgSrc: "/products/focusrite_solo_3rd.png",
     name: "Focusrite Scarlett Solo Studio Pack (3rd Generation)",
     category: "Accessory",
     brand: "Focusrite",
