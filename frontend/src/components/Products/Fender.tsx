@@ -198,9 +198,16 @@ function Fender() {
 
   const sortProducts = (products: ProductInfo[]) => {
     return products.sort((a, b) => {
-      return sortOrder === "Price (Low to High)"
-        ? a.price - b.price
-        : b.price - a.price;
+      if (sortOrder === "Price (Low to High)") {
+        return a.price - b.price;
+      } else if (sortOrder === "Price (High to Low)") {
+        return b.price - a.price;
+      } else if (sortOrder === "Rating (High to Low)") {
+        return b.rating - a.rating;
+      } else if (sortOrder === "Rating (Low to High)") {
+        return a.rating - b.rating;
+      }
+      return 0;
     });
   };
 
@@ -242,6 +249,8 @@ function Fender() {
           >
             <option value="Price (Low to High)">Price (Low to High)</option>
             <option value="Price (High to Low)">Price (High to Low)</option>
+            <option value="Rating (High to Low)">Rating (High to Low)</option>
+            <option value="Rating (Low to High)">Rating (Low to High)</option>
           </select>
         </div>
         <div className="product-grid">
@@ -260,7 +269,6 @@ function Fender() {
                     minimumFractionDigits: 2,
                   })}
                 </h3>
-
                 <div className="rating">{renderStars(product.rating)}</div>
               </div>
             </div>
