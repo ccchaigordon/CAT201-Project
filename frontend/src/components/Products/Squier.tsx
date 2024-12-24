@@ -1,6 +1,6 @@
-import NavBar from "../../global/NavBar";
-import SearchBar from "../../global/SearchBar";
-import Footer from "../../global/Footer";
+import NavBar from "../global/NavBar";
+import SearchBar from "../global/SearchBar";
+import Footer from "../global/Footer";
 
 function Squier() {
   return (

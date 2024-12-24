@@ -1,12 +1,12 @@
-import NavBar from "../../global/NavBar";
-import SearchBar from "../../global/SearchBar";
+import NavBar from "../global/NavBar";
+import SearchBar from "../global/SearchBar";
 import Carousel from "./Carousel";
 import AboutUs from "./AboutUs";
 import ShopByCategory from "./ShopByCategory";
 import TopSellers from "./TopSellers";
 import ShopByBrand from "./ShopByBrand";
 import Faq from "./Faq";
-import Footer from "../../global/Footer";
+import Footer from "../global/Footer";
 // import { Link } from "react-router-dom";
 
 function MainPage() {

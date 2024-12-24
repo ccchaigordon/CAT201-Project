@@ -5,7 +5,7 @@ function NavBar() {
         <div className="header-container">
           <div className="logo">
             <a href="/">
-              <img src="./src/assets/logo.svg" alt="Logo" />
+              <img src="/assets/logo.svg" alt="Logo" />
             </a>
           </div>
           <nav className="navbar">
@@ -28,8 +28,8 @@ function NavBar() {
             </ul>
           </nav>
           <div className="cart-profile">
-            <img src="./src/assets/cart.svg" alt="Add href cart" />
-            <img src="./src/assets/profile.svg" alt="Profile" />
+            <img src="/assets/cart.svg" alt="Add href cart" />
+            <img src="/assets/profile.svg" alt="Profile" />
           </div>
         </div>
       </header>

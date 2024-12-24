@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const imagePaths = [
-    "./src/assets/deal_1.png",
-    "./src/assets/deal_2.png",
-    "./src/assets/deal_3.png",
-    "./src/assets/deal_4.png",
-    "./src/assets/deal_5.png",
+    "./public/assets/deal_1.png",
+    "./public/assets/deal_2.png",
+    "./public/assets/deal_3.png",
+    "./public/assets/deal_4.png",
+    "./public/assets/deal_5.png",
   ];
 
   useEffect(() => {
