@@ -120,7 +120,12 @@ function TopSellers() {
                 <img src={product.imgSrc} alt={product.name} />
                 <div className="product-info">
                   <h3>{product.name}</h3>
-                  <h4>RM {product.price.toFixed(2)}</h4>
+                  <h4>
+                    RM{" "}
+                    {product.price.toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                    })}
+                  </h4>
                   <div className="rating">{renderStars(product.rating)}</div>
                 </div>
               </div>

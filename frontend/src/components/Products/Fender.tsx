@@ -254,7 +254,13 @@ function Fender() {
               />
               <div className="product-grid-info">
                 <h2>{product.name}</h2>
-                <h3>RM {product.price.toFixed(2)}</h3> {/* Format price */}
+                <h3>
+                  RM{" "}
+                  {product.price.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                  })}
+                </h3>
+
                 <div className="rating">{renderStars(product.rating)}</div>
               </div>
             </div>
