@@ -202,10 +202,8 @@ function Fender() {
         return a.price - b.price;
       } else if (sortOrder === "Price (High to Low)") {
         return b.price - a.price;
-      } else if (sortOrder === "Rating (High to Low)") {
+      } else if (sortOrder === "Most Popular") {
         return b.rating - a.rating;
-      } else if (sortOrder === "Rating (Low to High)") {
-        return a.rating - b.rating;
       }
       return 0;
     });
@@ -249,8 +247,7 @@ function Fender() {
           >
             <option value="Price (Low to High)">Price (Low to High)</option>
             <option value="Price (High to Low)">Price (High to Low)</option>
-            <option value="Rating (High to Low)">Rating (High to Low)</option>
-            <option value="Rating (Low to High)">Rating (Low to High)</option>
+            <option value="Most Popular">Most Popular</option>
           </select>
         </div>
         <div className="product-grid">

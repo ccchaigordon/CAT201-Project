@@ -674,6 +674,7 @@ input#search-bar:-ms-input-placeholder {
     font-size: 16px;
     font-weight: 600;
     color: #000000;
+    text-align-last: center;
     cursor: pointer;
     appearance: none;
     position: relative;
@@ -686,6 +687,7 @@ input#search-bar:-ms-input-placeholder {
   
 .sort::-ms-expand {
     display: none;
+    text-align: center;
 }
 
 .product-section {
