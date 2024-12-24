@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import React, { useRef } from "react";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
@@ -16,6 +17,30 @@ type ProductInfo = {
 function ProductPage() {
   const location = useLocation();
   const product = location.state?.product as ProductInfo;
+
+  const imgContainerRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const imgContainer = imgContainerRef.current;
+    const img = imgRef.current;
+    if (!imgContainer || !img) return;
+
+    const rect = imgContainer.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+    img.style.transformOrigin = `${x}% ${y}%`;
+    img.style.transform = "scale(3)";
+  };
+
+  const handleMouseLeave = () => {
+    const img = imgRef.current;
+    if (!img) return;
+
+    img.style.transformOrigin = "center center";
+    img.style.transform = "scale(1)";
+  };
 
   if (!product) {
     return <div>Product not found</div>;
@@ -39,8 +64,13 @@ function ProductPage() {
           />
         </div>
         <h2 style={{ textAlign: "left" }}>{product.name}</h2>
-        <div className="product-details-row-1">
-          <img src={product.imgSrc} alt={product.name} />
+        <div
+          ref={imgContainerRef}
+          className="product-details-image-container"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img ref={imgRef} src={product.imgSrc} alt={product.name} />
         </div>
         <div className="product-details-row-2">
           <div className="product-details-desc">
