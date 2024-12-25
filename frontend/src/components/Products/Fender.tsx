@@ -33,6 +33,16 @@ function renderStars(rating: number) {
   return stars;
 }
 
+function getStockStatus(quantity: number) {
+  if (quantity === 0) {
+    return { text: "Out of stock", color: "red" };
+  } else if (quantity > 0 && quantity <= 5) {
+    return { text: "Low in stock", color: "orange" };
+  } else {
+    return { text: "Available", color: "green" };
+  }
+}
+
 function Fender() {
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -165,6 +175,14 @@ function Fender() {
                     }) || "No price available"}
                   </h3>
                   <div className="rating">{renderStars(product.rating)}</div>
+                </div>
+                <div
+                  className="stock-status"
+                  style={{
+                    color: getStockStatus(product.quantity).color,
+                  }}
+                >
+                  {getStockStatus(product.quantity).text}
                 </div>
               </div>
             </Link>
