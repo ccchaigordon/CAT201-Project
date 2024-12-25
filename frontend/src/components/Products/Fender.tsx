@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
@@ -37,6 +37,8 @@ function Fender() {
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("Price (Low to High)");
+  const [buttonClicked, setButtonClicked] = useState(false);
+  const productSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedSortOrder = localStorage.getItem("sortOrder");
@@ -60,10 +62,32 @@ function Fender() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    if (buttonClicked && productSectionRef.current) {
+      productSectionRef.current.scrollIntoView({ behavior: "smooth" });
+      setButtonClicked(false); // Reset after scrolling
+    }
+  }, [currentPage, buttonClicked]);
+
   const handleChangeSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newSortOrder = e.target.value;
     setSortOrder(newSortOrder);
     localStorage.setItem("sortOrder", newSortOrder);
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      setButtonClicked(true);
+    }
+  };
+
+  const handleNext = () => {
+    const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      setButtonClicked(true);
+    }
   };
 
   const sortedProducts = products.sort((a, b) => {
@@ -104,7 +128,7 @@ function Fender() {
           journey.
         </p>
       </div>
-      <div className="product-section">
+      <div className="product-section" ref={productSectionRef}>
         <div className="filter">
           <p style={{ textAlign: "right" }}>Sort by</p>
           <select
@@ -147,18 +171,10 @@ function Fender() {
           ))}
         </div>
         <div className="pagination">
-          <button
-            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-            disabled={currentPage <= 1}
-          >
+          <button onClick={handlePrevious} disabled={currentPage <= 1}>
             Previous
           </button>
-          <button
-            onClick={() =>
-              setCurrentPage((page) => Math.min(totalPages, page + 1))
-            }
-            disabled={currentPage >= totalPages}
-          >
+          <button onClick={handleNext} disabled={currentPage >= totalPages}>
             Next
           </button>
         </div>
