@@ -16,6 +16,7 @@ type ProductInfo = {
   price: number;
   rating: number;
   quantity: number;
+  specs: string;
 };
 
 const PRODUCTS_PER_PAGE = 16;
@@ -55,19 +56,32 @@ function Fender() {
     if (savedSortOrder) {
       setSortOrder(savedSortOrder);
     }
+  }, []);
 
-    async function fetchProducts() {
-      const response = await fetch("/products.csv");
-      const text = await response.text();
-      Papa.parse(text, {
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          setProducts(results.data as ProductInfo[]);
-        },
-      });
-    }
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const files = ["/guitars.csv", "/basses.csv"];
+      const fetches = files.map((file) =>
+        fetch(file).then((response) => response.text())
+      );
+
+      const results = await Promise.all(fetches);
+      const allProducts = results.flatMap(
+        (result) =>
+          Papa.parse<ProductInfo>(result, {
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            complete: (results) => results.data,
+          }).data
+      );
+
+      // Filter products based on the ID prefix and set the state
+      const filteredProducts = allProducts.filter((product) =>
+        product.id.startsWith("FND")
+      );
+      setProducts(filteredProducts);
+    };
 
     fetchProducts();
   }, []);

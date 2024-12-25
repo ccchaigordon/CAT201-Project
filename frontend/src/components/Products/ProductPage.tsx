@@ -13,6 +13,7 @@ type ProductInfo = {
   price: number;
   rating: number;
   quantity: number;
+  specs: string;
 };
 
 function ProductPage() {
@@ -25,6 +26,13 @@ function ProductPage() {
       topRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [product]);
+
+  const specsArray = product.specs
+    ? product.specs.split(";").map((spec) => {
+        const [key, value] = spec.split(":").map((item) => item.trim());
+        return { key, value };
+      })
+    : [];
 
   const imgContainerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -128,6 +136,27 @@ function ProductPage() {
                 <i className="cart-icon"></i> Add to Cart
               </button>
             </div>
+          </div>
+        </div>
+        <h2 style={{ textAlign: "left", margin: "0 auto" }}>Specifications</h2>
+        <div className="product-details-row-3">
+          <div className="product-details-specs">
+            {specsArray.length > 0 && (
+              <div className="specs-container">
+                <table>
+                  <tbody style={{ fontSize: "0.9rem" }}>
+                    {specsArray.map((spec, index) => (
+                      <tr key={index}>
+                        <td style={{ width: "20%" }}>
+                          <strong>{spec.key}</strong>
+                        </td>
+                        <td>{spec.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </div>

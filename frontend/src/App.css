@@ -883,12 +883,34 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .product-details-desc p {
-    margin: 1.5rem 0 5rem;
+    margin: 1.5rem 0 2rem;
     text-align: justify;
+}
+
+.product-details-row-3 {
+    display: flex;
+    margin: 1.5rem auto 3rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.specs-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .specs-container td {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+.product-details-specs {
+    width: 70%;
 }
 
 .price-cart {
     width: 40vw;
+    margin: 2rem auto;
 }
 
 .price-cart-card {
@@ -896,7 +918,7 @@ input#search-bar:-ms-input-placeholder {
     padding: 20px;
     background-color: #FFFFFF;
     max-width: 300px;
-    margin: 2rem auto;
+    margin: 0 0 auto auto;
     font-family: Arial, sans-serif;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
