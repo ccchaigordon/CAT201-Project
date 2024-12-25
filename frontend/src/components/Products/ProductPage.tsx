@@ -12,7 +12,7 @@ type ProductInfo = {
   description: string;
   price: number;
   rating: number;
-  quantity: number; // Ensure you have quantity in your type
+  quantity: number;
 };
 
 function ProductPage() {
