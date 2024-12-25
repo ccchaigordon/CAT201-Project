@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
+import "../../style/Products.css";
 
 type ProductInfo = {
   imgSrc: string;

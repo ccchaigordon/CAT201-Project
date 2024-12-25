@@ -11,8 +11,6 @@ import Nux from "./components/Products/Nux";
 import Focusrite from "./components/Products/Focusrite";
 import ProductPage from "./components/Products/ProductPage";
 
-import "./App.css";
-
 const router = createBrowserRouter([
   {
     path: "/",

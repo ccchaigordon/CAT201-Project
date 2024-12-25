@@ -7,7 +7,8 @@ import TopSellers from "./TopSellers";
 import ShopByBrand from "./ShopByBrand";
 import Faq from "./Faq";
 import Footer from "../global/Footer";
-// import { Link } from "react-router-dom";
+import "../../style/Global.css";
+import "../../style/MainPage.css";
 
 function MainPage() {
   return (

@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Deals */
+
+.carousel {
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slides {
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slides img {
+    width: 60%;
+    height: auto;
+}
+
+/* About Us */
+
+.about-us {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    font-family: "Poppins", sans-serif;
+    color: #FFFFFF;
+    padding: 0;
+    margin: 0 auto;
+    width: 60%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.about-us h2 {
+    font-size: 2rem;
+}
+
+.about-us p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 auto;
+}
+
+/* Shop by Category */
+
+.shop-by-category {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shop-by-category h2 {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+}
+
+.categories {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px 0;
+    border: 3px solid silver;
+    border-radius: 20px;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.category:hover {
+    opacity: 70%;
+    transform: scale(1.1);
+    transition: transform 0.75s;
+}
+
+.category img {
+    width: 5rem;
+    height: auto;
+}
+
+.category span {
+    margin: 1rem 0 0 0;
+}
+
+/* Top Sellers */
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.product-info {
+    color: #000000;
+    background-color: white;
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.product-info h3, h4 {
+    margin: 0 auto;
+}
+
+.product-info h3 {
+    margin: 0 0.5rem;
+    font-size: 0.82rem;
+    text-align: center;
+    font-weight: 400;
+}
+
+.product-info h4 {
+    margin: 0 0.5rem;
+    padding: 0.25rem 0 0;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.slide-container {
+    width: 60%;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.slide-container h2 {
+    margin-top: 2rem;
+    font-size: 2rem;
+}
+
+.slider {
+    height: 50vh;
+    width: calc(100vw * 0.6);
+    overflow: hidden;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: transparent;
+}
+
+.slider::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+}
+
+.slider::before {
+    left: 0;
+    top: 0;
+}
+
+.slide-track {
+    display: flex;
+    width: calc(250px * 14);
+}
+
+.slide {
+    width: 250px;
+    height: 100px;
+    cursor: grab;
+}
+
+.slide:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s;
+}
+
+.slide img {
+    width: 85%;
+    height: auto;
+}
+
+.slide-details {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+/* Shop by Brands */
+
+.brand-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 40vh;
+    margin: 0 auto;
+    padding-top: 2.5rem;
+}
+
+.brand-container h2 {
+    margin: 0 auto;
+    font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+    width: calc(100vw * 0.6);
+    text-align: center;
+}
+
+.brands-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 0 0;
+    width: 60%;
+    align-items: center;
+    background-color: #000000;
+    border: 3px solid #FFFFFF;
+    border-radius: 15px;
+}
+
+.brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.brand-link {
+    display: flex;
+    flex-direction: row;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-link img {
+    width: 75%;
+    cursor: grab;
+}
+
+.brand-link img:hover {
+    transform: scale(1.1);
+    transition: transform 0.75s;
+}
+
+.see-more {
+    text-align: center;
+    margin: 2rem auto;
+    cursor: grab;
+}
+
+.see-more:hover {
+    opacity: 85%;
+}
+
+.see-more a {
+    color: #FFFFFF;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+/* FAQ */
+
+.accordian-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 60vh;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.accordian-container h2 {
+    font-size: 2rem;
+    margin-top: 0.25rem;
+}
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;;
+}
+  
+.accordion .accordion-item {
+    background-color: rgb(0, 0, 0, 0.5);
+    border: 1px solid #000000;
+    color: #FFFFFF;
+    border-radius: 0.35rem;
+}
+  
+.accordion .accordion-item .accordion-item-description-wrapper hr {
+    border: none;
+    border-top: 1px solid #000000;
+    visibility: visible;
+}
+  
+.accordion .accordion-item.open .accordion-item-description-wrapper hr {
+    visibility: visible;
+}
+  
+.accordion .accordion-item .accordion-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+}
+  
+.accordion .accordion-item .accordion-item-header .accordion-item-header-title {
+    font-weight: 500;
+}
+  
+.accordion .accordion-item .accordion-item-header .accordion-item-header-icon {
+    transition: 0.3s ease;
+}
+  
+.accordion .accordion-item.open .accordion-item-header .accordion-item-header-icon {
+    transform: rotate(-180deg);
+}
+  
+.accordion .accordion-item .accordion-item-description-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+  
+.accordion .accordion-item.open .accordion-item-description-wrapper {
+    grid-template-rows: 1fr;
+}
+  
+.accordion .accordion-item .accordion-item-description-wrapper .accordion-item-description {
+    min-height: 0;
+}
+  
+.accordion .accordion-item .accordion-item-description-wrapper .accordion-item-description p {
+    font-weight: 200;
+    padding: 0.5rem 2rem;
+    line-height: 1.5;
+    text-align: left;
+}

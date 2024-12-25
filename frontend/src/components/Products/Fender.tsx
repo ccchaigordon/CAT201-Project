@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
+import "../../style/Products.css";
 
 type ProductInfo = {
   id: string;
