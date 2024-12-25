@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
@@ -12,11 +12,19 @@ type ProductInfo = {
   description: string;
   price: number;
   rating: number;
+  quantity: number; // Ensure you have quantity in your type
 };
 
 function ProductPage() {
   const location = useLocation();
   const product = location.state?.product as ProductInfo;
+  const topRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (product && topRef.current) {
+      topRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [product]);
 
   const imgContainerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -46,9 +54,19 @@ function ProductPage() {
     return <div>Product not found</div>;
   }
 
+  function getStockStatus(quantity: number) {
+    if (quantity === 0) {
+      return { text: "Out of stock", color: "red" };
+    } else if (quantity > 0 && quantity <= 5) {
+      return { text: "Low in stock", color: "orange" };
+    } else {
+      return { text: "Available", color: "green" };
+    }
+  }
+
   return (
     <>
-      <div className="product-details-container">
+      <div className="product-details-container" ref={topRef}>
         <NavBar />
         <SearchBar />
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -88,6 +106,15 @@ function ProductPage() {
                   minimumFractionDigits: 2,
                 })}
               </h2>
+              <div
+                className="stock-status"
+                style={{
+                  color: getStockStatus(product.quantity).color,
+                  textAlign: "center",
+                }}
+              >
+                {getStockStatus(product.quantity).text}
+              </div>
               <div className="quantity-control">
                 <button className="decrease">
                   <i className="minus-icon">-</i>

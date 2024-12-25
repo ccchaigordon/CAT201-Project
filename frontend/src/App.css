@@ -753,11 +753,11 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .stock-status {
-    display: flex;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-size: 0.85rem;
-    margin: 1rem auto;
+    margin: 0.5rem auto 0;
+    align-items: center;
 }
   
 .pagination {
@@ -803,7 +803,7 @@ input#search-bar:-ms-input-placeholder {
 }
 
 .product-details-container h2 {
-    margin: 1.5rem auto;
+    margin: 1rem auto 0;
     font-size: 1.5rem;
     width: 70%;
 }
@@ -907,7 +907,7 @@ input#search-bar:-ms-input-placeholder {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 0.85rem 0;
 }
 
 .quantity-control button {
