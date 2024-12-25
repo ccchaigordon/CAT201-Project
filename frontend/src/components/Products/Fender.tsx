@@ -39,9 +39,14 @@ function Fender() {
   const [sortOrder, setSortOrder] = useState("Price (Low to High)");
 
   useEffect(() => {
+    const savedSortOrder = localStorage.getItem("sortOrder");
+    if (savedSortOrder) {
+      setSortOrder(savedSortOrder);
+    }
+
     async function fetchProducts() {
       const response = await fetch("/products.csv");
-      const text = await response.text(); // Fetching the CSV text from the response
+      const text = await response.text();
       Papa.parse(text, {
         header: true,
         dynamicTyping: true,
@@ -54,6 +59,12 @@ function Fender() {
 
     fetchProducts();
   }, []);
+
+  const handleChangeSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSortOrder = e.target.value;
+    setSortOrder(newSortOrder);
+    localStorage.setItem("sortOrder", newSortOrder);
+  };
 
   const sortedProducts = products.sort((a, b) => {
     if (sortOrder === "Price (Low to High)") {
@@ -98,7 +109,7 @@ function Fender() {
           <p style={{ textAlign: "right" }}>Sort by</p>
           <select
             value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
+            onChange={handleChangeSortOrder}
             className="sort"
           >
             <option value="Price (Low to High)">Price (Low to High)</option>
