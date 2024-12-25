@@ -10,6 +10,7 @@ import Marshall from "./components/Products/Marshall";
 import Nux from "./components/Products/Nux";
 import Focusrite from "./components/Products/Focusrite";
 import ProductPage from "./components/Products/ProductPage";
+import CartPage from "./components/Cart/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "/product/:id",
     element: <ProductPage />,
+  },
+  {
+    path: "/cart",
+    element: <CartPage />,
   },
 ]);
 

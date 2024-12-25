@@ -28,7 +28,9 @@ function NavBar() {
             </ul>
           </nav>
           <div className="cart-profile">
-            <img src="/assets/cart.svg" alt="Add href cart" />
+            <a href="/cart">
+              <img src="/assets/cart.svg" alt="Add href cart" />
+            </a>
             <img src="/assets/profile.svg" alt="Profile" />
           </div>
         </div>
