@@ -4,7 +4,7 @@ function ShopByCategory() {
       <div className="shop-by-category">
         <h2>Shop by Category</h2>
         <div className="categories">
-          <a href="#" className="category">
+          <a href="/guitars" className="category">
             <img src="/assets/guitar.svg" alt="Guitars" />
             <span>Guitars</span>
           </a>

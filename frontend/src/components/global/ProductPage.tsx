@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
 import React, { useRef, useEffect } from "react";
-import NavBar from "../global/NavBar";
-import SearchBar from "../global/SearchBar";
+import NavBar from "./NavBar";
+import SearchBar from "./SearchBar";
 import Faq from "../MainPage/Faq";
-import Footer from "../global/Footer";
+import Footer from "./Footer";
 import "../../style/Global.css";
 import "../../style/Products.css";
 import "../../style/MainPage.css";

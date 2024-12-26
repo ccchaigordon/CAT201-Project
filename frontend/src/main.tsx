@@ -9,8 +9,9 @@ import Squier from "./components/Brands/Squier";
 import Marshall from "./components/Brands/Marshall";
 import Nux from "./components/Brands/Nux";
 import Focusrite from "./components/Brands/Focusrite";
-import BrandPage from "./components/Brands/BrandPage";
+import ProductPage from "./components/global/ProductPage";
 import CartPage from "./components/Cart/CartPage";
+import Guitars from "./components/Categories/Guitars";
 
 const router = createBrowserRouter([
   {
@@ -47,11 +48,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/product/:id",
-    element: <BrandPage />,
+    element: <ProductPage />,
   },
   {
     path: "/cart",
     element: <CartPage />,
+  },
+  {
+    path: "/guitars",
+    element: <Guitars />,
   },
 ]);
 
