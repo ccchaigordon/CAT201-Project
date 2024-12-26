@@ -31,7 +31,7 @@ function Footer() {
                   <a href="/fender">Fender</a>
                 </li>
                 <li>
-                  <a href="/">PRS</a>
+                  <a href="/prs">PRS</a>
                 </li>
                 <li>
                   <a href="/">Marshall</a>

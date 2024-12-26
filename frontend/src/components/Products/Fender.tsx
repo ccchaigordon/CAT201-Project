@@ -139,7 +139,11 @@ function Fender() {
       <SearchBar />
       <h2 style={{ marginTop: "3rem" }}>Fender</h2>
       <div className="intro-container">
-        <img src="/assets/fender.png" alt="Fender Logo" />
+        <img
+          src="/assets/fender_logo.png"
+          alt="Fender Logo"
+          style={{ height: "12rem", width: "auto" }}
+        />
         <p>
           Discover the legendary sound of Fender, a hallmark of quality and
           innovation in the music industry since 1946. Renowned for
