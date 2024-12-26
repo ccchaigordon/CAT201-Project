@@ -82,7 +82,6 @@ function Faq() {
 
   return (
     <div className="accordian-container">
-      <h2>Frequently Asked Questions</h2>
       <div className="accordion">
         {faqs.map((faq, index) => (
           <AccordionItem

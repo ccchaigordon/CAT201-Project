@@ -25,6 +25,7 @@ function MainPage() {
       </div>
       <div className="section-3" style={{ scrollSnapAlign: "start" }}>
         <ShopByBrand />
+        <h2 style={{ marginTop: "0.25rem" }}>Frequently Asked Questions</h2>
         <Faq />
       </div>
       <div style={{ scrollSnapAlign: "start" }}>

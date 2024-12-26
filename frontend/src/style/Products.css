@@ -367,3 +367,20 @@
 .add-to-cart:hover {
     background-color: #c09730;
 }
+
+.faq-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2rem 0 0;
+    height: 100vh;
+    background-image: url('/assets/bg_3.jpg');
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.85);
+    background-blend-mode: overlay;
+}
+
+.faq-row h2 {
+    color: #FFFFFF;
+    font-size: 2rem;
+}

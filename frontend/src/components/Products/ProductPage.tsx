@@ -4,7 +4,9 @@ import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Faq from "../MainPage/Faq";
 import Footer from "../global/Footer";
+import "../../style/Global.css";
 import "../../style/Products.css";
+import "../../style/MainPage.css";
 
 type ProductInfo = {
   imgSrc: string;
@@ -161,7 +163,10 @@ function ProductPage() {
             )}
           </div>
         </div>
-        <Faq />
+        <div className="faq-row">
+          <h2 style={{ margin: "2rem auto" }}>Frequently Asked Questions</h2>
+          <Faq />
+        </div>
       </div>
       <Footer />
     </>
