@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../global/NavBar";
+import SearchBar from "../global/SearchBar";
 import CartItem from "./CartItem";
 import { CartItemProps } from "./CartItem";
 import CartSummary from "./CartSummary";
@@ -53,11 +54,12 @@ const CartPage: React.FC = () => {
     <div>
       <NavBar />
       <div className="cart-page">
+      <SearchBar />
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <EmptyCartMessage />
         ) : (
-          <div>
+          <div className="cart-container">
             <div className="cart-items">
               {cartItems.map((item) => (
                 <CartItem
