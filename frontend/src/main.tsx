@@ -11,6 +11,7 @@ import Nux from "./components/Brands/Nux";
 import Focusrite from "./components/Brands/Focusrite";
 import ProductPage from "./components/global/ProductPage";
 import CartPage from "./components/Cart/CartPage";
+import CheckOutPage from "./components/CheckOut/CheckOutPage";
 import Guitars from "./components/Categories/Guitars";
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <CartPage />,
+  },
+  {
+    path: "/checkout",
+    element: <CheckOutPage />,
   },
   {
     path: "/guitars",

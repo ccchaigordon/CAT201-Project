@@ -31,6 +31,16 @@ const CartPage: React.FC = () => {
         console.log(`Updated ${id} to quantity ${quantity}`),
       onRemove: (id: string) => console.log(`Removed item ${id}`),
     },
+    {
+      id: "3",
+      name: "Fender P2 TL Blue",
+      image: "/products/fender_p2_tl_blue.png",
+      price: 1899.99,
+      quantity: 1,
+      onUpdateQuantity: (id: string, quantity: number) =>
+        console.log(`Updated ${id} to quantity ${quantity}`),
+      onRemove: (id: string) => console.log(`Removed item ${id}`),
+    },
   ]);
 
   const updateQuantity = (id: string, quantity: number) => {
