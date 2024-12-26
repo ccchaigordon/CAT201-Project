@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import React, { useRef, useEffect } from "react";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
+import Faq from "../MainPage/Faq";
 import Footer from "../global/Footer";
 import "../../style/Products.css";
 
@@ -160,6 +161,7 @@ function ProductPage() {
             )}
           </div>
         </div>
+        <Faq />
       </div>
       <Footer />
     </>
