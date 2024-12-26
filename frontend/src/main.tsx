@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import ArrivalPage from "./components/New Arrivals/ArrivalPage";
-import Fender from "./components/Products/Fender";
-import PRS from "./components/Products/Prs";
-import Squier from "./components/Products/Squier";
-import Marshall from "./components/Products/Marshall";
-import Nux from "./components/Products/Nux";
-import Focusrite from "./components/Products/Focusrite";
-import ProductPage from "./components/Products/ProductPage";
+import Fender from "./components/Brands/Fender";
+import PRS from "./components/Brands/Prs";
+import Squier from "./components/Brands/Squier";
+import Marshall from "./components/Brands/Marshall";
+import Nux from "./components/Brands/Nux";
+import Focusrite from "./components/Brands/Focusrite";
+import BrandPage from "./components/Brands/BrandPage";
 import CartPage from "./components/Cart/CartPage";
 
 const router = createBrowserRouter([
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/product/:id",
-    element: <ProductPage />,
+    element: <BrandPage />,
   },
   {
     path: "/cart",
