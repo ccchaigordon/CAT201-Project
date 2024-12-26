@@ -99,13 +99,14 @@ div h2 {
 
 .cart-profile {
     display: flex;
+    height: 2.5rem;
     gap: 20px;
     
 }
 
 .cart-profile img {
     width: 2.5rem;
-    height: auto;
+    height: 2.5rem;
     filter: invert(100%);
     cursor: grab;
 }
