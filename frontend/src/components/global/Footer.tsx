@@ -8,7 +8,7 @@ function Footer() {
               <h4>Categories</h4>
               <ul>
                 <li>
-                  <a href="/">Guitars</a>
+                  <a href="/guitars">Guitars</a>
                 </li>
                 <li>
                   <a href="/">Basses</a>
