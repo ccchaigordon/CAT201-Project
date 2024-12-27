@@ -164,7 +164,7 @@ function ProductPage() {
           </div>
         </div>
         <div className="faq-row">
-          <h2 style={{ margin: "5rem auto 2rem" }}>
+          <h2 style={{ margin: "5rem auto 3rem" }}>
             Frequently Asked Questions
           </h2>
           <Faq />
