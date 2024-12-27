@@ -56,7 +56,7 @@
 /* Shop by Category */
 
 .shop-by-category {
-    height: 40vh;
+    height: 35vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,7 +64,7 @@
 }
 
 .shop-by-category h2 {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     text-align: center;
     font-size: 2rem;
     color: #000000;
@@ -76,7 +76,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 30px 0;
+    padding: 1.2rem 0;
     border: 3px solid silver;
     border-radius: 20px;
 }
@@ -97,7 +97,7 @@
 }
 
 .category img {
-    width: 5rem;
+    width: 4rem;
     height: auto;
 }
 
@@ -144,7 +144,7 @@
 
 .slide-container {
     width: 60%;
-    height: 60vh;
+    height: 65vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -152,12 +152,12 @@
 }
 
 .slide-container h2 {
-    margin-top: 2rem;
+    margin: 2rem 0 1rem;
     font-size: 2rem;
 }
 
 .slider {
-    height: 50vh;
+    height: 60vh;
     width: calc(100vw * 0.6);
     overflow: hidden;
     margin: 0 auto;
@@ -195,7 +195,7 @@
 }
 
 .slide img {
-    width: 85%;
+    width: 100%;
     height: auto;
 }
 
