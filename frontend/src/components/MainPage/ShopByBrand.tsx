@@ -41,9 +41,6 @@ function ShopByBrand() {
             </a>
           </div>
         </div>
-        <div className="see-more">
-          <a href="#">See more</a>
-        </div>
       </div>
     </>
   );

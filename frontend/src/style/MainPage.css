@@ -265,23 +265,6 @@
     transition: transform 0.75s;
 }
 
-.see-more {
-    text-align: center;
-    margin: 2rem auto;
-    cursor: grab;
-}
-
-.see-more:hover {
-    opacity: 85%;
-}
-
-.see-more a {
-    color: #FFFFFF;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    text-decoration: none;
-}
-
 /* FAQ */
 
 .accordian-container {
