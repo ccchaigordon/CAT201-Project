@@ -118,6 +118,7 @@
 .product-info {
     color: #000000;
     background-color: white;
+    justify-content: space-between;
     text-align: center;
     padding: 0;
     margin: 0 auto;
@@ -133,6 +134,7 @@
     font-size: 0.82rem;
     text-align: center;
     font-weight: 400;
+    height: 4rem;
 }
 
 .product-info h4 {
@@ -152,7 +154,7 @@
 }
 
 .slide-container h2 {
-    margin: 2rem 0 1rem;
+    margin: 2rem 0 0.5rem;
     font-size: 2rem;
 }
 
