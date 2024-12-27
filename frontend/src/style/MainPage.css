@@ -45,12 +45,14 @@
 
 .about-us h2 {
     font-size: 2rem;
+    margin: 0 auto;
 }
 
 .about-us p {
     font-size: 1rem;
     line-height: 1.6;
     margin: 0 auto;
+    padding: 1rem 0;
 }
 
 /* Shop by Category */
