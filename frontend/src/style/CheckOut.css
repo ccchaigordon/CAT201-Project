@@ -1,3 +1,73 @@
 .checkout-page{
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #ffffff;
 }
+
+.checkout-form-container {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+.contact-info-form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.contact-info-header {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.contact-info-fields 
+.contact-info-input {
+    margin-bottom: 15px;
+}
+
+.contact-info-fields 
+.contact-info-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.contact-info-fields input,
+.contact-info-fields select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.contact-info-fields input:focus,
+.contact-info-fields select:focus {
+  outline: none;
+  border-color: #333; 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+  background-color: #fff;
+}
+
+.contact-info-input.half-width {
+    flex: 0 0 48%; /* Half the row width */
+  }
+  
+  .contact-info-input.third-width {
+    flex: 0 0 30%; /* A third of the row width */
+  }
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    font-family: poppins;
+  }
