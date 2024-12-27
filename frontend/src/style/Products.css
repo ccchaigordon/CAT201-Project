@@ -366,13 +366,9 @@
 .faq-row {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: 2rem 0 0;
-    height: 100vh;
-    background-image: url('/assets/bg_3.jpg');
-    background-size: cover;
-    background-color: rgba(0, 0, 0, 0.85);
-    background-blend-mode: overlay;
+    margin: 0 auto;
+    width: 100vw;
+    background-color: #000000;
 }
 
 .faq-row h2 {
