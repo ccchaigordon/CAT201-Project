@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
@@ -31,7 +32,8 @@ function renderStars(rating: number) {
 function TopSellers() {
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const trackRef = useRef<HTMLDivElement>(null);
-  const offsetRef = useRef(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerSlide = 4;
 
   useEffect(() => {
     const fetchTopSellers = async () => {
@@ -48,23 +50,29 @@ function TopSellers() {
     fetchTopSellers();
   }, []);
 
+  const moveSlideLeft = () => {
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === 0) {
+        return Math.max(0, products.length - itemsPerSlide); // Move to the last set of products
+      }
+      return prevIndex - 1;
+    });
+  };
+
+  const moveSlideRight = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex >= products.length - itemsPerSlide ? 0 : prevIndex + 1
+    );
+  };
+
   useEffect(() => {
     if (!trackRef.current || products.length === 0) return;
-
-    const totalWidth = trackRef.current.scrollWidth / 2;
-
-    const moveSlide = () => {
-      if (!trackRef.current) return;
-      offsetRef.current += 0.5;
-      if (offsetRef.current > totalWidth) {
-        offsetRef.current = 0;
-      }
-      trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
-    };
-
-    const intervalId = setInterval(moveSlide, 20);
-    return () => clearInterval(intervalId);
-  }, [products]);
+    const cardWidth = (trackRef.current.children[0] as HTMLDivElement)
+      .offsetWidth;
+    trackRef.current.style.transform = `translateX(-${
+      currentIndex * cardWidth
+    }px)`;
+  }, [currentIndex, products]);
 
   if (products.length === 0) {
     return <p>Loading...</p>;
@@ -72,14 +80,24 @@ function TopSellers() {
 
   return (
     <div className="slide-container">
-      <h2>Top Sellers</h2>
+      <div className="title-and-buttons">
+        <h2>Top Sellers</h2>
+        <div className="navigation-buttons">
+          <button onClick={moveSlideLeft} className="slider-button">
+            <FaArrowLeft />
+          </button>
+          <button onClick={moveSlideRight} className="slider-button">
+            <FaArrowRight />
+          </button>
+        </div>
+      </div>
       <div className="slider">
         <div className="slide-track" ref={trackRef}>
-          {products.concat(products).map((product, index) => (
+          {products.map((product, index) => (
             <Link
+              key={index}
               to={`/product/${product.name.replace(/ /g, "-").toLowerCase()}`}
               state={{ product }}
-              key={index}
               style={{ textDecoration: "none", color: "#000000" }}
             >
               <div className="slide">
