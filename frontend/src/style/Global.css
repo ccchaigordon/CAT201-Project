@@ -184,7 +184,7 @@ input#search-bar:-ms-input-placeholder {
     margin: 0 auto;
     background-image: url('assets/bg_1.jpg');
     background-size: cover;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.6);
     background-blend-mode: overlay;
 }
 
