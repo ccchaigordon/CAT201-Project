@@ -82,7 +82,7 @@ function MainPage() {
           backgroundSize: backgroundSize,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          transition: "background-size 1.5s ease-out",
+          transition: "background-size 1.2s ease-out",
         }}
       >
         <NavBar />
