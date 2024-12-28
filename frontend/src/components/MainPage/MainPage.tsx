@@ -79,7 +79,6 @@ function MainPage() {
       <div
         className="section-1"
         style={{
-          scrollSnapAlign: "start",
           backgroundSize: backgroundSize,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -103,7 +102,7 @@ function MainPage() {
           <AboutUs />
         </div>
       </div>
-      <div className="section-2" style={{ scrollSnapAlign: "start" }}>
+      <div className="section-2">
         <div
           ref={categoryRef}
           className={`fade-in ${showCategory ? "visible" : ""}`}
@@ -117,7 +116,7 @@ function MainPage() {
           <TopSellers />
         </div>
       </div>
-      <div className="section-3" style={{ scrollSnapAlign: "start" }}>
+      <div className="section-3">
         <div ref={brandRef} className={`fade-in ${showBrand ? "visible" : ""}`}>
           <ShopByBrand />
         </div>
@@ -131,12 +130,12 @@ function MainPage() {
         <div
           ref={faqRef}
           className={`fade-in ${showFAQ ? "visible" : ""}`}
-          style={{ width: "100%" }}
+          style={{ width: "100%", margin: "0 auto 1rem" }}
         >
           <Faq />
         </div>
       </div>
-      <div style={{ scrollSnapAlign: "start" }}>
+      <div>
         <Footer />
       </div>
     </>

@@ -281,7 +281,6 @@
     justify-content: center;
     max-height: 40vh;
     margin: 0 auto;
-    padding-top: 2.5rem;
 }
 
 .brand-container h2 {
@@ -299,7 +298,7 @@
     width: 60%;
     align-items: center;
     background-color: #000000;
-    border: 3px solid #FFFFFF;
+    border: 2px solid #FFFFFF;
     border-radius: 15px;
 }
 
@@ -308,7 +307,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    width: 100%;
 }
 
 .brand-link {
@@ -320,13 +319,13 @@
 }
 
 .brand-link img {
-    width: 75%;
+    width: 70%;
     cursor: grab;
 }
 
 .brand-link img:hover {
     transform: scale(1.1);
-    transition: transform 0.75s;
+    transition: transform 0.5s;
 }
 
 /* FAQ */
@@ -335,7 +334,6 @@
     display: flex;
     flex-direction: column;
     width: 60%;
-    height: 60vh;
     text-align: center;
     font-family: "Poppins", sans-serif;
     margin: 0 auto;
@@ -356,11 +354,12 @@
 }
   
 .accordion .accordion-item {
-    background-color: rgb(0, 0, 0, 0.5);
-    border: 1px solid #000000;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 255, 255, 0.7);
     color: #FFFFFF;
     border-radius: 0.35rem;
-}
+    transition: all 0.3s ease-out;
+  }
   
 .accordion .accordion-item .accordion-item-description-wrapper hr {
     border: none;
@@ -376,7 +375,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1.5rem;
     cursor: pointer;
 }
   
@@ -400,16 +399,18 @@
 }
   
 .accordion .accordion-item.open .accordion-item-description-wrapper {
-    grid-template-rows: 1fr;
-}
+    max-height: 500px;
+    transition: max-height 0.5s ease-in-out;
+  }
   
-.accordion .accordion-item .accordion-item-description-wrapper .accordion-item-description {
-    min-height: 0;
-}
+  .accordion .accordion-item-description-wrapper {
+    overflow: hidden;
+    max-height: 0;
+  }
   
 .accordion .accordion-item .accordion-item-description-wrapper .accordion-item-description p {
     font-weight: 200;
-    padding: 0.5rem 2rem;
+    padding: 0 1.5rem 0.5rem;
     line-height: 1.5;
     text-align: left;
 }

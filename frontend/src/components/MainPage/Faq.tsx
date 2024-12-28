@@ -63,7 +63,6 @@ function AccordionItem({
       </div>
       {isOpen && (
         <div className="accordion-item-description-wrapper">
-          <hr />
           <div className="accordion-item-description">
             <p>{faq.answer}</p>
           </div>
