@@ -207,7 +207,7 @@ input#search-bar:-ms-input-placeholder {
     background-color: rgba(0, 0, 0, 0.85);
     background-blend-mode: overlay;
     width: 100%;
-    padding: 3rem 0;
+    padding: 5rem 0;
   }
 
 /* Footer */
