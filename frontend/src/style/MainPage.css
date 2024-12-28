@@ -359,7 +359,7 @@
     color: #FFFFFF;
     border-radius: 0.35rem;
     transition: all 0.3s ease-out;
-  }
+}
   
 .accordion .accordion-item .accordion-item-description-wrapper hr {
     border: none;
@@ -401,12 +401,12 @@
 .accordion .accordion-item.open .accordion-item-description-wrapper {
     max-height: 500px;
     transition: max-height 0.5s ease-in-out;
-  }
+}
   
   .accordion .accordion-item-description-wrapper {
     overflow: hidden;
     max-height: 0;
-  }
+}
   
 .accordion .accordion-item .accordion-item-description-wrapper .accordion-item-description p {
     font-weight: 200;

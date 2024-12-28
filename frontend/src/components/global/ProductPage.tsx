@@ -163,7 +163,7 @@ function ProductPage() {
             )}
           </div>
         </div>
-        <div className="section-3">
+        <div className="section-3" style={{ backgroundColor: "#000000" }}>
           <h2
             style={{
               margin: "0 auto 2rem",
