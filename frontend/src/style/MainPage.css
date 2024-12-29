@@ -86,7 +86,7 @@
 
 .categories {
     margin: 0 auto;
-    width: 60%;
+    width: 50vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -117,6 +117,8 @@
 
 .category span {
     margin: 1rem 0 0 0;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 /* Top Sellers */
