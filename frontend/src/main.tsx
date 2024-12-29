@@ -17,6 +17,7 @@ import Basses from "./components/Categories/Basses";
 import Drums from "./components/Categories/Drums";
 import Keyboards from "./components/Categories/Keyboards";
 import Accessories from "./components/Categories/Accessories";
+import TermsOfUse from "./components/global/termsOfUse";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
   {
     path: "/accessories",
     element: <Accessories />,
+  },
+  {
+    path: "/terms-of-use",
+    element: <TermsOfUse />,
   },
 ]);
 
