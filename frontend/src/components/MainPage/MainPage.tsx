@@ -19,10 +19,26 @@ function MainPage() {
   const [showBrand, setShowBrand] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
 
+  const scrollCategory = useRef<HTMLDivElement>(null);
+  const scrollBrand = useRef<HTMLDivElement>(null);
   const categoryRef = useRef(null);
   const topSellersRef = useRef(null);
   const brandRef = useRef(null);
   const faqRef = useRef(null);
+
+  const scrollToCategories = () => {
+    scrollCategory.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const scrollToBrands = () => {
+    scrollBrand.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   useEffect(() => {
     const backgroundTimeout = setTimeout(() => {
@@ -85,7 +101,10 @@ function MainPage() {
           transition: "background-size 1.2s ease-out",
         }}
       >
-        <NavBar />
+        <NavBar
+          onCategoriesClick={scrollToCategories}
+          onBrandsClick={scrollToBrands}
+        />
         <div
           style={{
             opacity: contentOpacity,
@@ -102,7 +121,11 @@ function MainPage() {
           <AboutUs />
         </div>
       </div>
-      <div className="section-2" style={{ minHeight: "calc(100vh * 1.1)" }}>
+      <div
+        className="section-2"
+        style={{ minHeight: "calc(100vh * 1.1)" }}
+        ref={scrollCategory}
+      >
         <div
           ref={categoryRef}
           className={`fade-in ${showCategory ? "visible" : ""}`}
@@ -116,7 +139,7 @@ function MainPage() {
           <TopSellers />
         </div>
       </div>
-      <div className="section-3">
+      <div className="section-3" ref={scrollBrand}>
         <div ref={brandRef} className={`fade-in ${showBrand ? "visible" : ""}`}>
           <ShopByBrand />
         </div>

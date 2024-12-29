@@ -1,4 +1,9 @@
-function NavBar() {
+interface NavBarProps {
+  onCategoriesClick?: () => void;
+  onBrandsClick?: () => void;
+}
+
+function NavBar({ onCategoriesClick, onBrandsClick }: NavBarProps) {
   return (
     <>
       <header>
@@ -17,10 +22,10 @@ function NavBar() {
                 <a href="/deals">DEALS</a>
               </li>
               <li>
-                <a href="/brands">BRANDS</a>
+                <div onClick={onBrandsClick}>BRANDS</div>
               </li>
               <li>
-                <a href="/categories">CATEGORIES</a>
+                <div onClick={onCategoriesClick}>CATEGORIES</div>
               </li>
               <li>
                 <a href="/about-us">ABOUT US</a>
