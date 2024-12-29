@@ -11,16 +11,16 @@ function Footer() {
                   <a href="/guitars">Guitars</a>
                 </li>
                 <li>
-                  <a href="/">Basses</a>
+                  <a href="/basses">Basses</a>
                 </li>
                 <li>
-                  <a href="/">Drums</a>
+                  <a href="/drums">Drums</a>
                 </li>
                 <li>
-                  <a href="/">Keyboards</a>
+                  <a href="/keyboards">Keyboards</a>
                 </li>
                 <li>
-                  <a href="/">Accessories</a>
+                  <a href="/accessories">Accessories</a>
                 </li>
               </ul>
             </div>

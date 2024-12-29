@@ -45,10 +45,10 @@ function getStockStatus(quantity: number) {
   }
 }
 
-function Squier() {
+function Keyboards() {
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState("Latest"); // Set Default to 'Latest'
+  const [sortOrder, setSortOrder] = useState("Latest"); // Default to 'Latest'
   const [buttonClicked, setButtonClicked] = useState(false);
   const productSectionRef = useRef<HTMLDivElement>(null);
 
@@ -61,26 +61,15 @@ function Squier() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const files = ["/basses.csv", "/guitars.csv"];
-      const fetches = files.map((file) =>
-        fetch(file).then((response) => response.text())
-      );
+      const response = await fetch("/keyboards.csv");
+      const csvData = await response.text();
+      const parsedData = Papa.parse<ProductInfo>(csvData, {
+        header: true,
+        dynamicTyping: true,
+        skipEmptyLines: true,
+      }).data;
 
-      const results = await Promise.all(fetches);
-      const fetchedProducts = results.flatMap(
-        (result) =>
-          Papa.parse<ProductInfo>(result, {
-            header: true,
-            dynamicTyping: true,
-            skipEmptyLines: true,
-            complete: (results) => results.data,
-          }).data
-      );
-
-      const filteredProducts = fetchedProducts.filter((product) =>
-        product.id.startsWith("SQR")
-      );
-      setProducts(filteredProducts);
+      setProducts(parsedData);
     };
 
     fetchProducts();
@@ -108,6 +97,12 @@ function Squier() {
     return sorted;
   }, [products, sortOrder]);
 
+  const handleChangeSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSortOrder = e.target.value;
+    setSortOrder(newSortOrder);
+    localStorage.setItem("sortOrder", newSortOrder);
+  };
+
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -134,26 +129,22 @@ function Squier() {
     <>
       <NavBar />
       <SearchBar />
-      <h2 style={{ marginTop: "3rem" }}>Squier by Fender</h2>
+      <h2 style={{ marginTop: "3rem" }}>Category: Keyboards</h2>
       <div className="intro-container">
         <img
-          src="/assets/squier.png"
-          alt="Squier Logo"
-          style={{ height: "7rem", width: "auto", filter: "invert(100%)" }}
+          src="/assets/category_keyboard.jpg"
+          alt="A person playing keyboard"
+          style={{ width: "30%", height: "auto" }}
         />
         <p>
-          Squier by Fender: Affordable Excellence with Classic Heritage.
-          <br />
-          <br />A subsidiary of the renowned Fender brand, delivers exceptional
-          value by bringing the iconic designs, classic aesthetics, and
-          distinguished tones of Fender instruments to an affordable price
-          point. Established to cater to beginners and emerging musicians,
-          Squier offers a range of electric guitars, basses, and acoustic
-          instruments that don't compromise on quality. Each model is crafted
-          with the care and attention to detail that Fender is famous for,
-          ensuring that every musician can experience the feel and sound of a
-          classic Fender, whether they're strumming their first chords or
-          rocking out on stage.
+          Step into the world of music with our extensive selection of
+          keyboards, ideal for musicians at any level—from budding enthusiasts
+          to professional performers. Our range features everything from
+          beginner-friendly models with built-in learning tools to advanced
+          synthesizers and digital pianos designed for studio recording and live
+          performances. Explore a variety of touch-sensitive keys, intuitive
+          controls, and integrated digital sounds that allow you to create and
+          customize your music effortlessly.
         </p>
       </div>
       <div className="product-section" ref={productSectionRef}>
@@ -161,13 +152,13 @@ function Squier() {
           <p style={{ textAlign: "right" }}>Sort by</p>
           <select
             value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
+            onChange={handleChangeSortOrder}
             className="sort"
           >
-            <option value="Most Popular">Most Popular</option>
-            <option value="Latest">Latest</option>
             <option value="Price (Low to High)">Price (Low to High)</option>
             <option value="Price (High to Low)">Price (High to Low)</option>
+            <option value="Most Popular">Most Popular</option>
+            <option value="Latest">Latest</option>
           </select>
         </div>
         <div className="product-grid">
@@ -221,4 +212,4 @@ function Squier() {
   );
 }
 
-export default Squier;
+export default Keyboards;

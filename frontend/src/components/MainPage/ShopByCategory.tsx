@@ -8,20 +8,20 @@ function ShopByCategory() {
             <img src="/assets/guitar.svg" alt="Guitars" />
             <span>Guitars</span>
           </a>
-          <a href="#" className="category">
+          <a href="/basses" className="category">
             <img src="/assets/bass.svg" alt="Basses" />
             <span>Basses</span>
           </a>
-          <a href="#" className="category">
+          <a href="/drums" className="category">
             <img src="/assets/drum.svg" alt="Drums" />
             <span>Drums</span>
           </a>
 
-          <a href="#" className="category">
+          <a href="/keyboards" className="category">
             <img src="/assets/keyboard.svg" alt="Keyboards" />
             <span>Keyboards</span>
           </a>
-          <a href="#" className="category">
+          <a href="/accessories" className="category">
             <img
               src="/assets/accessory.svg"
               alt="Accessories"

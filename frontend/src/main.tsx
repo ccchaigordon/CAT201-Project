@@ -13,6 +13,10 @@ import ProductPage from "./components/global/ProductPage";
 import CartPage from "./components/Cart/CartPage";
 import CheckOutPage from "./components/CheckOut/CheckOutPage";
 import Guitars from "./components/Categories/Guitars";
+import Basses from "./components/Categories/Basses";
+import Drums from "./components/Categories/Drums";
+import Keyboards from "./components/Categories/Keyboards";
+import Accessories from "./components/Categories/Accessories";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +66,22 @@ const router = createBrowserRouter([
   {
     path: "/guitars",
     element: <Guitars />,
+  },
+  {
+    path: "/basses",
+    element: <Basses />,
+  },
+  {
+    path: "/drums",
+    element: <Drums />,
+  },
+  {
+    path: "/keyboards",
+    element: <Keyboards />,
+  },
+  {
+    path: "/accessories",
+    element: <Accessories />,
   },
 ]);
 
