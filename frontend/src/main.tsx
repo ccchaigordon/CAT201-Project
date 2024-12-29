@@ -17,7 +17,7 @@ import Basses from "./components/Categories/Basses";
 import Drums from "./components/Categories/Drums";
 import Keyboards from "./components/Categories/Keyboards";
 import Accessories from "./components/Categories/Accessories";
-import TermsOfUse from "./components/global/termsOfUse";
+import TermsOfUse from "./components/global/TermsOfUse";
 
 const router = createBrowserRouter([
   {
