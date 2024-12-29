@@ -102,7 +102,7 @@ function MainPage() {
           <AboutUs />
         </div>
       </div>
-      <div className="section-2">
+      <div className="section-2" style={{ minHeight: "calc(100vh * 1.1)" }}>
         <div
           ref={categoryRef}
           className={`fade-in ${showCategory ? "visible" : ""}`}
