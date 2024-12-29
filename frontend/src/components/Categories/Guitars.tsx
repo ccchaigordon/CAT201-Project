@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
@@ -48,7 +48,7 @@ function getStockStatus(quantity: number) {
 function Guitars() {
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState("Price (Low to High)");
+  const [sortOrder, setSortOrder] = useState("Latest"); // Default to 'Latest'
   const [buttonClicked, setButtonClicked] = useState(false);
   const productSectionRef = useRef<HTMLDivElement>(null);
 
@@ -82,6 +82,21 @@ function Guitars() {
     }
   }, [currentPage, buttonClicked]);
 
+  const sortedProducts = useMemo(() => {
+    const sorted = [...products];
+
+    if (sortOrder === "Latest") {
+      sorted.reverse();
+    } else if (sortOrder === "Price (Low to High)") {
+      sorted.sort((a, b) => a.price - b.price);
+    } else if (sortOrder === "Price (High to Low)") {
+      sorted.sort((a, b) => b.price - a.price);
+    } else if (sortOrder === "Most Popular") {
+      sorted.sort((a, b) => b.rating - a.rating);
+    }
+    return sorted;
+  }, [products, sortOrder]);
+
   const handleChangeSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newSortOrder = e.target.value;
     setSortOrder(newSortOrder);
@@ -96,23 +111,12 @@ function Guitars() {
   };
 
   const handleNext = () => {
-    const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+    const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
       setButtonClicked(true);
     }
   };
-
-  const sortedProducts = products.sort((a, b) => {
-    if (sortOrder === "Price (Low to High)") {
-      return a.price - b.price;
-    } else if (sortOrder === "Price (High to Low)") {
-      return b.price - a.price;
-    } else if (sortOrder === "Most Popular") {
-      return b.rating - a.rating;
-    }
-    return 0;
-  });
 
   const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
@@ -125,7 +129,7 @@ function Guitars() {
     <>
       <NavBar />
       <SearchBar />
-      <h2 style={{ marginTop: "3rem" }}>Category: Guitar</h2>
+      <h2 style={{ marginTop: "3rem" }}>Category: Guitars</h2>
       <div className="intro-container">
         <img
           src="/assets/category_guitar.jpg"
@@ -151,6 +155,7 @@ function Guitars() {
             <option value="Price (Low to High)">Price (Low to High)</option>
             <option value="Price (High to Low)">Price (High to Low)</option>
             <option value="Most Popular">Most Popular</option>
+            <option value="Latest">Latest</option>
           </select>
         </div>
         <div className="product-grid">

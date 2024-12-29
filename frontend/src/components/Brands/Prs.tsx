@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
@@ -48,7 +48,7 @@ function getStockStatus(quantity: number) {
 function PRS() {
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState("Price (Low to High)");
+  const [sortOrder, setSortOrder] = useState("Latest"); // Default to 'Latest'
   const [buttonClicked, setButtonClicked] = useState(false);
   const productSectionRef = useRef<HTMLDivElement>(null);
 
@@ -61,13 +61,13 @@ function PRS() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const files = ["/guitars.csv", "/basses.csv"];
+      const files = ["/basses.csv", "/guitars.csv"];
       const fetches = files.map((file) =>
         fetch(file).then((response) => response.text())
       );
 
       const results = await Promise.all(fetches);
-      const allProducts = results.flatMap(
+      const fetchedProducts = results.flatMap(
         (result) =>
           Papa.parse<ProductInfo>(result, {
             header: true,
@@ -77,11 +77,10 @@ function PRS() {
           }).data
       );
 
-      // Filter products based on the ID prefix and set the state
-      const filteredProducts = allProducts.filter((product) =>
+      const filteredProducts = fetchedProducts.filter((product) =>
         product.id.startsWith("PRS")
       );
-      setProducts(filteredProducts);
+      setProducts(filteredProducts); // Set products in their initial order
     };
 
     fetchProducts();
@@ -94,11 +93,20 @@ function PRS() {
     }
   }, [currentPage, buttonClicked]);
 
-  const handleChangeSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newSortOrder = e.target.value;
-    setSortOrder(newSortOrder);
-    localStorage.setItem("sortOrder", newSortOrder);
-  };
+  const sortedProducts = useMemo(() => {
+    const sorted = [...products];
+
+    if (sortOrder === "Latest") {
+      sorted.reverse();
+    } else if (sortOrder === "Price (Low to High)") {
+      sorted.sort((a, b) => a.price - b.price);
+    } else if (sortOrder === "Price (High to Low)") {
+      sorted.sort((a, b) => b.price - a.price);
+    } else if (sortOrder === "Most Popular") {
+      sorted.sort((a, b) => b.rating - a.rating);
+    }
+    return sorted;
+  }, [products, sortOrder]);
 
   const handlePrevious = () => {
     if (currentPage > 1) {
@@ -108,23 +116,12 @@ function PRS() {
   };
 
   const handleNext = () => {
-    const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+    const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
       setButtonClicked(true);
     }
   };
-
-  const sortedProducts = products.sort((a, b) => {
-    if (sortOrder === "Price (Low to High)") {
-      return a.price - b.price;
-    } else if (sortOrder === "Price (High to Low)") {
-      return b.price - a.price;
-    } else if (sortOrder === "Most Popular") {
-      return b.rating - a.rating;
-    }
-    return 0;
-  });
 
   const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
@@ -157,12 +154,13 @@ function PRS() {
           <p style={{ textAlign: "right" }}>Sort by</p>
           <select
             value={sortOrder}
-            onChange={handleChangeSortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
             className="sort"
           >
+            <option value="Most Popular">Most Popular</option>
+            <option value="Latest">Latest</option>
             <option value="Price (Low to High)">Price (Low to High)</option>
             <option value="Price (High to Low)">Price (High to Low)</option>
-            <option value="Most Popular">Most Popular</option>
           </select>
         </div>
         <div className="product-grid">
