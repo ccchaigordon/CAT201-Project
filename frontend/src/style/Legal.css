@@ -1,0 +1,68 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Maven Pro', sans-serif;
+}
+
+.tou-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+}
+
+.tou-heading {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tou-subheader {
+    margin: 3rem auto 2rem;
+    width: 100%;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.tou-p {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    font-family: "Poppins", sans-serif;
+}
+
+.legalNav {
+    display: flex;
+    width: 70%;
+    padding: 0; 
+    margin: 2rem auto 0;
+    box-sizing: border-box;
+}
+
+.md-footer_button_left {
+    margin: 0 0.2rem 0 0;
+    padding: 0 0.4rem 0 0;
+}
+
+.md-footer_button_right {
+    margin: 0 0 0 0.2rem;
+    padding: 0 0 0 0.4rem;
+}
+
+.md-icon svg {
+    fill: currentcolor;
+    display: block;
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.legalLink {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.legalLink:hover {
+    opacity: 70%;
+}

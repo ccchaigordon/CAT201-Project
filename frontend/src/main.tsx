@@ -17,7 +17,8 @@ import Basses from "./components/Categories/Basses";
 import Drums from "./components/Categories/Drums";
 import Keyboards from "./components/Categories/Keyboards";
 import Accessories from "./components/Categories/Accessories";
-import TermsOfUse from "./components/global/TermsOfUse";
+import TermsOfUse from "./components/Terms/TermsOfUse";
+import Privacy from "./components/Terms/Privacy";
 
 const router = createBrowserRouter([
   {
@@ -27,30 +28,6 @@ const router = createBrowserRouter([
   {
     path: "/new-arrivals",
     element: <ArrivalPage />,
-  },
-  {
-    path: "/fender",
-    element: <Fender />,
-  },
-  {
-    path: "/prs",
-    element: <PRS />,
-  },
-  {
-    path: "/squier",
-    element: <Squier />,
-  },
-  {
-    path: "/marshall",
-    element: <Marshall />,
-  },
-  {
-    path: "/nux",
-    element: <Nux />,
-  },
-  {
-    path: "/focusrite",
-    element: <Focusrite />,
   },
   {
     path: "/product/:id",
@@ -65,28 +42,71 @@ const router = createBrowserRouter([
     element: <CheckOutPage />,
   },
   {
-    path: "/guitars",
-    element: <Guitars />,
+    path: "/brand",
+    children: [
+      {
+        path: "fender",
+        element: <Fender />,
+      },
+      {
+        path: "prs",
+        element: <PRS />,
+      },
+      {
+        path: "squier",
+        element: <Squier />,
+      },
+      {
+        path: "marshall",
+        element: <Marshall />,
+      },
+      {
+        path: "nux",
+        element: <Nux />,
+      },
+      {
+        path: "focusrite",
+        element: <Focusrite />,
+      },
+    ],
   },
   {
-    path: "/basses",
-    element: <Basses />,
+    path: "/category",
+    children: [
+      {
+        path: "guitars",
+        element: <Guitars />,
+      },
+      {
+        path: "basses",
+        element: <Basses />,
+      },
+      {
+        path: "drums",
+        element: <Drums />,
+      },
+      {
+        path: "keyboards",
+        element: <Keyboards />,
+      },
+      {
+        path: "accessories",
+        element: <Accessories />,
+      },
+    ],
   },
   {
-    path: "/drums",
-    element: <Drums />,
-  },
-  {
-    path: "/keyboards",
-    element: <Keyboards />,
-  },
-  {
-    path: "/accessories",
-    element: <Accessories />,
-  },
-  {
-    path: "/terms-of-use",
-    element: <TermsOfUse />,
+    path: "/legal",
+    children: [
+      {
+        path: "terms-of-use",
+        element: <TermsOfUse />,
+      },
+      {
+        path: "privacy-policy",
+        element: <Privacy />,
+      },
+    ],
   },
 ]);
 

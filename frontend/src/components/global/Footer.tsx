@@ -8,19 +8,19 @@ function Footer() {
               <h4>Categories</h4>
               <ul>
                 <li>
-                  <a href="/guitars">Guitars</a>
+                  <a href="/category/guitars">Guitars</a>
                 </li>
                 <li>
-                  <a href="/basses">Basses</a>
+                  <a href="/category/basses">Basses</a>
                 </li>
                 <li>
-                  <a href="/drums">Drums</a>
+                  <a href="/category/drums">Drums</a>
                 </li>
                 <li>
-                  <a href="/keyboards">Keyboards</a>
+                  <a href="/category/keyboards">Keyboards</a>
                 </li>
                 <li>
-                  <a href="/accessories">Accessories</a>
+                  <a href="/category/accessories">Accessories</a>
                 </li>
               </ul>
             </div>
@@ -28,19 +28,19 @@ function Footer() {
               <h4>Brands</h4>
               <ul>
                 <li>
-                  <a href="/fender">Fender</a>
+                  <a href="/brand/fender">Fender</a>
                 </li>
                 <li>
-                  <a href="/prs">PRS</a>
+                  <a href="/brand/prs">PRS</a>
                 </li>
                 <li>
-                  <a href="/">Marshall</a>
+                  <a href="/brand/">Marshall</a>
                 </li>
                 <li>
-                  <a href="/">NUX</a>
+                  <a href="/brand/">NUX</a>
                 </li>
                 <li>
-                  <a href="/">Focusrite</a>
+                  <a href="/brand/">Focusrite</a>
                 </li>
                 <li>
                   <a
@@ -60,10 +60,10 @@ function Footer() {
               <h4>About</h4>
               <ul>
                 <li>
-                  <a href="/">Terms of Use</a>
+                  <a href="/legal/terms-of-use">Terms of Use</a>
                 </li>
                 <li>
-                  <a href="/">Privacy Policy</a>
+                  <a href="/legal/privacy-policy">Privacy Policy</a>
                 </li>
                 <li>
                   <a href="/">Return & Exchange Policy</a>

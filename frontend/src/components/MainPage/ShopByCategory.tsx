@@ -4,24 +4,24 @@ function ShopByCategory() {
       <div className="shop-by-category">
         <h2>Shop by Category</h2>
         <div className="categories">
-          <a href="/guitars" className="category">
+          <a href="/category/guitars" className="category">
             <img src="/assets/guitar.svg" alt="Guitars" />
             <span>Guitars</span>
           </a>
-          <a href="/basses" className="category">
+          <a href="/category/basses" className="category">
             <img src="/assets/bass.svg" alt="Basses" />
             <span>Basses</span>
           </a>
-          <a href="/drums" className="category">
+          <a href="/category/drums" className="category">
             <img src="/assets/drum.svg" alt="Drums" />
             <span>Drums</span>
           </a>
 
-          <a href="/keyboards" className="category">
+          <a href="/category/keyboards" className="category">
             <img src="/assets/keyboard.svg" alt="Keyboards" />
             <span>Keyboards</span>
           </a>
-          <a href="/accessories" className="category">
+          <a href="/category/accessories" className="category">
             <img
               src="/assets/accessory.svg"
               alt="Accessories"
