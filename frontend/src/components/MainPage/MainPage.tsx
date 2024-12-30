@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Carousel from "./Carousel";
@@ -19,6 +20,7 @@ function MainPage() {
   const [showBrand, setShowBrand] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
 
+  const location = useLocation();
   const scrollCategory = useRef<HTMLDivElement>(null);
   const scrollBrand = useRef<HTMLDivElement>(null);
   const categoryRef = useRef(null);
@@ -26,19 +28,18 @@ function MainPage() {
   const brandRef = useRef(null);
   const faqRef = useRef(null);
 
-  const scrollToCategories = () => {
-    scrollCategory.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+  useEffect(() => {
+    if (location.hash) {
+      const section = location.hash.replace("#", "");
+      let ref;
+      if (section === "categories") ref = scrollCategory.current;
+      else if (section === "brands") ref = scrollBrand.current;
 
-  const scrollToBrands = () => {
-    scrollBrand.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+      if (ref) {
+        ref.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     const backgroundTimeout = setTimeout(() => {
@@ -101,10 +102,7 @@ function MainPage() {
           transition: "background-size 1.2s ease-out",
         }}
       >
-        <NavBar
-          onCategoriesClick={scrollToCategories}
-          onBrandsClick={scrollToBrands}
-        />
+        <NavBar />
         <div
           style={{
             opacity: contentOpacity,
