@@ -18,6 +18,10 @@ const Carousel: React.FC = () => {
     return () => clearInterval(timer);
   }, [imagePaths.length]);
 
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
+  };
+
   return (
     <div className="carousel">
       <div
@@ -31,6 +35,16 @@ const Carousel: React.FC = () => {
           <div className="slides" key={index}>
             <img src={path} alt={`Slide ${index}`} />
           </div>
+        ))}
+      </div>
+      <div className="carousel-indicators">
+        {imagePaths.map((_, index) => (
+          <button
+            key={index}
+            className={`indicator ${currentIndex === index ? "active" : ""}`}
+            onClick={() => handleDotClick(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
         ))}
       </div>
     </div>
