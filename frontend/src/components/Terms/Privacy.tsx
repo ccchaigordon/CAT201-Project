@@ -167,14 +167,12 @@ function Privacy() {
           </ul>
           <h2 className="tou-subheader">Usage Data</h2>
           <p className="tou-p">
-            Usage Data is collected automatically when using the Service.
-          </p>
-          <p className="tou-p">
-            Usage Data may include information such as Your Device&#x27;s
-            Internet Protocol address (e.g. IP address), browser type, browser
-            version, the pages of our Service that You visit, the time and date
-            of Your visit, the time spent on those pages, unique device
-            identifiers and other diagnostic data.
+            Usage Data is collected automatically when using the Service. Usage
+            Data may include information such as Your Device&#x27;s Internet
+            Protocol address (e.g. IP address), browser type, browser version,
+            the pages of our Service that You visit, the time and date of Your
+            visit, the time spent on those pages, unique device identifiers and
+            other diagnostic data.
           </p>
           <p className="tou-p">
             When You access the Service by or through a mobile device, We may
@@ -289,8 +287,8 @@ function Privacy() {
               </p>
             </li>
           </ul>
-          <p className="tou-p">
-            For more information about the cookies we use and your choices
+          <p className="tou-p" style={{ fontStyle: "italic" }}>
+            ** For more information about the cookies we use and your choices
             regarding cookies, please visit our Cookies Policy or the Cookies
             section of our Privacy Policy.
           </p>

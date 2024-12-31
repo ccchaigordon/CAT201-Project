@@ -56,26 +56,23 @@ function TermsOfUse() {
             We employ the use of cookies. By accessing
             pluckyourheartstringmusic.com, you agreed to use cookies in
             agreement with the Pluck Your Heart String Music Co.'s Privacy
-            Policy.
-            <br />
-            <br />
-            Most interactive websites use cookies to let us retrieve the user's
-            details for each visit. Cookies are used by our website to enable
-            the functionality of certain areas to make it easier for people
-            visiting our website. Some of our affiliate/advertising partners may
-            also use cookies.
+            Policy. Most interactive websites use cookies to let us retrieve the
+            user's details for each visit. Cookies are used by our website to
+            enable the functionality of certain areas to make it easier for
+            people visiting our website. Some of our affiliate/advertising
+            partners may also use cookies.
           </p>
           <h3 className="tou-subheader">License</h3>
           <p className="tou-p">
             Unless otherwise stated, Pluck Your Heart String Music Co. and/or
             its licensors own the intellectual property rights for all material
             on pluckyourheartstringmusic.com. All intellectual property rights
-            are reserved.
+            are reserved. You may access this from pluckyourheartstringmusic.com
+            for your own personal use subjected to restrictions set in these
+            terms and conditions.
             <br />
             <br />
-            You may access this from pluckyourheartstringmusic.com for your own
-            personal use subjected to restrictions set in these terms and
-            conditions. You must not:
+            You must not:
           </p>
           <p className="tou-p">
             <ul>
@@ -102,8 +99,6 @@ function TermsOfUse() {
             Co. shall not be liable for the Comments or for any liability,
             damages or expenses caused and/or suffered as a result of any use of
             and/or posting of and/or appearance of the Comments on this website.
-            <br />
-            <br />
             Pluck Your Heart String Music Co. reserves the right to monitor all
             Comments and to remove any Comments which can be considered
             inappropriate, offensive or causes breach of these Terms and
