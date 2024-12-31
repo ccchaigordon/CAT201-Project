@@ -37,13 +37,10 @@ function TermsOfUse() {
           <p className="tou-p">
             These terms and conditions outline the rules and regulations for the
             use of Pluck Your Heart String Music Co.'s Website, located at
-            pluckyourheartstringmusic.com.
-            <br />
-            <br />
-            By accessing this website we assume you accept these terms and
-            conditions. Do not continue to use pluckyourheartstringmusic.com if
-            you do not agree to take all of the terms and conditions stated on
-            this page.
+            pluckyourheartstringmusic.com. By accessing this website we assume
+            you accept these terms and conditions. Do not continue to use
+            pluckyourheartstringmusic.com if you do not agree to take all of the
+            terms and conditions stated on this page.
             <br />
             <br />
             The following terminology applies to these Terms and Conditions,
