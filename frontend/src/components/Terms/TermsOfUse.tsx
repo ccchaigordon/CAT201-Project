@@ -23,17 +23,9 @@ function TermsOfUse() {
       </div>
       <div className="section-3" style={{ backgroundColor: "#000000" }}>
         <div className="tou-container">
-          <h1 className="tou-heading">Terms of Use</h1>
-          <p
-            className="tou-p"
-            style={{
-              margin: "0.5rem auto 2rem",
-              textAlign: "center",
-              fontSize: "0.8rem",
-            }}
-          >
-            (Last updated: 30 December 2024)
-          </p>
+          <h1 className="tou-heading">
+            Terms of Use (Last updated: 30 December 2024)
+          </h1>
           <p className="tou-p">
             These terms and conditions outline the rules and regulations for the
             use of Pluck Your Heart String Music Co.'s Website, located at

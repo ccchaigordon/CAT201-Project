@@ -35,17 +35,10 @@ function Privacy() {
       </div>
       <div className="section-3" style={{ backgroundColor: "#000000" }}>
         <div className="tou-container">
-          <h1 className="tou-heading">Privacy Policy</h1>
-          <p
-            className="tou-p"
-            style={{
-              margin: "0.5rem auto 2rem",
-              textAlign: "center",
-              fontSize: "0.8rem",
-            }}
-          >
-            (Last updated: 30 December 2024)
-          </p>
+          <h1 className="tou-heading">
+            Privacy Policy (Last updated: 30 December 2024)
+          </h1>
+
           <p className="tou-p">
             This Privacy Policy describes Our policies and procedures on the
             collection, use and disclosure of Your information when You use the

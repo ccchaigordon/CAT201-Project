@@ -10,15 +10,15 @@ body {
     display: flex;
     flex-direction: column;
     width: 70vw;
+    text-align: left;
 }
 
 .tou-heading {
-    margin: 0 auto;
-    text-align: center;
+    margin: 0 0 2rem;
 }
 
 .tou-subheader {
-    margin: 3rem auto 2rem;
+    margin: 2rem auto;
     width: 100%;
     text-align: left;
     font-size: 1.5rem;
