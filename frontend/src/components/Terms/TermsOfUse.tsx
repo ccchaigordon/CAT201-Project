@@ -21,7 +21,10 @@ function TermsOfUse() {
           </div>
         </Link>
       </div>
-      <div className="section-3" style={{ backgroundColor: "#000000" }}>
+      <div
+        className="section-3"
+        style={{ backgroundColor: "#000000", padding: "3rem 0" }}
+      >
         <div className="tou-container">
           <h1 className="tou-heading">
             Terms of Use (Last updated: 30 December 2024)

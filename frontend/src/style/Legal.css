@@ -6,10 +6,13 @@ body {
 }
 
 .tou-container {
+    background-color: rgb(37, 37, 37);
     margin: 0 auto;
+    padding: 3rem;
     display: flex;
     flex-direction: column;
-    width: 70vw;
+    width: 60vw;
+    border-radius: 1.5rem;
     text-align: left;
 }
 
@@ -34,7 +37,7 @@ body {
 
 .legalNav {
     display: flex;
-    width: 70%;
+    width: 65%;
     padding: 0; 
     margin: 3rem auto 0;
     box-sizing: border-box;
