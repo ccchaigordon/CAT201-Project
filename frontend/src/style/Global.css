@@ -59,9 +59,15 @@ div h2 {
     align-items: center;
 }
 
+.logo a {
+    width: 10rem;
+    height: 5rem;
+}
+
 .logo img {
-    width: 50%;
-    height: auto;
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Navigation Bar */
