@@ -1,94 +1,113 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../global/NavBar";
-import SearchBar from "../global/SearchBar";
-import CartItem from "./CartItem";
-import { CartItemProps } from "./CartItem";
-import CartSummary from "./CartSummary";
-import EmptyCartMessage from "./EmptyCartMessage";
 import Footer from "../global/Footer";
 import "../../style/Cart.css";
 
+type ProductInfo = {
+  imgSrc: string;
+  name: string;
+  category: string;
+  brand: string;
+  description: string;
+  price: number;
+  quantity: number; // Quantity in cart
+  maxQuantity: number; //Quantity in stock
+  specs: string;
+};
+
 const CartPage: React.FC = () => {
-  const [cartItems, setCartItems] = React.useState<CartItemProps[]>([
-    // Example items
-    {
-      id: "1",
-      name: "Squier Helkit ST Pink",
-      image: "/products/squier_helkit_st_pink.png",
-      price: 2799.99,
-      quantity: 1,
-      onUpdateQuantity: (id: string, quantity: number) =>
-        console.log(`Updated ${id} to quantity ${quantity}`),
-      onRemove: (id: string) => console.log(`Removed item ${id}`),
-    },
-    {
-      id: "2",
-      name: "Squier Debut Prec Red",
-      image: "/products/squier_debut_prec_red.png",
-      price: 2399.99,
-      quantity: 1,
-      onUpdateQuantity: (id: string, quantity: number) =>
-        console.log(`Updated ${id} to quantity ${quantity}`),
-      onRemove: (id: string) => console.log(`Removed item ${id}`),
-    },
-    {
-      id: "3",
-      name: "Fender P2 TL Blue",
-      image: "/products/fender_p2_tl_blue.png",
-      price: 1899.99,
-      quantity: 1,
-      onUpdateQuantity: (id: string, quantity: number) =>
-        console.log(`Updated ${id} to quantity ${quantity}`),
-      onRemove: (id: string) => console.log(`Removed item ${id}`),
-    },
-  ]);
+  const [cartItems, setCartItems] = useState<ProductInfo[]>([]);
 
-  const updateQuantity = (id: string, quantity: number) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
-      )
-    );
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartItems(cart);
+  }, []);
+
+  const getStockStatus = (quantity: number) => {
+    if (quantity === 0) {
+      return { text: "Out of stock", color: "red" };
+    } else if (quantity > 0 && quantity <= 5) {
+      return { text: "Low in stock", color: "orange" };
+    } else {
+      return { text: "Available", color: "green" };
+    }
   };
 
-  const removeItem = (id: string) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
+  const handleRemove = (index: number) => {
+    const newCart = [...cartItems];
+    newCart.splice(index, 1);
+    setCartItems(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const handleQuantityChange = (index: number, change: number) => {
+    const newCart = [...cartItems];
+    const item = newCart[index];
+
+    const newQuantity = item.quantity + change;
+
+    if (newQuantity >= 1 && newQuantity <= item.maxQuantity) {
+      newCart[index].quantity = newQuantity;
+      setCartItems(newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+    }
+  };
 
   return (
-    <div>
-      <NavBar />
-      <div className="cart-page">
-      <SearchBar />
-        <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
-          <EmptyCartMessage />
-        ) : (
-          <div className="cart-container">
-            <div className="cart-items">
-              {cartItems.map((item) => (
-                <CartItem
-                  key={item.id}
-                  {...item}
-                  onUpdateQuantity={updateQuantity}
-                  onRemove={removeItem}
-                />
-              ))}
-            </div>
-            <CartSummary
-              totalPrice={totalPrice}
-              onCheckout={() => console.log("Checkout")}
-            />
-          </div>
-        )}
+    <>
+      <div style={{ backgroundColor: "#FFFFFF", color: "#000000" }}>
+        <NavBar />
+        <div className="cart-container">
+          <h1 className="cart-header">Your Cart</h1>
+          {cartItems.length > 0 ? (
+            cartItems.map((item, index) => (
+              <div key={index} className="cart-item">
+                <div className="cart-item-image">
+                  <img
+                    src={item.imgSrc}
+                    alt={item.name}
+                    style={{ height: "15rem", width: "auto" }}
+                  />
+                </div>
+                <div className="cart-item-info">
+                  <h3 style={{ fontWeight: "500" }}>{item.name}</h3>
+                  <p className="price">Price: RM {item.price.toFixed(2)}</p>
+                  <p
+                    style={{
+                      color: getStockStatus(item.maxQuantity).color,
+                      margin: "1rem 0 0",
+                    }}
+                  >
+                    {getStockStatus(item.maxQuantity).text}
+                  </p>
+                  <div className="cart-action">
+                    <div className="quantity-control">
+                      <button onClick={() => handleQuantityChange(index, -1)}>
+                        -
+                      </button>
+                      {item.quantity}
+                      <button onClick={() => handleQuantityChange(index, 1)}>
+                        +
+                      </button>
+                    </div>
+                    <button
+                      className="remove-button"
+                      onClick={() => handleRemove(index)}
+                    >
+                      Remove from Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Your cart is empty.</p>
+          )}
+        </div>
+
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

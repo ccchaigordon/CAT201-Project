@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 import Faq from "../MainPage/Faq";
@@ -24,12 +24,63 @@ function ProductPage() {
   const location = useLocation();
   const product = location.state?.product as ProductInfo;
   const topRef = useRef<HTMLDivElement>(null);
+  const [inputQuantity, setInputQuantity] = useState(1);
 
   useEffect(() => {
     if (product && topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [product]);
+
+  const addToCart = () => {
+    if (product.quantity === 0) {
+      alert("This product is out of stock and cannot be added to the cart.");
+      return; // Prevent adding out-of-stock items
+    }
+
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const existingProductIndex = cart.findIndex(
+      (item: ProductInfo) => item.name === product.name
+    );
+
+    if (existingProductIndex !== -1) {
+      const newQuantity = cart[existingProductIndex].quantity + inputQuantity;
+      // Ensure not to exceed the available stock
+      cart[existingProductIndex].quantity = Math.min(
+        newQuantity,
+        product.quantity
+      );
+    } else {
+      // Add new product with current input quantity and maxQuantity as product.quantity
+      const newProduct = {
+        ...product,
+        quantity: inputQuantity,
+        maxQuantity: product.quantity,
+      };
+      cart.push(newProduct);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Added to cart!");
+  };
+
+  const handleIncrease = () => {
+    setInputQuantity((prev) => {
+      if (prev < product.quantity) {
+        return prev + 1;
+      }
+      return prev;
+    });
+  };
+
+  const handleDecrease = () => {
+    setInputQuantity((prev) => {
+      if (prev > 0) {
+        return prev - 1;
+      }
+      return prev;
+    });
+  };
 
   const specsArray = product.specs
     ? product.specs.split(";").map((spec) => {
@@ -128,15 +179,20 @@ function ProductPage() {
                 {getStockStatus(product.quantity).text}
               </div>
               <div className="quantity-control">
-                <button className="decrease">
+                <button className="decrease" onClick={handleDecrease}>
                   <i className="minus-icon">-</i>
                 </button>
-                <input type="number" value="1" className="quantity-input" />
-                <button className="increase">
+                <input
+                  type="number"
+                  value={inputQuantity}
+                  readOnly
+                  className="quantity-input"
+                />
+                <button className="increase" onClick={handleIncrease}>
                   <i className="plus-icon">+</i>
                 </button>
               </div>
-              <button className="add-to-cart">
+              <button className="add-to-cart" onClick={addToCart}>
                 <i className="cart-icon"></i> Add to Cart
               </button>
             </div>
