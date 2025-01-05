@@ -2,4 +2,5 @@ com\musical\backend\controller\UserController.class
 com\musical\backend\BackendApplication.class
 com\musical\backend\controller\ProductController.class
 com\musical\backend\controller\CategoryController.class
+com\musical\backend\model\Product.class
 com\musical\backend\ServletInitializer.class
