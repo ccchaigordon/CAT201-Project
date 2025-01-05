@@ -31,8 +31,8 @@ public class ProductController {
     @GetMapping
     public List<Product> all(@RequestParam(required = false) String productID,
             @RequestParam(required = false) String category, @RequestParam(required = false) String brand) {
-                List<Product> temp = products;
-        
+        List<Product> temp = products;
+
         if (productID != null) {
             temp = temp.stream()
                     .filter(product -> product.getProductID().equals(productID))
@@ -52,14 +52,9 @@ public class ProductController {
         }
 
         return temp;
-        // return products.stream()
-        //         .filter(product -> productID == null || product.getProductID().equals(productID))
-        //         .filter(product -> category == null || product.getCategory().equals(category))
-        //         .filter(product -> brand == null || product.getBrand().equals(brand))
-        //         .collect(Collectors.toList());
     }
 
-    // Get products by brand using path variable
+    // Get products by brand 
     @GetMapping("/brand/{brand}")
     public List<Product> allByBrand(@PathVariable String brand) {
         return products.stream()
@@ -67,6 +62,7 @@ public class ProductController {
                 .collect(Collectors.toList());
     }
 
+    // Get products by category 
     @GetMapping("/category/{category}")
     public List<Product> allByCategory(@PathVariable String category) {
         return products.stream()
@@ -87,18 +83,23 @@ public class ProductController {
         }
     }
 
-    // Update details of a product
-    @PutMapping("/update")
-    public String updateProduct(@RequestBody Product product) {
-        boolean exists = products.stream().anyMatch(p -> p.getProductID().equals(product.getProductID()));
-
-        if (exists) {
-            products = products.stream()
-                    .map(p -> p.getProductID().equals(product.getProductID()) ? product : p)
-                    .collect(Collectors.toList());
-            return "Product with ID " + product.getProductID() + " updated successfully.";
-        } else {
-            return "Product with ID " + product.getProductID() + " does not exist.";
-        }
+    // Update a product by ID 
+    @PutMapping("/update/{id}")
+    public Product updateProduct(@PathVariable String id, @RequestBody Product product) {
+        Product existingProduct = products.stream()
+            .filter(p -> p.getProductID().equals(id))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Product not found!"));
+    
+        existingProduct.setProductID(product.getProductID());
+        existingProduct.setName(product.getName());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setStockQuantity(product.getStockQuantity());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setBrand(product.getBrand());
+        existingProduct.setRating(product.getRating());
+    
+        return existingProduct;
     }
 }
