@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,7 +86,7 @@ public class ProductController {
 
     // Update a product by ID 
     @PutMapping("/update/{id}")
-    public Product updateProduct(@PathVariable String id, @RequestBody Product product) {
+    public Product updateProductById(@PathVariable String id, @RequestBody Product product) {
         Product existingProduct = products.stream()
             .filter(p -> p.getProductID().equals(id))
             .findFirst()
@@ -101,5 +102,17 @@ public class ProductController {
         existingProduct.setRating(product.getRating());
     
         return existingProduct;
+    }
+
+    // Delete a product by ID
+    @DeleteMapping("/delete/{id}")
+    public String deleteProductById(@PathVariable String id) {
+        boolean exists = products.removeIf(p -> p.getProductID().equals(id));
+
+        if (exists) {
+            return "Product with ID " + id + " deleted successfully.";
+        } else {
+            return "Product with ID " + id + " not found.";
+        }
     }
 }
