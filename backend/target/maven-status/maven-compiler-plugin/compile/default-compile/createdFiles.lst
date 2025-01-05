@@ -1,1 +1,2 @@
-com\musical\Main.class
+com\musical\backend\BackendApplication.class
+com\musical\backend\ServletInitializer.class
