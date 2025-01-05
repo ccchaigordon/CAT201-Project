@@ -11,7 +11,7 @@
 	<groupId>com.musical</groupId>
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>backend</name>
 	<description>Demo backend project for Spring Boot</description>
 	<url/>
