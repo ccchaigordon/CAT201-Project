@@ -171,7 +171,7 @@ const CartPage: React.FC = () => {
             <div className="summary-details">
               <h1>ORDER SUMMARY</h1>
               <div className="summary-row">
-                <p className="summary-title">Subtotal (including tax):</p>
+                <p className="summary-title">Subtotal:</p>
                 <p className="summary-value">
                   RM{" "}
                   {total.toLocaleString("en-US", {
@@ -195,7 +195,7 @@ const CartPage: React.FC = () => {
                 </p>
               </div>
               <div className="summary-row">
-                <p className="summary-title">Tax (10%):</p>{" "}
+                <p className="summary-title">Tax (10% incl.):</p>{" "}
                 <p className="summary-value">
                   RM{" "}
                   {((total / 1.1) * 0.1).toLocaleString("en-US", {
