@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import Papa from "papaparse";
+//import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
 import NavBar from "../global/NavBar";
@@ -60,20 +60,23 @@ function Basses() {
   }, []);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch("/basses.csv");
-      const csvData = await response.text();
-      const parsedData = Papa.parse<ProductInfo>(csvData, {
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: true,
-      }).data;
-
-      setProducts(parsedData);
-    };
-
-    fetchProducts();
-  }, []);
+      const fetchProducts = async () => {
+        try {
+          // Fetch data from the servlet
+          const response = await fetch("http://localhost:8080/backend/getProducts?category=bass");
+          if (!response.ok) {
+            throw new Error("Failed to fetch bass data");
+          }
+          const fetchedProducts: ProductInfo[] = await response.json();
+        
+          setProducts(fetchedProducts);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      };
+    
+      fetchProducts();
+    }, []);
 
   useEffect(() => {
     if (buttonClicked && productSectionRef.current) {

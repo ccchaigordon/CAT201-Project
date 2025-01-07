@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import Papa from "papaparse";
+//import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
 import NavBar from "../global/NavBar";
@@ -61,30 +61,27 @@ function Fender() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const files = ["/basses.csv", "/guitars.csv"];
-      const fetches = files.map((file) =>
-        fetch(file).then((response) => response.text())
-      );
+      try {
+        // Fetch data from the servlet
+        const response = await fetch("http://localhost:8080/backend/getAllProducts");
+        if (!response.ok) {
+          throw new Error("Failed to fetch guitar data");
+        }
+        const fetchedProducts: ProductInfo[] = await response.json();
 
-      const results = await Promise.all(fetches);
-      const fetchedProducts = results.flatMap(
-        (result) =>
-          Papa.parse<ProductInfo>(result, {
-            header: true,
-            dynamicTyping: true,
-            skipEmptyLines: true,
-            complete: (results) => results.data,
-          }).data
-      );
-
-      const filteredProducts = fetchedProducts.filter((product) =>
-        product.id.startsWith("FND")
-      );
-      setProducts(filteredProducts);
+        // Filter and update the products state with the fetched data
+        const filteredProducts = fetchedProducts.filter((product) =>
+          product.id.startsWith("FND")
+        );
+        setProducts(filteredProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
-
+  
     fetchProducts();
   }, []);
+
 
   useEffect(() => {
     if (buttonClicked && productSectionRef.current) {

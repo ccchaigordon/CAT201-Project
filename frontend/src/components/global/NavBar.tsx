@@ -31,7 +31,9 @@ function NavBar() {
             <a href="/cart">
               <img src="/assets/cart.svg" alt="Add href cart" />
             </a>
-            <img src="/assets/profile.svg" alt="Profile" />
+            <a href="/profile">
+              <img src="/assets/profile.svg" alt="Profile" />
+            </a>
           </div>
         </div>
       </header>

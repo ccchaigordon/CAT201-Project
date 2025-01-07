@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import Papa from "papaparse";
+//import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
 type ProductInfo = {
@@ -36,19 +36,23 @@ function TopSellers() {
   const itemsPerSlide = 4;
 
   useEffect(() => {
-    const fetchTopSellers = async () => {
-      const response = await fetch("/TopSellers.csv");
-      const csvData = await response.text();
-      const parsedData = Papa.parse<ProductInfo>(csvData, {
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: true,
-      }).data;
-      setProducts(parsedData);
-    };
-
-    fetchTopSellers();
-  }, []);
+      const fetchProducts = async () => {
+        try {
+          // Fetch data from the servlet
+          const response = await fetch("http://localhost:8080/backend/getProducts?category=topseller");
+          if (!response.ok) {
+            throw new Error("Failed to fetch top seller data");
+          }
+          const fetchedProducts: ProductInfo[] = await response.json();
+        
+          setProducts(fetchedProducts);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      };
+    
+      fetchProducts();
+    }, []);
 
   const moveSlideLeft = () => {
     setCurrentIndex((prevIndex) => {

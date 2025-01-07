@@ -19,6 +19,8 @@ import Keyboards from "./components/Categories/Keyboards";
 import Accessories from "./components/Categories/Accessories";
 import TermsOfUse from "./components/Terms/TermsOfUse";
 import Privacy from "./components/Terms/Privacy";
+import Profile from "./components//ProfilePage/Profile";
+import SignUpPage from "./components/ProfilePage/SignUpPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <CheckOutPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignUpPage />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
   {
     path: "/brand",
