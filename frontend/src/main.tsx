@@ -9,6 +9,7 @@ import Squier from "./components/Brands/Squier";
 import Marshall from "./components/Brands/Marshall";
 import Nux from "./components/Brands/Nux";
 import Focusrite from "./components/Brands/Focusrite";
+import AboutUsPage from "./components/AboutUs/AboutUs";
 import ProductPage from "./components/global/ProductPage";
 import CartPage from "./components/Cart/CartPage";
 import CheckOutPage from "./components/CheckOut/CheckOutPage";
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/product/:id",
     element: <ProductPage />,
+  },
+  {
+    path: "/about-us",
+    element: <AboutUsPage />,
   },
   {
     path: "/cart",
