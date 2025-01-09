@@ -63,7 +63,7 @@ function Accessories() {
       const fetchProducts = async () => {
         try {
           // Fetch data from the servlet
-          const response = await fetch("http://localhost:8080/backend/getProducts?category=accessories");
+          const response = await fetch("http://localhost:8083/backend/getProducts?category=accessories");
           if (!response.ok) {
             throw new Error("Failed to fetch accessories data");
           }

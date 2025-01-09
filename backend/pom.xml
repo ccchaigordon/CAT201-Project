@@ -90,7 +90,7 @@
           <version>2.2</version>
           <configuration>
             <server>Tomcat</server>
-            <port>8080</port>
+            <port>8083</port>
           </configuration>
         </plugin>
       </plugins>

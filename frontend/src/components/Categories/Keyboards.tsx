@@ -63,7 +63,7 @@ function Keyboards() {
       const fetchProducts = async () => {
         try {
           // Fetch data from the servlet
-          const response = await fetch("http://localhost:8080/backend/getProducts?category=keyboard");
+          const response = await fetch("http://localhost:8083/backend/getProducts?category=keyboard");
           if (!response.ok) {
             throw new Error("Failed to fetch keyboard data");
           }

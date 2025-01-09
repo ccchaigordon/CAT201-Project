@@ -63,7 +63,7 @@ function Drums() {
       const fetchProducts = async () => {
         try {
           // Fetch data from the servlet
-          const response = await fetch("http://localhost:8080/backend/getProducts?category=drum");
+          const response = await fetch("http://localhost:8083/backend/getProducts?category=drum");
           if (!response.ok) {
             throw new Error("Failed to fetch drum data");
           }

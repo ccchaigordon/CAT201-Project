@@ -63,7 +63,7 @@ function Basses() {
       const fetchProducts = async () => {
         try {
           // Fetch data from the servlet
-          const response = await fetch("http://localhost:8080/backend/getProducts?category=bass");
+          const response = await fetch("http://localhost:8083/backend/getProducts?category=bass");
           if (!response.ok) {
             throw new Error("Failed to fetch bass data");
           }
