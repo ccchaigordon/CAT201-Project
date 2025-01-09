@@ -1,8 +1,5 @@
 package com.pluckyourheartstrings.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Test {
     public static void main(String[] args) throws Exception {
         User user = new User();

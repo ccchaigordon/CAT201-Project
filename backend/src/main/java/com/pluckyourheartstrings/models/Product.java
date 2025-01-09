@@ -206,9 +206,17 @@ public class Product {
         return products;
     }
 
+    
     public static Product getProductByID(String id, String... csvFiles) {
+        System.out.println("csvFiles: " + csvFiles[0]);
+        
         for (String csvFile : csvFiles) {
-            try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            InputStream inputStream = Product.class.getClassLoader().getResourceAsStream(csvFile);
+            if (inputStream == null) {
+                System.err.println("File not found in resources");
+                continue;
+            }
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
                 String line;
                 boolean isFirstLine = true;
                 while ((line = br.readLine()) != null) {
