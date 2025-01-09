@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    justify-content: space-around; /* Distributes space between cards */
+    gap: 20px; /* Adds space between cards */
+    padding: 20px; /* Prevents cards from touching container edges */
+    background-color: #f5f5f5; /* Optional: container background for visibility */
+  }
+  

@@ -19,8 +19,8 @@ import Keyboards from "./components/Categories/Keyboards";
 import Accessories from "./components/Categories/Accessories";
 import TermsOfUse from "./components/Terms/TermsOfUse";
 import Privacy from "./components/Terms/Privacy";
-import Profile from "./components//ProfilePage/Profile";
-import SignUpPage from "./components/ProfilePage/SignUpPage";
+import AdminPage from "./components/admin/AdminPage";
+import EditProduct from "./components/admin/EditProduct";
 
 const router = createBrowserRouter([
   {
@@ -40,16 +40,16 @@ const router = createBrowserRouter([
     element: <CartPage />,
   },
   {
+    path : "/profile",
+    element: <AdminPage />,
+  },
+  {
+    path: "/admin/edit-product/:id",
+    element: <EditProduct />,
+  },
+  {
     path: "/checkout",
     element: <CheckOutPage />,
-  },
-  {
-    path: "/signup",
-    element: <SignUpPage />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
   },
   {
     path: "/brand",
