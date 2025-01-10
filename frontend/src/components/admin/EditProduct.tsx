@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-
-import { useLocation, useNavigate } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import { useId } from "react";
 import AdminNavBar from "./AdminNavBar";
-import Modal from "../common/Modal";
+// import Form from "./Form";
 import "../../style/AdminPage.css";
-import "../../style/Modal.css";
+import "../../style/EditProduct.css";
 
-type ProductDetails = {
+interface ProductDetails {
   id: string;
   name: string;
   category: string;
@@ -17,29 +18,25 @@ type ProductDetails = {
   quantity: string;
   image: string;
   specs: string;
-};
+}
 
-// type ModalProps = {
-//   show: boolean;
-//   prompt: string;
-//   onClose: () => void;
-//   onSubmit: (id: string) => void;
+// export default function Form(){
+//   const productInputId = useId();
+
+//   return(
+//     <>
+//     <label>
+//       Product ID:
+//       <input type="text" id={productInputId} />
+//     </label>
+//     </>
+//   );
+// }
+
+// const editableFields = {
+//   id: false,
+//   category: false,
 // };
-
-// const Modal: React.FC<ModalProps> = ({ show, prompt, onClose, onSubmit }) => {
-//   const [productID, setProductID] = useState("");
-//   const [showWarning, setShowWarning] = useState(false);
-
-//   useEffect(() => {
-//     if (!show) {
-//       setProductID("");
-//       setShowWarning(false);
-//     }
-//   }, [show]);
-
-//   if (!show) {
-//     return null;
-//   }
 
 //   const handleSubmit = (e: React.FormEvent) => {
 //     e.preventDefault();
@@ -53,144 +50,112 @@ type ProductDetails = {
 //     onClose();
 //   };
 
-//   return (
-//     <div className="modal-overlay">
-//       <div className="modal-content">
-//         <h2>{prompt}</h2>
-//         <form onSubmit={handleSubmit}>
-//           <input
-//             type="text"
-//             value={productID}
-//             onChange={(e) => setProductID(e.target.value)}
-//             placeholder="Enter Product ID"
-//           />
-//           {showWarning && <p className="warning-message" style={{ color: "red" }}>*Please enter a Product ID.</p>}
-//           <button type="submit">Submit</button>
-//           <button type="button" onClick={onClose}>
-//             Cancel
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
 const EditProduct: React.FC = () => {
-  // const navigate = useNavigate();
-  // const [showModal, setShowModal] = useState(true);
-  // const [errorMessage, setErrorMessage] = useState("");
-  // const [productID, setProductID] = useState("");
-  // const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
   const location = useLocation();
   const product = location.state?.product as ProductDetails;
-
+  const [productDetails, setProductDetails] = useState<ProductDetails>(product);
+  const [editableFields, setEditableFields] = useState<{
+    [key: string]: boolean;
+  }>({});
+  const nonEditableFields: (keyof ProductDetails)[] = ["id"];
   // console.log("Product Data:", product)
 
+  const handleInputChange = (field: string, value: string) => {
+    if (productDetails) {
+      setProductDetails({ ...productDetails, [field]: value });
+    }
+  };
+
+  // const handleEditClick = (field: string) => {
+  //   setEditableFields((prev) => ({ ...prev, [field]: true }));
+  // };
+
+    const handleEditClick = (field: keyof ProductDetails) => {
+    setEditableFields((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  // Check if productDetails is null
   if (!product) {
-    return <p style={{ color: 'white' }}>No product data found. Please go back and try again.</p>;
-  } 
-  // else {
-  //   console.log("Product Data:", product);
-  //   return <p style={{ color: 'white' }}>Product data found. Product ID: {product.id}</p>;
-  // }
-  
+    return (
+      <p style={{ color: "white" }}>
+        No product data found. Please go back and try again.
+      </p>
+    );
+  }
 
-  // const handleCloseModal = () => {
-  //   setShowModal(false);
-  //   setErrorMessage(""); // Clear error message when modal is closed
-  //   // navigate("/profile");
-  // };
-
-  // const handleSubmitProductID = async (id: string) => {
-  //   if (!id.trim()) {
-  //     setErrorMessage("Product ID cannot be empty.");
-  //     return;
-  //   }
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:8083/backend/getProductsById?id=${id}`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     ); // Corrected URL
-
-  //     console.log(response);
-      
-  //     if (!response.ok) throw new Error("Failed to fetch product data");
-  //     const product: ProductDetails[] = await response.json();
-  //     setProductDetails(product);
-  //     setShowModal(false); // Close modal
-  //     console.log(await response.body);
-  //   } catch (error) {
-  //     console.error("Error fetching product data:", error);
-  //     setErrorMessage("Failed to fetch product details. Please try again.");
-  //   }
-  // };
-  // const handleSubmitProductID = async (id: string) => {
-  //   if (!id.trim()) {
-  //     setErrorMessage("Product ID cannot be empty.");
-  //     return;
-  //   }
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:8083/backend/getProductsById?id=${id}`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     if (!response.ok) throw new Error("Failed to fetch product data");
-  //     const product: ProductDetails[] = await response.json();
-  //     setProductDetails(product);
-  //     setShowModal(false); // Close modal
-  //   } catch (error) {
-  //     console.error("Error fetching product data:", error);
-  //     setErrorMessage("Failed to fetch product details. Please try again.");
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   setShowModal(true);
-  // }, []);
-
+  // Display the product details
   return (
     <>
-    <div
-      style={{
-        textAlign: "left",
-        display: "block",
-        margin: "0 auto",
-        backgroundColor: "#FFFFFF",
-        color: "#000000",
-      }}
-    >
-      <AdminNavBar />
-      {/* <Modal
-        show={showModal}
-        prompt="Enter Product ID"
-        onClose={handleCloseModal}
-        // onSubmit={handleSubmitProductID}
-      /> */}
-      {/* {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>} */}
-      {/* <h1>{productDetails.name}</h1> */}
-      {/* {productID && (
-        <p>
-          <strong>Entered Product ID:</strong> {productID}
+      <div
+        style={{
+          textAlign: "left",
+          display: "block",
+          margin: "0 auto",
+          backgroundColor: "#FFFFFF",
+          color: "#000000",
+        }}
+      >
+        <AdminNavBar />
+      </div>
+      {/* <div>
+        <h1 style={{ color: "white" }}>Product id: {product.id}</h1>
+        <p style={{ color: "white" }}>Product name: {product.name}</p>
+        <p style={{ color: "white" }}>Product brand: {product.brand}</p>
+        <p style={{ color: "white" }}>Product category: {product.category}</p>
+        <p style={{ color: "white" }}>
+          Product description: {product.description}
         </p>
-      )} */}
+        <p style={{ color: "white" }}>Product price: {product.price}</p>
+        <p style={{ color: "white" }}>Product rating: {product.rating}</p>
+        <p style={{ color: "white" }}>Product quantity: {product.quantity}</p>
+        <p style={{ color: "white" }}>Product image: {product.image}</p>
+        <p style={{ color: "white" }}>Product specs: {product.specs}</p>
+      </div> */}
+      {/* <Form /> */}
 
-
-    </div>
-    <div><h1 style={{ color: 'white' }}>Product id: {product.id}</h1>
-    <h1 style={{ color: 'white' }}>Product name: {product.name}</h1>
-    <h1 style={{ color: 'white' }}>Product brand: {product.brand}</h1></div>
-    {/* <div><h1 style={{ color: 'white' }}>hi</h1></div> */}
+      <div className="form-container">
+        <form>
+          {Object.keys(productDetails).map((field) => {
+            const id = useId();
+            return (
+              <div key={field} className="form-field" style={{ color: "black" }}>
+                <label htmlFor={id} className="form-label">
+                  {field.charAt(0).toUpperCase() + field.slice(1)}:
+                </label>
+                <div className="input-container">
+              
+                </div>
+                <input
+                  id={id}
+                  type="text"
+                  value={productDetails[field as keyof ProductDetails]}
+                  onChange={(e) =>
+                    handleInputChange(
+                      field as keyof ProductDetails,
+                      e.target.value
+                    )
+                  }
+                  disabled={
+                    !editableFields[field] ||
+                    nonEditableFields.includes(field as keyof ProductDetails)
+                  }
+                />
+                {!nonEditableFields.includes(field as keyof ProductDetails) && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleEditClick(field as keyof ProductDetails)
+                    }
+                  >
+                    {editableFields[field] ? "Lock" : "Edit"}
+                  </button>
+                )}
+              </div>
+            );
+          })}
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
     </>
   );
 };

@@ -22,6 +22,7 @@ import Privacy from "./components/Terms/Privacy";
 import AdminPage from "./components/admin/AdminPage";
 import EnterId from "./components/admin/EnterId";
 import EditProduct from "./components/admin/EditProduct";
+import Form from "./components/admin/Form";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/enterid",
     element: <EnterId />,
+  },
+  {
+    path: "/admin/enterid/form",
+    element: <Form />,
   },
   {
     path: "/checkout",
