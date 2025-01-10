@@ -20,6 +20,7 @@ import Keyboards from "./components/Categories/Keyboards";
 import Accessories from "./components/Categories/Accessories";
 import TermsOfUse from "./components/Terms/TermsOfUse";
 import Privacy from "./components/Terms/Privacy";
+import DealsPage from "./components/Deals/DealsPage";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/about-us",
     element: <AboutUsPage />,
+  },
+  {
+    path: "/deals",
+    element: <DealsPage />,
   },
   {
     path: "/cart",
