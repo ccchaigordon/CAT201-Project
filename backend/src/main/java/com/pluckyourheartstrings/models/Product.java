@@ -209,6 +209,7 @@ public class Product {
     
     public static Product getProductByID(String id, String... csvFiles) {
         System.out.println("csvFiles: " + csvFiles[0]);
+
         
         for (String csvFile : csvFiles) {
             InputStream inputStream = Product.class.getClassLoader().getResourceAsStream(csvFile);
@@ -216,23 +217,45 @@ public class Product {
                 System.err.println("File not found in resources");
                 continue;
             }
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-                String line;
-                boolean isFirstLine = true;
-                while ((line = br.readLine()) != null) {
-                    if (isFirstLine) {
-                        isFirstLine = false; // Skip header
-                        continue;
-                    }
-                    String[] productData = line.split(",");
+            // try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            //     String line;
+            //     boolean isFirstLine = true;
+            //     while ((line = br.readLine()) != null) {
+            //         if (isFirstLine) {
+            //             isFirstLine = false; // Skip header
+            //             continue;
+            //         }
+            //         String[] productData = line.split(",");
+            //         if (productData[0].trim().equals(id)) {
+            //             return new Product(productData[0], productData[1], productData[2], productData[3],
+            //                     productData[4], productData[5], productData[6], productData[7],
+            //                     productData[8], productData[9]);
+            //         }
+            //     }
+            // } catch (IOException e) {
+            //     System.err.println("Error reading CSV file: " + e.getMessage());
+            // }
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                    CSVReader csvReader = new CSVReader(br)) {
+                List<String[]> allRows = csvReader.readAll();// Read all rows
+
+                for (int i = 1; i < allRows.size(); i++) { // Skip the header
+                    String[] productData = allRows.get(i);
                     if (productData[0].trim().equals(id)) {
-                        return new Product(productData[0], productData[1], productData[2], productData[3],
-                                productData[4], productData[5], productData[6], productData[7],
-                                productData[8], productData[9]);
+                        return new Product(
+                            productData[0], productData[8], productData[2], productData[3],
+                            productData[4], productData[5],
+                            productData[6], productData[7],
+                            productData[1], productData[9]);
                     }
                 }
             } catch (IOException e) {
                 System.err.println("Error reading CSV file: " + e.getMessage());
+                return null;
+            } catch (CsvException e) {
+                System.err.println("Error parsing CSV file: " + e.getMessage());
+                return null;
             }
         }
         return null;

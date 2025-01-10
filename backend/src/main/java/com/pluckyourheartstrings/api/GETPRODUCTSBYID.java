@@ -1,6 +1,8 @@
 package com.pluckyourheartstrings.api;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.pluckyourheartstrings.models.Product;
 
 @WebServlet("/getProductsById")
@@ -50,41 +51,65 @@ public class GETPRODUCTSBYID extends HttpServlet {
 
         Product product = Product.getProductByID(id, guitar_csvfile, bass_csvfile, drum_csvfile, keyboard_csvfile,
                 accessories_csvfile);
-        System.out.println("Product: " + product.getid());
-        System.out.println("Name: " + product.getName());
-
+        
         // Set the response type to JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        JsonObject jsonResponse2 = new JsonObject();
+        Map<String, Object> responseMap = new HashMap<>();            
+            
+        if(product == null) {
+            System.out.println("Product not found");
+            responseMap.put("status", "error");
+            responseMap.put("message", "Product not found");
+            
+        }
+        else{
+            System.out.println("Product ID entered: "+ product.getid());
+            System.out.println("Product Name: " + product.getName());
+            System.out.println("Product brand " + product.getBrand());
+            responseMap.put("status", "success");
+            responseMap.put("message", "Product found");
+            responseMap.put("product", product); 
+        }
+        
+        String jsonResponse = new Gson().toJson(responseMap);
+        response.getWriter().write(jsonResponse);
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+        //JsonObject jsonResponse2 = new JsonObject();
+
+        // response.setContentType("application/json");
+        // response.setCharacterEncoding("UTF-8");
 
         // Check if the product is null
-        if (product.getid() == null) {
-            System.out.println("Product not found.");
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 404 Not Found
-            response.getWriter().write("{\"error\": \"Product not found.\"}");
-        }
-        System.out.println("Product found.");
-        // Convert the product to JSON and send it to the frontend
-        JsonObject jsonResponse = new JsonObject();
-        jsonResponse.addProperty("id", product.getid());
-        jsonResponse.addProperty("name", product.getName());
-        jsonResponse.addProperty("category", product.getCategory());
-        jsonResponse.addProperty("brand", product.getBrand());
-        jsonResponse.addProperty("description", product.getDescription());
-        jsonResponse.addProperty("price", product.getPrice());
-        jsonResponse.addProperty("rating", product.getRating());
-        jsonResponse.addProperty("quantity", product.getQuantity());
-        jsonResponse.addProperty("imgSrc", product.getImgSrc());
-        jsonResponse.addProperty("specs", product.getspecs());
-        jsonResponse2.addProperty("product", jsonResponse.toString());
+        // Product not found check removed as it is unnecessary
+        // if(product == null) {
+        //     jsonResponse2.addProperty("status", "not found");
+        // }
+        // else{
+        //     System.out.println("Product: " + product.getid());
+        //     System.out.println("Name: " + product.getName());
 
-        response.getWriter().write(new Gson().toJson(jsonResponse2));
-        // response.getWriter().flush();
+        //     System.out.println("Product found.");
+        // // Convert the product to JSON and send it to the frontend
+        //     JsonObject jsonResponse = new JsonObject();
+        //     jsonResponse.addProperty("id", product.getid());
+        //     jsonResponse.addProperty("name", product.getName());
+        //     jsonResponse.addProperty("category", product.getCategory());
+        //     jsonResponse.addProperty("brand", product.getBrand());
+        //     jsonResponse.addProperty("description", product.getDescription());
+        //     jsonResponse.addProperty("price", product.getPrice());
+        //     jsonResponse.addProperty("rating", product.getRating());
+        //     jsonResponse.addProperty("quantity", product.getQuantity());
+        //     jsonResponse.addProperty("imgSrc", product.getImgSrc());
+        //     jsonResponse.addProperty("specs", product.getspecs());
+        //     jsonResponse2.addProperty("product", jsonResponse.toString());
+        //     jsonResponse2.addProperty("status", "found");
+        // }
+        
+
+        // response.getWriter().write(new Gson().toJson(jsonResponse2));
+        // // response.getWriter().flush();
 
     }
 }

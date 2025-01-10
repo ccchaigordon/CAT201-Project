@@ -6,19 +6,19 @@ interface ModalProps {
   show: boolean;
   prompt: string;
   onClose: () => void;
-  onSubmit: (productID: string) => void;
+  // onSubmit: (productID: string) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ show, prompt, onClose, onSubmit }) => {
+const Modal: React.FC<ModalProps> = ({ show, prompt, onClose}) => {
   const [productID, setProductID] = useState("");
-  const [showWarning, setShowWarning] = useState(false);
+  // const [showWarning, setShowWarning] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!show) {
       setProductID("");
-      setShowWarning(false);
+      // setShowWarning(false);
     }
   }, [show]);
 
@@ -51,20 +51,36 @@ const Modal: React.FC<ModalProps> = ({ show, prompt, onClose, onSubmit }) => {
         });
 
         const jsonContainer = document.getElementById("jsonContainer");
+        if(jsonContainer) {
+          jsonContainer.textContent = "";
+        }
 
         if(response.ok) {
           const data = await response.json();
-          console.log(data);
+          const productData = data.product;
+       
           //navigate("/admin/edit-product", { state: { productID: productID } });
 
         if (jsonContainer) {
           // Format and display the user data
-          jsonContainer.textContent = JSON.stringify(data, null, 2)
-          setMessage("Product found");
-          //navigate("/loggedin", { state: { user: data } });
+          
+          if (data.status === "not found") {
+            setMessage("Product not found");
+          }
+          else {
+            setMessage("Product found");
+            jsonContainer.textContent = JSON.stringify(data, null, 2)
+            navigate("/admin/edit-product", { state: { product: productData } });
+          }
+  
         };
           //onClose();
-        }   
+        }  
+        
+        else{ 
+          setMessage("Product not found");
+          //console.error("Fetch error: ", response.statusText);
+        }
     }
     catch (error:any) { 
       console.error("Fetch error: ", error.message);
@@ -82,12 +98,13 @@ const Modal: React.FC<ModalProps> = ({ show, prompt, onClose, onSubmit }) => {
             value={productID}
             onChange={(e) => setProductID(e.target.value)}
             placeholder="Enter Product ID"
+            required
           />
-          {showWarning && (
+          {/* {showWarning && (
             <p className="warning-message" style={{ color: "red" }}>
               *Please enter a Product ID.
             </p>
-          )}
+          )} */}
           <button type="submit">Submit</button>
           <button type="button" onClick={onClose}>
             Cancel

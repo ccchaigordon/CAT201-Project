@@ -20,6 +20,7 @@ import Accessories from "./components/Categories/Accessories";
 import TermsOfUse from "./components/Terms/TermsOfUse";
 import Privacy from "./components/Terms/Privacy";
 import AdminPage from "./components/admin/AdminPage";
+import EnterId from "./components/admin/EnterId";
 import EditProduct from "./components/admin/EditProduct";
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/edit-product",
     element: <EditProduct />,
+  },
+  {
+    path: "/admin/enterid",
+    element: <EnterId />,
   },
   {
     path: "/checkout",

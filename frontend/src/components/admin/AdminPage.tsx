@@ -16,7 +16,7 @@ const AdminPage: React.FC = () => {
 
   const handleCardClick = () => {
     // setShowModal(true);
-    navigate("/admin/edit-product");
+    navigate("/admin/enterid");
   };
 
   // const handleCloseModal = () => {

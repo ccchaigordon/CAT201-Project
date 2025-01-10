@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AdminNavBar from "./AdminNavBar";
 import Modal from "../common/Modal";
 import "../../style/AdminPage.css";
@@ -12,10 +12,10 @@ type ProductDetails = {
   category: string;
   brand: string;
   description: string;
-  price: number;
-  rating: number;
-  quantity: number;
-  image: File | null;
+  price: string;
+  rating: string;
+  quantity: string;
+  image: string;
   specs: string;
 };
 
@@ -76,53 +76,91 @@ type ProductDetails = {
 // };
 
 const EditProduct: React.FC = () => {
-  const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [productID, setProductID] = useState("");
-  const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
+  // const navigate = useNavigate();
+  // const [showModal, setShowModal] = useState(true);
+  // const [errorMessage, setErrorMessage] = useState("");
+  // const [productID, setProductID] = useState("");
+  // const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
+  const location = useLocation();
+  const product = location.state?.product as ProductDetails;
+
+  // console.log("Product Data:", product)
+
+  if (!product) {
+    return <p style={{ color: 'white' }}>No product data found. Please go back and try again.</p>;
+  } 
+  // else {
+  //   console.log("Product Data:", product);
+  //   return <p style={{ color: 'white' }}>Product data found. Product ID: {product.id}</p>;
+  // }
   
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setErrorMessage(""); // Clear error message when modal is closed
-    // navigate("/profile");
-  };
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  //   setErrorMessage(""); // Clear error message when modal is closed
+  //   // navigate("/profile");
+  // };
 
-  const handleSubmitProductID = async (id: string) => {
-    if (!id.trim()) {
-      setErrorMessage("Product ID cannot be empty.");
-      return;
-    }
-    try {
-      const response = await fetch(
-        `http://localhost:8083/backend/getProductsById?id=${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ); // Corrected URL
+  // const handleSubmitProductID = async (id: string) => {
+  //   if (!id.trim()) {
+  //     setErrorMessage("Product ID cannot be empty.");
+  //     return;
+  //   }
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8083/backend/getProductsById?id=${id}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     ); // Corrected URL
 
-      console.log(response);
+  //     console.log(response);
       
-      if (!response.ok) throw new Error("Failed to fetch product data");
-      const product: ProductDetails[] = await response.json();
-      setProductDetails(product);
-      setShowModal(false); // Close modal
-      console.log(await response.body);
-    } catch (error) {
-      console.error("Error fetching product data:", error);
-      setErrorMessage("Failed to fetch product details. Please try again.");
-    }
-  };
+  //     if (!response.ok) throw new Error("Failed to fetch product data");
+  //     const product: ProductDetails[] = await response.json();
+  //     setProductDetails(product);
+  //     setShowModal(false); // Close modal
+  //     console.log(await response.body);
+  //   } catch (error) {
+  //     console.error("Error fetching product data:", error);
+  //     setErrorMessage("Failed to fetch product details. Please try again.");
+  //   }
+  // };
+  // const handleSubmitProductID = async (id: string) => {
+  //   if (!id.trim()) {
+  //     setErrorMessage("Product ID cannot be empty.");
+  //     return;
+  //   }
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8083/backend/getProductsById?id=${id}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
 
-  useEffect(() => {
-    setShowModal(true);
-  }, []);
+  //     if (!response.ok) throw new Error("Failed to fetch product data");
+  //     const product: ProductDetails[] = await response.json();
+  //     setProductDetails(product);
+  //     setShowModal(false); // Close modal
+  //   } catch (error) {
+  //     console.error("Error fetching product data:", error);
+  //     setErrorMessage("Failed to fetch product details. Please try again.");
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   setShowModal(true);
+  // }, []);
 
   return (
+    <>
     <div
       style={{
         textAlign: "left",
@@ -133,20 +171,27 @@ const EditProduct: React.FC = () => {
       }}
     >
       <AdminNavBar />
-      <Modal
+      {/* <Modal
         show={showModal}
         prompt="Enter Product ID"
         onClose={handleCloseModal}
-        onSubmit={handleSubmitProductID}
-      />
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        // onSubmit={handleSubmitProductID}
+      /> */}
+      {/* {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>} */}
       {/* <h1>{productDetails.name}</h1> */}
-      {productID && (
+      {/* {productID && (
         <p>
           <strong>Entered Product ID:</strong> {productID}
         </p>
-      )}
+      )} */}
+
+
     </div>
+    <div><h1 style={{ color: 'white' }}>Product id: {product.id}</h1>
+    <h1 style={{ color: 'white' }}>Product name: {product.name}</h1>
+    <h1 style={{ color: 'white' }}>Product brand: {product.brand}</h1></div>
+    {/* <div><h1 style={{ color: 'white' }}>hi</h1></div> */}
+    </>
   );
 };
 
