@@ -12,6 +12,15 @@
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+   /* Hide scrollbar for WebKit browsers */
+ ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .form-field {
@@ -65,12 +74,4 @@ button[type="submit"]:hover {
   background-color: #218838;
 }
 
- /* Hide scrollbar for WebKit browsers */
- ::-webkit-scrollbar {
-    display: none;
-  }
 
-  /* Hide scrollbar for IE, Edge, and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}

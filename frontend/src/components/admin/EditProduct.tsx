@@ -16,7 +16,7 @@ interface ProductDetails {
   price: string;
   rating: string;
   quantity: string;
-  image: string;
+  imgSrc: string;
   specs: string;
 }
 
@@ -57,8 +57,21 @@ const EditProduct: React.FC = () => {
   const [editableFields, setEditableFields] = useState<{
     [key: string]: boolean;
   }>({});
-  const nonEditableFields: (keyof ProductDetails)[] = ["id"];
+  const nonEditableFields: (keyof ProductDetails)[] = ["id","category"];
   // console.log("Product Data:", product)
+
+  const fieldDisplayNames: { [key in keyof ProductDetails]: string } = {
+    id: "Product ID",
+    name: "Name",
+    category: "Category",
+    brand: "Brand",
+    description: "Description",
+    price: "Price",
+    rating: "Rating",
+    quantity: "Quantity",
+    imgSrc: "Image Source",
+    specs: "Specifications"
+  };
 
   const handleInputChange = (field: string, value: string) => {
     if (productDetails) {
@@ -120,7 +133,8 @@ const EditProduct: React.FC = () => {
             return (
               <div key={field} className="form-field" style={{ color: "black" }}>
                 <label htmlFor={id} className="form-label">
-                  {field.charAt(0).toUpperCase() + field.slice(1)}:
+                  {/* {field.charAt(0).toUpperCase() + field.slice(1)}: */}
+                  {fieldDisplayNames[field as keyof ProductDetails]}:
                 </label>
                 <div className="input-container">
               

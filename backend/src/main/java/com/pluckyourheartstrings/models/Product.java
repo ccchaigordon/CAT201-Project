@@ -15,7 +15,6 @@ import com.opencsv.exceptions.CsvException;
 
 public class Product {
     private String id;
-    private String imgSrc;
     private String name;
     private String category;
     private String brand;
@@ -23,8 +22,9 @@ public class Product {
     private String price;
     private String rating;
     private String quantity;
+    private String imgSrc;
     private String specs;
-
+    
     // Constructor
     public Product() {
         this.id = "";
@@ -40,8 +40,8 @@ public class Product {
     }
 
     // Constructor
-    public Product(String id, String imgSrc, String category, String brand, String description,
-            String price, String rating, String quantity, String name, String specs) {
+    public Product(String id, String category, String brand, String description,
+            String price, String rating, String quantity, String name, String imgSrc, String specs) {
         this.id = id;
         this.name = name;
         this.category = category;

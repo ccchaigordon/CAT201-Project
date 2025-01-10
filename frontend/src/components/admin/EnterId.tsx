@@ -68,7 +68,7 @@ function EnterId() {
       }}
     >
       <AdminNavBar />
-      <div className="admin-content">
+      <div className="admin-content" style={{ height: "50vh" }}>
         <h1>Enter Product ID</h1>
         <input
           type="text"
