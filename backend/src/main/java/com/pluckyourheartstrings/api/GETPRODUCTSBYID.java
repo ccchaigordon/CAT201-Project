@@ -22,24 +22,24 @@ public class GETPRODUCTSBYID extends HttpServlet {
     @Override
     public void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-        response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-        response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         // response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         response.setHeader("Access-Control-Allow-Credentials", "true");
 
         String guitar_csvfile = "GUITAR.csv", bass_csvfile = "BASS.csv", drum_csvfile = "DRUM.csv",
                 keyboard_csvfile = "KEYBOARD.csv", accessories_csvfile = "ACCESSORIES.csv";
-        String id = request.getParameter("id");
+        String id = request.getParameter("productID");
         System.out.println("ID: " + id);
 
         if (id == null || id.trim().isEmpty()) {
@@ -58,6 +58,9 @@ public class GETPRODUCTSBYID extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         JsonObject jsonResponse2 = new JsonObject();
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         // Check if the product is null
         if (product.getid() == null) {
@@ -81,7 +84,7 @@ public class GETPRODUCTSBYID extends HttpServlet {
         jsonResponse2.addProperty("product", jsonResponse.toString());
 
         response.getWriter().write(new Gson().toJson(jsonResponse2));
-        response.getWriter().flush();
+        // response.getWriter().flush();
 
     }
 }

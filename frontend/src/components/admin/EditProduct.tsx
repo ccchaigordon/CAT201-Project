@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import AdminNavBar from "./AdminNavBar";
+import Modal from "../common/Modal";
 import "../../style/AdminPage.css";
 import "../../style/Modal.css";
 
@@ -18,63 +19,61 @@ type ProductDetails = {
   specs: string;
 };
 
+// type ModalProps = {
+//   show: boolean;
+//   prompt: string;
+//   onClose: () => void;
+//   onSubmit: (id: string) => void;
+// };
 
-type ModalProps = {
-  show: boolean;
-  prompt: string;
-  onClose: () => void;
-  onSubmit: (id: string) => void;
-};
+// const Modal: React.FC<ModalProps> = ({ show, prompt, onClose, onSubmit }) => {
+//   const [productID, setProductID] = useState("");
+//   const [showWarning, setShowWarning] = useState(false);
 
+//   useEffect(() => {
+//     if (!show) {
+//       setProductID("");
+//       setShowWarning(false);
+//     }
+//   }, [show]);
 
-const Modal: React.FC<ModalProps> = ({ show, prompt, onClose, onSubmit }) => {
-  const [productID, setProductID] = useState("");
-  const [showWarning, setShowWarning] = useState(false);
+//   if (!show) {
+//     return null;
+//   }
 
-  useEffect(() => {
-    if (!show) {
-      setProductID("");
-      setShowWarning(false);
-    }
-  }, [show]);
+//   const handleSubmit = (e: React.FormEvent) => {
+//     e.preventDefault();
+//     if (productID.trim() === "") {
+//       setShowWarning(true);
+//       return;
+//     }
+//     setShowWarning(false);
+//     onSubmit(productID);
+//     setProductID("");
+//     onClose();
+//   };
 
-  if (!show) {
-    return null;
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (productID.trim() === "") {
-      setShowWarning(true);
-      return;
-    }
-    setShowWarning(false);
-    onSubmit(productID);
-    setProductID("");
-    onClose();
-  };
-
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2>{prompt}</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={productID}
-            onChange={(e) => setProductID(e.target.value)}
-            placeholder="Enter Product ID"
-          />
-          {showWarning && <p className="warning-message" style={{ color: "red" }}>*Please enter a Product ID.</p>}
-          <button type="submit">Submit</button>
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="modal-overlay">
+//       <div className="modal-content">
+//         <h2>{prompt}</h2>
+//         <form onSubmit={handleSubmit}>
+//           <input
+//             type="text"
+//             value={productID}
+//             onChange={(e) => setProductID(e.target.value)}
+//             placeholder="Enter Product ID"
+//           />
+//           {showWarning && <p className="warning-message" style={{ color: "red" }}>*Please enter a Product ID.</p>}
+//           <button type="submit">Submit</button>
+//           <button type="button" onClick={onClose}>
+//             Cancel
+//           </button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
 
 const EditProduct: React.FC = () => {
   const navigate = useNavigate();
@@ -82,10 +81,12 @@ const EditProduct: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [productID, setProductID] = useState("");
   const [productDetails, setProductDetails] = useState<ProductDetails[]>([]);
+  
 
   const handleCloseModal = () => {
     setShowModal(false);
     setErrorMessage(""); // Clear error message when modal is closed
+    // navigate("/profile");
   };
 
   const handleSubmitProductID = async (id: string) => {
@@ -94,19 +95,18 @@ const EditProduct: React.FC = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:8083/backend/getProductsById?id=${id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-
-
+      const response = await fetch(
+        `http://localhost:8083/backend/getProductsById?id=${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       ); // Corrected URL
 
-
-
       console.log(response);
+      
       if (!response.ok) throw new Error("Failed to fetch product data");
       const product: ProductDetails[] = await response.json();
       setProductDetails(product);
@@ -140,7 +140,7 @@ const EditProduct: React.FC = () => {
         onSubmit={handleSubmitProductID}
       />
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <h1>{productDetails.name}</h1>
+      {/* <h1>{productDetails.name}</h1> */}
       {productID && (
         <p>
           <strong>Entered Product ID:</strong> {productID}
