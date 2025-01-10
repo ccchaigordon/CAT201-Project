@@ -1,5 +1,4 @@
 import NavBar from "../global/NavBar";
-import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
 import React, {useEffect, useState, useRef} from "react";
 import "../../style/AboutUs.css";
@@ -63,7 +62,7 @@ const AboutUsPage: React.FC = () => {
   return (
     <>
       <div>
-        <NavBar /><SearchBar />
+        <NavBar />
       </div> 
 
       {/* about us */}
