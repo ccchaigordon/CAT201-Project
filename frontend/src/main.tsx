@@ -22,7 +22,7 @@ import Privacy from "./components/Terms/Privacy";
 import AdminPage from "./components/admin/AdminPage";
 import EnterId from "./components/admin/EnterId";
 import EditProduct from "./components/admin/EditProduct";
-//import AddProduct from "./components/admin/AddProduct";
+import AddProduct from "./components/admin/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -49,10 +49,10 @@ const router = createBrowserRouter([
     path: "/admin/edit-product",
     element: <EditProduct />,
   },
-  // {
-  //   path: "/admin/add-product",
-  //   element: <AddProduct />,
-  // },
+  {
+    path: "/admin/add-product",
+    element: <AddProduct />,
+  },
   {
     path: "/admin/enterid",
     element: <EnterId />,
