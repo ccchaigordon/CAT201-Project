@@ -97,6 +97,7 @@
 //         setWarningMessage((prev) => ({ ...prev, rating: null })); // Clear the warning message
 //       }
 //     }
+
 //     setProductDetails((prevDetails) => ({
 //       ...prevDetails,
 //       [field]: value, // Explicitly update the field
@@ -198,7 +199,7 @@
 //       </div>
 //       <div className="form-container">
 //         <form>
-//           <h1 style={{ color: "black" }}>Edit Product</h1>
+//           <h1 style={{ color: "black" , textAlign: "center" }}>Add Product</h1>
 
 //           {Object.keys(productDetails).map((field) => {
 //             const typedField = field as keyof ProductDetails;

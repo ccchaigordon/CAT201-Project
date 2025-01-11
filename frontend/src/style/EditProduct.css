@@ -84,12 +84,12 @@ button[type="submit"]:hover {
   border: 2px solid #ccc; /* Slightly thicker border */
   border-radius: 8px; /* Rounded corners for elegance */
   appearance: none; /* Remove default arrow */
-  background-color: #f0f0f0; /* Light background color */
+  background-color: #ffffff; /* Light background color */
   background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="%23000" stroke-width=".75" d="M2 0L0 2.5h4z"/></svg>'); /* Custom arrow */
   background-repeat: no-repeat;
   background-position: right 12px center; /* Adjust arrow position */
-  background-size: 12px 14px; /* Adjust arrow size */
-  font-size: 16px; /* Slightly larger font for readability */
+  background-size: 12px 12px; /* Adjust arrow size */
+  /* font-size: 16px; */
   color: #333; /* Darker text for contrast */
   transition: all 0.3s ease; /* Smooth transition for hover effects */
   cursor: pointer;
