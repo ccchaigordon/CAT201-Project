@@ -31,7 +31,7 @@ public class GETPRODUCTS extends HttpServlet {
         }
 
         // Determine which CSV file to read
-        switch (category) {
+         switch (category) {
             case "guitar":
                 csvFile = "GUITAR.csv";
                 break;

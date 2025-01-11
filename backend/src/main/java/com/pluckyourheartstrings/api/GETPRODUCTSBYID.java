@@ -67,7 +67,7 @@ public class GETPRODUCTSBYID extends HttpServlet {
         else{
             System.out.println("Product ID entered: "+ product.getid());
             System.out.println("Product Name: " + product.getName());
-            System.out.println("Product brand " + product.getBrand());
+            System.out.println("Product brand: " + product.getBrand());
             responseMap.put("status", "success");
             responseMap.put("message", "Product found");
             responseMap.put("product", product); 

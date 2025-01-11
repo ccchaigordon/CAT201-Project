@@ -12,51 +12,62 @@ function EnterId() {
     setProductID(productID);
 
     try {
-        const response = await fetch(
+      const response = await fetch(
         `http://localhost:8083/backend/getProductsById?productID=${productID}`,
         {
-            method: "GET",
-            headers: {
+          method: "GET",
+          headers: {
             "Content-Type": "application/json",
-            },
-        });
-
-        // const jsonContainer = document.getElementById("jsonContainer");
-        // if(jsonContainer) {
-        //     jsonContainer.textContent = "";
-        // }
-
-        if(response.ok) {
-            const data = await response.json();
-            const productData = data.product;
-
-            // if (jsonContainer) {
-            // Format and display the user data
-            
-            if (data.status === "not found") {
-                setMessage("Product not found");
-                navigate("/admin/edit-product", { state: { product: productData } });
-            }
-            else {
-                setMessage("Product found");
-                //console.log(data);
-                //jsonContainer.textContent = JSON.stringify(data, null, 2)
-                navigate("/admin/edit-product", { state: { product: productData } });
-            }
-
-            }
-            //onClose();
-                  
-        else{ 
-            setMessage("Product not found");
-            //console.error("Fetch error: ", response.statusText);
+          },
         }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const productData = data.product;
+
+        if (data.status === "not found") {
+          setMessage("Product not found");
+          //navigate("/admin/edit-product", { state: { product: productData } });
+        } else {
+          setMessage("Product found");
+          //console.log(data);
+          //jsonContainer.textContent = JSON.stringify(data, null, 2)
+          navigate("/admin/edit-product", { state: { product: productData } });
+        }
+      } else {
+        setMessage("Product not found damn");
+        console.error("Fetch error: ", response.statusText);
+      }
+    } catch (error: any) {
+      console.error("Fetch error: ", error.message);
+      setMessage(
+        "Network Error: Unable to reach the server. Please try again."
+      );
     }
-    catch (error:any) { 
-        console.error("Fetch error: ", error.message);
-        setMessage("Network Error: Unable to reach the server. Please try again.");
-    };
-}
+  };
+
+  // if (response.ok) {
+  //       const data = await response.json();
+  //       const productData = data.product;
+
+  //       if (!productData || data.status === "not found") {
+  //         setMessage("Product not found");
+  //       } else {
+  //         console.log(productData);
+  //         setMessage("Product found");
+  //         setTimeout(() => {
+  //         navigate("/admin/edit-product", { state: { product: productData } });
+  //         });
+  //       }
+  //     } else {
+  //       setMessage("Product not found");
+  //     }
+  //   } catch (error: any) {
+  //     console.error("Fetch error: ", error.message);
+  //     setMessage("Network Error: Unable to reach the server. Please try again.");
+  //   }
+  // };
 
   return (
     <div
@@ -78,9 +89,10 @@ function EnterId() {
           required
         />
         <button onClick={() => handleSubmitProductID()}>Submit</button>
+        {message && <p style={{ color: "red" }}>{message}</p>}
       </div>
     </div>
   );
-};
+}
 
 export default EnterId;

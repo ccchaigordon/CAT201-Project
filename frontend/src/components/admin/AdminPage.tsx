@@ -3,20 +3,17 @@ import { useNavigate } from "react-router-dom";
 import AdminNavBar from "./AdminNavBar";
 // import Footer from "../global/Footer";
 import AdminCard from "./AdminCard";
-// import Modal from "../common/Modal";
-// import EditProduct from "./EditProduct";
-// import TestCard from "./testCard";
 import "../../style/AdminPage.css";
 
 const AdminPage: React.FC = () => {
-  // const [showModal, setShowModal] = useState(false);
-  // const [productID, setProductID] = useState("");
-  // const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    // setShowModal(true);
     navigate("/admin/enterid");
+  };
+
+  const handleAddCardClick = () => {
+    navigate("/admin/add-product");
   };
 
   // const handleCloseModal = () => {
@@ -73,7 +70,7 @@ const AdminPage: React.FC = () => {
                 content="Accessories, Basses, Drums, Guitars, Keyboards"
                 width = "500px"
                 color="#f0f0f0"
-                onClick={handleCardClick}
+                onClick={handleAddCardClick}
             />
         </div>
         {/* <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>

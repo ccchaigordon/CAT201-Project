@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useId } from "react";
 import AdminNavBar from "./AdminNavBar";
 // import Form from "./Form";
@@ -53,13 +53,19 @@ interface ProductDetails {
 const EditProduct: React.FC = () => {
   const location = useLocation();
   const product = location.state?.product as ProductDetails;
+  const [message, setMessage] = useState<string>(""); // Add state for message
+  const [successMessage, setSuccessMessage] = useState(""); // For showing success message after save
   const [productDetails, setProductDetails] = useState<ProductDetails>(product);
   const [editableFields, setEditableFields] = useState<{
     [key: string]: boolean;
   }>({});
-  const nonEditableFields: (keyof ProductDetails)[] = ["id","category"];
-  // console.log("Product Data:", product)
-
+  const nonEditableFields: (keyof ProductDetails)[] = ["id", "category"];
+  const navigate = useNavigate();
+  console.log("Product Data:", product)
+  console.log("Location state:", location.state);
+  if(product === null || product === undefined)
+    console.error("Product data is null or undefined");
+  
   const fieldDisplayNames: { [key in keyof ProductDetails]: string } = {
     id: "Product ID",
     name: "Name",
@@ -70,30 +76,72 @@ const EditProduct: React.FC = () => {
     rating: "Rating",
     quantity: "Quantity",
     imgSrc: "Image Source",
-    specs: "Specifications"
+    specs: "Specifications",
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    if (productDetails) {
-      setProductDetails({ ...productDetails, [field]: value });
-    }
+  const handleInputChange = (field: keyof ProductDetails, value: string) => {
+    setProductDetails((prevDetails) => ({
+      ...prevDetails,
+      [field]: value, // Explicitly update the field
+    }));
   };
 
   // const handleEditClick = (field: string) => {
   //   setEditableFields((prev) => ({ ...prev, [field]: true }));
   // };
 
-    const handleEditClick = (field: keyof ProductDetails) => {
+  const handleEditClick = (field: keyof ProductDetails) => {
     setEditableFields((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  const handleSaveChangesClick = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+       const response = await fetch(
+      `http://localhost:8083/backend/updateProducts?category=${product.category}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },      
+          body: JSON.stringify({
+            id: productDetails.id,
+            name: productDetails.name,
+            category: productDetails.category,
+            brand: productDetails.brand,
+            description: productDetails.description,
+            price: productDetails.price,
+            rating: productDetails.rating,
+            quantity: productDetails.quantity,
+            imgSrc: productDetails.imgSrc,
+            specs: productDetails.specs,
+          }),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.status) {
+          console.log(data.status);
+          console.log("Product updated successfully");
+          setMessage("Product updated successfully");
+        } else {
+          console.error("Failed to update product");
+          setMessage("Failed to update product. Please try again.");
+        }
+      } else {
+      console.error("Failed to update product oho");
+      setMessage("Failed to update product.");
+      }
+    } catch (error) {
+      console.error("Unable to connect to server", error);
+      setMessage("Network Error: Unable to reach the server. Please try again.");
+    }
   };
 
   // Check if productDetails is null
   if (!product) {
-    return (
-      <p style={{ color: "white" }}>
-        No product data found. Please go back and try again.
-      </p>
-    );
+    return <p style={{ color: "red" }}>Product not found</p>;
   }
 
   // Display the product details
@@ -128,46 +176,38 @@ const EditProduct: React.FC = () => {
 
       <div className="form-container">
         <form>
-          {Object.keys(productDetails).map((field) => {
-            const id = useId();
-            return (
-              <div key={field} className="form-field" style={{ color: "black" }}>
-                <label htmlFor={id} className="form-label">
-                  {/* {field.charAt(0).toUpperCase() + field.slice(1)}: */}
-                  {fieldDisplayNames[field as keyof ProductDetails]}:
-                </label>
-                <div className="input-container">
-              
-                </div>
-                <input
-                  id={id}
-                  type="text"
-                  value={productDetails[field as keyof ProductDetails]}
-                  onChange={(e) =>
-                    handleInputChange(
-                      field as keyof ProductDetails,
-                      e.target.value
-                    )
-                  }
-                  disabled={
-                    !editableFields[field] ||
-                    nonEditableFields.includes(field as keyof ProductDetails)
-                  }
-                />
-                {!nonEditableFields.includes(field as keyof ProductDetails) && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleEditClick(field as keyof ProductDetails)
-                    }
-                  >
-                    {editableFields[field] ? "Lock" : "Edit"}
-                  </button>
-                )}
-              </div>
-            );
-          })}
-          <button type="submit">Save Changes</button>
+        {Object.keys(productDetails).map((field) => {
+          const id = useId();
+          const typedField = field as keyof ProductDetails; // Explicit casting here
+          return (
+            <div key={field} className="form-field" style={{ color: "black" }}>
+              <label htmlFor={id} className="form-label">
+                {fieldDisplayNames[typedField]}:
+              </label>
+              <input
+                id={id}
+                type="text"
+                value={productDetails[typedField]} // Use typedField here
+                onChange={(e) => handleInputChange(typedField, e.target.value)} // Pass as keyof ProductDetails
+                disabled={
+                  !editableFields[typedField] || nonEditableFields.includes(typedField)
+                }
+              />
+              {!nonEditableFields.includes(typedField) && (
+                <button
+                  type="button"
+                  onClick={() => handleEditClick(typedField)}
+                >
+                  {editableFields[typedField] ? "Lock" : "Edit"}
+                </button>
+              )}
+            </div>
+          );
+        })}
+          <button type="submit" onClick={handleSaveChangesClick}>
+            Save Changes
+          </button>
+          {/* {message && <p style={{ color: message.includes("success") ? "green" : "red" }}>{message}</p>} */}
         </form>
       </div>
     </>

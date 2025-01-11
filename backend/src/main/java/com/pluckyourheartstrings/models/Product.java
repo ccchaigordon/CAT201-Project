@@ -15,6 +15,7 @@ import com.opencsv.exceptions.CsvException;
 
 public class Product {
     private String id;
+    private String imgSrc;
     private String name;
     private String category;
     private String brand;
@@ -22,12 +23,12 @@ public class Product {
     private String price;
     private String rating;
     private String quantity;
-    private String imgSrc;
     private String specs;
-    
+
     // Constructor
     public Product() {
         this.id = "";
+        this.imgSrc = "";
         this.name = "";
         this.category = "";
         this.brand = "";
@@ -35,14 +36,14 @@ public class Product {
         this.price = "";
         this.rating = "";
         this.quantity = "";
-        this.imgSrc = "";
         this.specs = "";
     }
 
     // Constructor
-    public Product(String id, String category, String brand, String description,
-            String price, String rating, String quantity, String name, String imgSrc, String specs) {
+    public Product(String id, String imgSrc, String category, String brand, String description,
+            String price, String rating, String quantity, String name, String specs) {
         this.id = id;
+        this.imgSrc = imgSrc;
         this.name = name;
         this.category = category;
         this.brand = brand;
@@ -50,7 +51,6 @@ public class Product {
         this.price = price;
         this.rating = rating;
         this.quantity = quantity;
-        this.imgSrc = imgSrc;
         this.specs = specs;
     }
 
@@ -206,7 +206,6 @@ public class Product {
         return products;
     }
 
-    
     public static Product getProductByID(String id, String... csvFiles) {
         System.out.println("csvFiles: " + csvFiles[0]);
 
@@ -216,7 +215,7 @@ public class Product {
                 System.err.println("File not found in resources");
                 continue;
             }
-            
+
             try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                     CSVReader csvReader = new CSVReader(br)) {
                 List<String[]> allRows = csvReader.readAll();// Read all rows
@@ -225,10 +224,10 @@ public class Product {
                     String[] productData = allRows.get(i);
                     if (productData[0].trim().equals(id)) {
                         return new Product(
-                            productData[0], productData[8], productData[2], productData[3],
-                            productData[4], productData[5],
-                            productData[6], productData[7],
-                            productData[1], productData[9]);
+                                productData[0], productData[8], productData[2], productData[3],
+                                productData[4], productData[5],
+                                productData[6], productData[7],
+                                productData[1], productData[9]);
                     }
                 }
             } catch (IOException e) {
@@ -242,11 +241,13 @@ public class Product {
         return null;
     }
 
-    public static boolean updateProductInCSV(String csvFile, Product updatedProduct) {
+    public static boolean updateProductInCSV(String csvFile, String id, String name, String productCategory,
+            String brand,
+            String description, String price, String rating, String quantity, String imgSrc, String specs) {
         List<String[]> products = new ArrayList<>();
         boolean productFound = false;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("../backend/src/main/resources/" + csvFile))) {
             String line;
             boolean isFirstLine = true;
             while ((line = br.readLine()) != null) {
@@ -255,13 +256,17 @@ public class Product {
                     products.add(line.split(","));
                     continue;
                 }
-                String[] productData = line.split(",");
-                if (productData[0].trim().equals(updatedProduct.getid())) {
+                String[] productData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Handle commas inside quotes
+                if (productData[0].trim().equals(id)) {
                     productData = new String[] {
-                            updatedProduct.getid(), updatedProduct.getName(), updatedProduct.getCategory(),
-                            updatedProduct.getBrand(), updatedProduct.getDescription(), updatedProduct.getPrice(),
-                            updatedProduct.getRating(), updatedProduct.getQuantity(), updatedProduct.getImgSrc(),
-                            updatedProduct.getspecs()
+                            id,
+                            "\"" + name + "\"",
+                            "\"" + productCategory + "\"",
+                            "\"" + brand + "\"",
+                            "\"" + description + "\"",
+                            price, rating, quantity,
+                            "\"" + imgSrc + "\"",
+                            "\"" + specs + "\""
                     };
                     productFound = true;
                 }
@@ -272,8 +277,9 @@ public class Product {
         }
 
         if (productFound) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("../backend/src/main/resources/" + csvFile))) {
                 for (String[] productData : products) {
+                    System.out.println("productData: " + productData[3]);
                     bw.write(String.join(",", productData));
                     bw.newLine();
                 }
@@ -283,6 +289,59 @@ public class Product {
             }
         }
         return false;
+    }
+
+    // new method: add new product to CSV
+    public static boolean addNewProductToCsv(String csvFile, String id, String name, String productCategory,
+            String brand,
+            String description, String price, String rating, String quantity, String imgSrc, String specs) {
+        List<String[]> products = new ArrayList<>();
+        boolean productFound = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("../backend/src/main/resources/" + csvFile))) {
+            String line;
+            boolean isFirstLine = true;
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false; // Add header to the list
+                    products.add(line.split(","));
+                    continue;
+                }
+                String[] productData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Handle commas inside quotes
+
+                products.add(productData);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading CSV file: " + e.getMessage());
+        }
+
+        String[] newProduct = new String[] {
+                id,
+                "\"" + name + "\"",
+                "\"" + productCategory + "\"",
+                "\"" + brand + "\"",
+                "\"" + description + "\"",
+                price, rating, quantity,
+                "\"" + imgSrc + "\"",
+                "\"" + specs + "\""
+        };
+
+        products.add(newProduct);
+
+        // Write updated user list back to the CSV file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("../backend/src/main/resources/" + csvFile))) {
+
+            for (String[] product : products) {
+                bw.write(String.join(",", product));
+                bw.newLine();
+            }
+            System.out.println("Product successfully added with ID: " + id);
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error writing to CSV file: " + e.getMessage());
+            return false;
+        }
+
     }
 
 }
