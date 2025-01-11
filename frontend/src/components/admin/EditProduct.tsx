@@ -116,10 +116,12 @@ const EditProduct: React.FC = () => {
         if (data.status) {
           console.log(data.status);
           console.log("Product updated successfully");
-          setMessage("Product updated successfully");
+          // setMessage("Product updated successfully");
+          setSuccessMessage(`Product with ID ${productDetails.id} successfully updated.`);
         } else {
           console.error("Failed to update product");
-          setMessage("Failed to update product. Please try again.");
+          // setMessage("Failed to update product. Please try again.");
+          setSuccessMessage("Failed to update product. Please try again.");
         }
       } else {
         console.error("Failed to update product oho");
@@ -283,11 +285,8 @@ const EditProduct: React.FC = () => {
           {/* {message && <p style={{ color: message.includes("success") ? "green" : "red" }}>{message}</p>} */}
         </form>
         {successMessage && (
-          <SuccessMessageModal
-            message={"Product updated successfully!"}
-            onClose={handleCloseModal}
-          />
-        )}
+        <SuccessMessageModal message={successMessage} onClose={handleCloseModal} />
+      )}
       </div>
     </>
   );
