@@ -102,7 +102,7 @@ const AboutUsPage: React.FC = () => {
           <p className={`Description ${ourStoryFadeIn ? "fade-in" : ""}`}>
           Every great endeavor starts with a spark. Ours was born from a small jam session in a cozy garage where a group of friends, 
           united by their love for music, struggled to find quality instruments and accessories at an affordable price. Frustrated by 
-          limited options and uninspired by what was available in the market, we decided to take matters into our own hands. <br></br>
+          limited options and uninspired by what was available in the market, we decided to take matters into our own hands. <br></br><br></br>
           From those humble beginnings, Pluck Your Heart String Music Co. emerged with a mission to make high-quality instruments and equipment
           accessible to everyone. What started as a small idea has grown into an online haven for musicians across the globe.
           </p>
