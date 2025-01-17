@@ -10,25 +10,24 @@
 }
 
 .login-header {
-    position: absolute; /* Place the header at the top of the page */
-    top: 80px; /* Distance from the top of the page */
-    width: 100%; /* Make the header span the full width */
-    text-align: center; /* Center the text horizontally */
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-  }
+  position: absolute; /* Place the header at the top of the page */
+  top: 80px; /* Distance from the top of the page */
+  width: 100%; /* Make the header span the full width */
+  text-align: center; /* Center the text horizontally */
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
 
 .login-container {
-    align-self: center;
-  max-width: 400px;  
+  max-width: 400px;
   width: 100%;
   text-align: left;
-  /* align-items: center; */
+  align-items: center;
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-field {
@@ -39,7 +38,7 @@
 
 .form-field label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .form-field input {
@@ -72,9 +71,9 @@
 }
 
 .form-field.remember-me label {
-    display: flex;
-    font-size: small;
-    color: #313131;
-    align-items: center;
-    margin-bottom: 0;
-  }
+  display: flex;
+  font-size: small;
+  color: #313131;
+  align-items: center;
+  margin-bottom: 0;
+}

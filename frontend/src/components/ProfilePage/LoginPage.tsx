@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   return (
     <>
-    <AdminNavBar />
+      <AdminNavBar />
       <div className="login-page">
         <div className="login-header">
           <h1>Log In</h1>
@@ -29,23 +29,27 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-field">
               <label>
-                Email:
+                Email 
+                <span style={{ color: "red" }}> *</span>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
+                  required
                 />
               </label>
             </div>
             <div className="form-field">
               <label>
-                Password:
+                Password
+                <span style={{ color: "red" }}> *</span>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
+                  required
                 />
               </label>
             </div>
