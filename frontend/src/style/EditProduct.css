@@ -1,3 +1,10 @@
+.edit-product-content {
+  background-color: #ffffff;
+  display: flex;
+  width: 100%;
+  height: 91vh;
+}
+
 .form-container {
   /* max-width: 600px; */
   min-width: 600px; /* Set a minimum width */
@@ -26,6 +33,7 @@
 
 .form-field {
   margin-bottom: 16px;
+  width: 97%;
   display: flex;
   justify-content: space-between;
   flex-direction: column; /* Stack label and input vertically */
@@ -39,7 +47,7 @@
 
 .form-field input {
   flex-grow: 1;
-  width: 95%;
+  width: 80%;
   padding: 8px;
   margin-right: 8px;
   border: 1px solid #ccc;
@@ -60,7 +68,7 @@
   background-color: #0056b3;
 }
 
-button[type="submit"] {
+.button[type="submit"] {
   display: block;
   width: 100%;
   padding: 10px;
@@ -74,19 +82,19 @@ button[type="submit"] {
   text-align: center; /* Center the text */
 }
 
-button[type="submit"]:hover {
+.button[type="submit"]:hover {
   background-color: #218838;
 }
 
 .custom-select {
   flex-grow: 1;
-  width: 100%; /* Make it longer */
-  padding: 12px; /* Add padding for a luxurious look */
-  border: 2px solid #ccc; /* Slightly thicker border */
+  width: 103%; /* Make it longer */
+  padding: 10px;
+  border: 1px solid #ccc; 
   border-radius: 8px; /* Rounded corners for elegance */
   appearance: none; /* Remove default arrow */
   background-color: #ffffff; /* Light background color */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="%23000" stroke-width=".75" d="M2 0L0 2.5h4z"/></svg>'); /* Custom arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://wwwwww.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="%23000" stroke-width=".75" d="M2 0L0 2.5h4z"/></svg>'); /* Custom arrow */
   background-repeat: no-repeat;
   background-position: right 12px center; /* Adjust arrow position */
   background-size: 12px 12px; /* Adjust arrow size */

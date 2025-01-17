@@ -174,15 +174,6 @@ const AddProduct: React.FC = () => {
     navigate("/profile");
   };
 
-  //   // Check if productDetails is null
-  //   if (!product) {
-  //     return (
-  //       <p style={{ color: "white" }}>
-  //         No product data found. Please go back and try again.
-  //       </p>
-  //     );
-  //   }
-
   // Display the product details
   return (
     <>

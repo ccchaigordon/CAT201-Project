@@ -11,7 +11,7 @@
 
 .login-header {
   position: absolute; /* Place the header at the top of the page */
-  top: 80px; /* Distance from the top of the page */
+  top: 180px; /* Distance from the top of the page */
   width: 100%; /* Make the header span the full width */
   text-align: center; /* Center the text horizontally */
   font-size: 24px;

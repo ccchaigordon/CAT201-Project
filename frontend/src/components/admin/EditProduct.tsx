@@ -117,7 +117,9 @@ const EditProduct: React.FC = () => {
           console.log(data.status);
           console.log("Product updated successfully");
           // setMessage("Product updated successfully");
-          setSuccessMessage(`Product with ID ${productDetails.id} successfully updated.`);
+          setSuccessMessage(
+            `Product with ID ${productDetails.id} successfully updated.`
+          );
         } else {
           console.error("Failed to update product");
           // setMessage("Failed to update product. Please try again.");
@@ -164,111 +166,106 @@ const EditProduct: React.FC = () => {
   // Display the product details
   return (
     <>
-      <div
-        style={{
-          textAlign: "left",
-          display: "block",
-          margin: "0 auto",
-          backgroundColor: "#FFFFFF",
-          color: "#000000",
-        }}
-      >
+      <div>
         <AdminNavBar />
       </div>
-      <div className="form-container">
-        <form>
-          <h1 style={{ color: "black", textAlign: "center" }}>Edit Product</h1>
+      <div className="edit-product-content">
+        <div className="form-container">
+          <form>
+            <h1 style={{ color: "black", textAlign: "center" }}>
+              Edit Product
+            </h1>
 
-          {Object.keys(productDetails).map((field) => {
-            const id = useId();
-            const typedField = field as keyof ProductDetails; // Explicit casting here
-            return (
-              <div
-                key={field}
-                className="form-field"
-                style={{ color: "black" }}
-              >
-                <label htmlFor={id} className="form-label">
-                  {fieldDisplayNames[typedField]}:
-                </label>
-                {field === "brand" ? (
-                  <select
-                    id={id}
-                    value={productDetails[typedField]}
-                    onChange={(e) =>
-                      handleInputChange(typedField, e.target.value)
-                    }
-                    className="custom-select"
-                    disabled={isFieldDisabled(typedField)}
-                  >
-                    {brandOptions.map((brand) => (
-                      <option key={brand} value={brand}>
-                        {brand}
-                      </option>
-                    ))}
-                  </select>
-                ) : field === "price" ? (
-                  <>
+            {Object.keys(productDetails).map((field) => {
+              const id = useId();
+              const typedField = field as keyof ProductDetails; // Explicit casting here
+              return (
+                <div
+                  key={field}
+                  className="form-field"
+                  style={{ color: "black" }}
+                >
+                  <label htmlFor={id} className="form-label">
+                    {fieldDisplayNames[typedField]}:
+                  </label>
+                  {field === "brand" ? (
+                    <select
+                      id={id}
+                      value={productDetails[typedField]}
+                      onChange={(e) =>
+                        handleInputChange(typedField, e.target.value)
+                      }
+                      className="custom-select"
+                      disabled={isFieldDisabled(typedField)}
+                    >
+                      {brandOptions.map((brand) => (
+                        <option key={brand} value={brand}>
+                          {brand}
+                        </option>
+                      ))}
+                    </select>
+                  ) : field === "price" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="number"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        step={0.01}
+                        min="0.00"
+                      />
+                    </>
+                  ) : field === "rating" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="number"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        step={1}
+                        min="1"
+                        max="5"
+                      />
+                      {warningMessage.rating && (
+                        <p style={{ color: "red" }}>{warningMessage.rating}</p>
+                      )}
+                    </>
+                  ) : field === "quantity" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="number"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        step={1}
+                        min="0"
+                      />
+                    </>
+                  ) : (
                     <input
-                      id={field}
-                      type="number"
+                      id={id}
+                      type="text"
                       value={productDetails[typedField]}
                       onChange={(e) =>
                         handleInputChange(typedField, e.target.value)
                       }
                       className="custom-input"
                       disabled={isFieldDisabled(typedField)}
-                      step={0.01}
-                      min="0.00"
                     />
-                  </>
-                ) : field === "rating" ? (
-                  <>
-                    <input
-                      id={field}
-                      type="number"
-                      value={productDetails[typedField]}
-                      onChange={(e) =>
-                        handleInputChange(typedField, e.target.value)
-                      }
-                      className="custom-input"
-                      disabled={isFieldDisabled(typedField)}
-                      step={1}
-                      min="1"
-                      max="5"
-                    />
-                    {warningMessage.rating && (
-                      <p style={{ color: "red" }}>{warningMessage.rating}</p>
-                    )}
-                  </>
-                ) : field === "quantity" ? (
-                  <>
-                    <input
-                      id={field}
-                      type="number"
-                      value={productDetails[typedField]}
-                      onChange={(e) =>
-                        handleInputChange(typedField, e.target.value)
-                      }
-                      className="custom-input"
-                      disabled={isFieldDisabled(typedField)}
-                      step={1}
-                      min="0"
-                    />
-                  </>
-                ) : (
-                  <input
-                    id={id}
-                    type="text"
-                    value={productDetails[typedField]}
-                    onChange={(e) =>
-                      handleInputChange(typedField, e.target.value)
-                    }
-                    className="custom-input"
-                    disabled={isFieldDisabled(typedField)}
-                  />
-                )}
-                {/* {!nonEditableFields.includes(typedField) && (
+                  )}
+                  {/* {!nonEditableFields.includes(typedField) && (
                   <button
                     type="button"
                     onClick={() => handleEditClick(typedField)}
@@ -276,17 +273,21 @@ const EditProduct: React.FC = () => {
                     {editableFields[typedField] ? "Lock" : "Edit"}
                   </button>
                 )} */}
-              </div>
-            );
-          })}
-          <button type="submit" onClick={handleSaveChangesClick}>
-            Save Changes
-          </button>
-          {/* {message && <p style={{ color: message.includes("success") ? "green" : "red" }}>{message}</p>} */}
-        </form>
-        {successMessage && (
-        <SuccessMessageModal message={successMessage} onClose={handleCloseModal} />
-      )}
+                </div>
+              );
+            })}
+            <button type="submit" onClick={handleSaveChangesClick}>
+              Save Changes
+            </button>
+            {/* {message && <p style={{ color: message.includes("success") ? "green" : "red" }}>{message}</p>} */}
+          </form>
+          {successMessage && (
+            <SuccessMessageModal
+              message={successMessage}
+              onClose={handleCloseModal}
+            />
+          )}
+        </div>
       </div>
     </>
   );
