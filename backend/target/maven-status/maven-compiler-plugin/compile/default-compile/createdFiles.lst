@@ -1,9 +1,12 @@
 com\pluckyourheartstrings\models\Product.class
 com\pluckyourheartstrings\models\Cart.class
+com\pluckyourheartstrings\api\GETUSERBYID.class
 com\pluckyourheartstrings\api\UPDATEPRODUCTS.class
+com\pluckyourheartstrings\api\UPDATEUSER$1.class
 com\pluckyourheartstrings\models\Test.class
 com\pluckyourheartstrings\api\GETPRODUCTS.class
 com\pluckyourheartstrings\api\UPDATEPRODUCTS$1.class
 com\pluckyourheartstrings\api\GETALLPRODUCTS.class
 com\pluckyourheartstrings\api\GETPRODUCTSBYID.class
 com\pluckyourheartstrings\models\User.class
+com\pluckyourheartstrings\api\UPDATEUSER.class

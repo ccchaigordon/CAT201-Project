@@ -24,7 +24,7 @@ import EnterProductId from "./components/admin/EnterProductId";
 import EditProduct from "./components/admin/EditProduct";
 import AddProduct from "./components/admin/AddProduct";
 import LoginPage from "./components/ProfilePage/LoginPage";
-import EditUserDetails from "./components/admin/EditUser";
+import EditUserDetails from "./components/admin/EditUserDetails";
 import EnterUserId from "./components/admin/EnterUserId";
 
 const router = createBrowserRouter([

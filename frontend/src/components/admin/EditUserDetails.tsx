@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useId } from "react";
 import AdminNavBar from "./AdminNavBar";
@@ -8,7 +8,7 @@ import "../../style/EditProduct.css";
 import "../../style/SuccessMessageModal.css";
 
 interface UserDetails {
-  id: string;
+  userID: string;
   name: string;
   email: string;
   password: string;
@@ -31,18 +31,18 @@ const EditUserDetails: React.FC = () => {
   });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
-  const nonEditableFields: (keyof UserDetails)[] = ["id"];
+  const nonEditableFields: (keyof UserDetails)[] = ["userID"];
   const navigate = useNavigate();
 
-  console.log("Product Data:", user);
+  console.log("User Data:", user);
   console.log("Location state:", location.state);
-  console.log("User id:", userDetails);
+  console.log("User id:", userDetails.userID);
 
   if (user === null || user === undefined)
     console.error("Product data is null or undefined");
 
   const fieldDisplayedNames: { [key: string]: string } = {
-    id: "User ID",
+    userID: "User ID",
     name: "Name",
     email: "Email",
     password: "Password",
@@ -52,12 +52,11 @@ const EditUserDetails: React.FC = () => {
 
   const handleInputChange = (field: keyof UserDetails, value: string) => {
     if (field === "email") {
-      const ratingValue = parseFloat(value);
-      if (ratingValue < 1 || ratingValue > 5) {
+    //   const ratingValue = parseFloat(value);
+      if (value === "") {
         setWarningMessage((prev) => ({
           ...prev,
-          rating: "Email cannot be empty.",
-          //   price: "Price must be positive value."
+          email: "Email cannot be empty.",
         }));
         setUserDetails((prevDetails) => ({
           ...prevDetails,
@@ -80,7 +79,7 @@ const EditUserDetails: React.FC = () => {
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
     // console.log("User details:", userDetails);
-    console.log("User ID:", userDetails.id);
+    console.log("User ID:", userDetails.userID);
 
     try {
       const response = await fetch(`http://localhost:8083/backend/updateUser`, {
@@ -89,7 +88,7 @@ const EditUserDetails: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: userDetails.id,
+          id: userDetails.userID,
           name: userDetails.name,
           email: userDetails.email,
           password: userDetails.password,
@@ -104,7 +103,7 @@ const EditUserDetails: React.FC = () => {
           console.log(data.status);
           console.log("User details updated successfully");
           setSuccessMessage(
-            `User details with ID ${userDetails.id} successfully updated.`
+            `User details with ID ${userDetails.userID} successfully updated.`
           );
         } else {
           console.error("Failed to update user details");
@@ -133,7 +132,7 @@ const EditUserDetails: React.FC = () => {
   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
-    const nonEditableFields: (keyof UserDetails)[] = ["id"];
+    const nonEditableFields: (keyof UserDetails)[] = ["userID"];
     return nonEditableFields.includes(field);
   };
 
