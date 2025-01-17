@@ -24,14 +24,16 @@ function EnterUserId() {
 
       if (response.ok) {
         const data = await response.json();
-        const userData = data.product;
+        const userData = data.user;
 
-        if (data.status == "error") {
+        if (!data.status) {
           setMessage("User details not found");
-          navigate("/admin/enter-user-id");
+        //   navigate("/admin/enter-user-id");
         } else {
           setMessage("Product found");
-          navigate("/admin/edit-user", { state: { product: userData } });
+          console.log(userData);
+          navigate("/admin/edit-user", { state: { user: userData } });
+          
         }
       } else {
         setMessage("Please Enter User ID.");

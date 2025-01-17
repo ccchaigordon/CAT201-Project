@@ -36,6 +36,7 @@ const EditUserDetails: React.FC = () => {
 
   console.log("Product Data:", user);
   console.log("Location state:", location.state);
+  console.log("User id:", userDetails);
 
   if (user === null || user === undefined)
     console.error("Product data is null or undefined");
@@ -74,8 +75,13 @@ const EditUserDetails: React.FC = () => {
     }));
   };
 
+
+  
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
+    // console.log("User details:", userDetails);
+    console.log("User ID:", userDetails.id);
+
     try {
       const response = await fetch(`http://localhost:8083/backend/updateUser`, {
         method: "POST",
@@ -164,6 +170,12 @@ const EditUserDetails: React.FC = () => {
             Save Changes
           </button>
         </form>
+        {/* {successMessage && (
+          <SuccessMessageModal
+            message={successMessage}
+            onClose={handleCloseModal}
+          />
+        )} */}
       </div>
     </>
   );
