@@ -23,6 +23,8 @@ import AdminPage from "./components/admin/AdminPage";
 import EnterId from "./components/admin/EnterId";
 import EditProduct from "./components/admin/EditProduct";
 import AddProduct from "./components/admin/AddProduct";
+// import LoginPage from "./components/ProfilePage/LoginPage";
+import LoginPage from "./components/ProfilePage/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
   {
     path : "/profile",
     element: <AdminPage />,
+  },
+  {
+    path : "/profile/login",
+    element: <LoginPage />,
   },
   {
     path: "/admin/edit-product",
