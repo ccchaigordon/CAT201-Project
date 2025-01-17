@@ -8,7 +8,7 @@ const AdminPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate("/admin/enterid");
+    navigate("/admin/enter-product-id");
   };
 
   const handleAddCardClick = () => {

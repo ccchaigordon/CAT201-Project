@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AdminNavBar from "./AdminNavBar";
 import "../../style/AdminPage.css";
 
-function EnterId() {
+function EnterProductId() {
   const [productID, setProductID] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -95,4 +95,4 @@ function EnterId() {
   );
 }
 
-export default EnterId;
+export default EnterProductId;
