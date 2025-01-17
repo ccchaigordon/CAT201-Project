@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
+import "../../style/Deals.css";
 
 type ProductInfo = {
   id: string;
@@ -174,6 +175,13 @@ function ArrivalPage() {
         <NavBar />
         <SearchBar />
         <h2>New Arrivals</h2>
+        <div className="arrival-banner">
+        <img src="\public\assets\ArrivalPage.webp" alt="Arrival" className="banner-image" />
+        <div className="banner-info">
+          <h3 className="new-arrivals">Discover Our New Arrivals!</h3>
+          <p>Fresh off the shelves, our latest collection of musical instruments and accessories is here! Explore cutting-edge guitars, keyboards, drums, and more—designed to elevate your performance and ignite your creativity. Don’t miss your chance to own the newest releases from top brands. Shop now and be the first to experience the future of music!</p>
+        </div>
+        </div>
       </div>
       <div className="product-section" ref={productSectionRef}>
         <div className="filter">
