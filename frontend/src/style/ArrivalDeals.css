@@ -1,11 +1,11 @@
-.section-1 {
+.deals-section {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     margin: 0 auto;
     background-image: url('assets/bg_1.jpg');
     background-size: cover;
-    max-height: 600px;
+    min-height: 600px;
     background-color: rgba(0, 0, 0, 0.7);
     background-blend-mode: overlay;
 }
@@ -20,7 +20,7 @@
 .banner-image {
     width: 45%; 
     object-fit: cover;  /* Ensures the image covers the area without distorting aspect ratio */
-    height: 100%;  /* Make height adjust to the parent */
+    height: 200px;  
 }
 
 .banner-info {
@@ -32,7 +32,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;  /* Align height with the image */
+    height: 200px;  
 }
 
 .deals-banner, .arrival-banner {

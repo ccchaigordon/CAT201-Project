@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
-import "../../style/Deals.css";
+import "../../style/ArrivalDeals.css";
 
 type ProductInfo = {
   id: string;
@@ -36,6 +36,20 @@ const dealsProducts: ProductInfo[] = [
     quantity: 20,
     specs:
       "Body Shape: Stratocaster®;Body Material: Alder;Body Finish: Gloss Polyester;Neck Profile: Modern 'C';Fretboard Material: Slab Rosewood;Pickups: Player Series Alnico 2 Humbucker (Bridge), Player Series Alnico 5 Single-Coil (Middle, Neck);",
+  },
+  {
+    id: "ROLK-002",
+    imgSrc: "/products/roland_gp_3_baby_grand_digital_piano_polished_ebony_with_bench.png",
+    name: "Roland GP-3 Baby Grand Digital Piano, Polished Ebony with Bench",
+    category: "Keyboard",
+    brand: "Roland",
+    description: 
+    "The GP-3 is the most compact and affordable grand in the acclaimed GP series, bringing you premium piano performance in a unique low-profile design that makes a statement in any living space. Roland's modern features and benefits are infused throughout, from the organic piano sound engine and responsive hammer-action keyboard to onboard recording, BluetoothÂ® audio/MIDI connectivity, and deep integration with the Roland Piano App. If you've always wanted a grand piano but thought you didn't have the space or budget to make it happen, the GP-3 turns your dream into reality.",
+    price: 13990,
+    oriPrice: 15990,
+    rating: 5,
+    quantity: 3,
+    specs: "No. of Keys: 88 keys;Type of Keys: Piano Reality Standard Keyboard with Escapement, Ivory Feel, and Dynamic Sensor Acceleration Technology;Max. Polyphony: 256 voices;Piano Sound: Piano Reality Standard Sound Engine;Touch Response: 5 types, fixed touch;Effects: Ambience, Brilliance;Number of Tones: 285;Built-in Songs: 394 songs;Lesson Function: 287 songs (Scale, Hanon, Beyer, Burgmuller, Czerny 100);Pedal: Damper (Piano Reality Standard Pedal, capable of continuous detection), Soft (capable of continuous detection, function assignable), Sostenuto (function assignable);Recorder: Standard MIDI Files (Format 0, 1 parts, Approx. 70,000 notes memory);Connectors: DC In jack, USB Computer port: USB B type (supports USB MIDI/AUDIO), USB Memory port: USB A type, Phones jack x 2: Stereo miniature phone type, Stereo 1/4-inch phone type;Convenient Functions: Metronome (adjustable Tempo/Beat/Volume), Dual, TwinPiano, Transpose (in semitones), Speaker volume and Headphones volume automatically select function, Speaker Auto Mute, Auto Off;App: Roland Piano App;Bluetooth: Bluetooth Ver 4.2, Profile: A2DP (Audio), GATT (MIDI over Bluetooth Low Energy), CODEC: SBC (Supports SCMS-T content protection);Sound System: Piano Reality Standard Sound System;Speakers: Two - 12 cm (4-3/4 inches);Headphones: Piano Reality Headphones Ambience;Cabinet: Piano Reality Cabinet Design, Music rest: Fixed angle, with Music holders, Keyboard cover: Slide type;Power Supply: AC adaptor;Power Consumption: 10 W (When using the included AC adaptor);Dimensions: 1,394 mm (W) Ã— 698 mm (D) Ã— 1214 mm (H) with music rest;Weight: 57.3 kg / 126 lbs 6 oz",
   },
   {
     id: "ROLD-001",
@@ -147,14 +161,14 @@ function DealsPage() {
 
   return (
     <>
-      <div className="section-1">
+      <div className="deals-section">
         <NavBar />
         <SearchBar />
         <h2>Deals</h2>
         <div className="deals-banner">
         <img src="\public\assets\DealsPage.webp" alt="Deals" className="banner-image" />
         <div className="banner-info">
-          <h3 className="hot-deals">Hot Deals</h3>
+          <h3 className="hot-deals">Our Ultimate Hot Deals!</h3>
           <p>Dive into our exclusive collection of musical instruments and accessories featuring unbeatable prices. From discontinued models to brand-new items still in their boxes, every piece is priced to move fast. This is your chance to snag that guitar, keyboard, or drum set you've been eyeing at a fraction of the cost!</p>
         </div>
         </div>

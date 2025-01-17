@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
-import "../../style/Deals.css";
+import "../../style/ArrivalDeals.css";
 
 type ProductInfo = {
   id: string;
@@ -171,7 +171,7 @@ function ArrivalPage() {
 
   return (
     <>
-      <div className="section-1">
+      <div className="deals-section">
         <NavBar />
         <SearchBar />
         <h2>New Arrivals</h2>
