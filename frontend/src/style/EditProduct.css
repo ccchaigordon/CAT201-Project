@@ -68,7 +68,7 @@
   background-color: #0056b3;
 }
 
-.button[type="submit"] {
+button[type="submit"] {
   display: block;
   width: 100%;
   padding: 10px;
@@ -82,7 +82,7 @@
   text-align: center; /* Center the text */
 }
 
-.button[type="submit"]:hover {
+button[type="submit"]:hover {
   background-color: #218838;
 }
 

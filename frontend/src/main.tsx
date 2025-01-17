@@ -20,11 +20,12 @@ import Accessories from "./components/Categories/Accessories";
 import TermsOfUse from "./components/Terms/TermsOfUse";
 import Privacy from "./components/Terms/Privacy";
 import AdminPage from "./components/admin/AdminPage";
-import EnterId from "./components/admin/EnterId";
+import EnterProductId from "./components/admin/EnterProductId";
 import EditProduct from "./components/admin/EditProduct";
 import AddProduct from "./components/admin/AddProduct";
-// import LoginPage from "./components/ProfilePage/LoginPage";
 import LoginPage from "./components/ProfilePage/LoginPage";
+import EditUserDetails from "./components/admin/EditUser";
+import EnterUserId from "./components/admin/EnterUserId";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
+    path: "/admin/enter-user-id",
+    element: <EnterUserId />,
+  },
+  {
+    path: "/admin/edit-user",
+    element: <EditUserDetails />,
+  },
+  {
     path: "/admin/edit-product",
     element: <EditProduct />,
   },
@@ -60,8 +69,8 @@ const router = createBrowserRouter([
     element: <AddProduct />,
   },
   {
-    path: "/admin/enterid",
-    element: <EnterId />,
+    path: "/admin/enter-product-id",
+    element: <EnterProductId />,
   },
   {
     path: "/checkout",

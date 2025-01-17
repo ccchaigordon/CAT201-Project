@@ -26,9 +26,9 @@ function EnterId() {
         const data = await response.json();
         const productData = data.product;
 
-        if (data.status === "not found") {
+        if (data.status == "error") {
           setMessage("Product not found");
-          //navigate("/admin/edit-product", { state: { product: productData } });
+          navigate("/admin/enter-product-id");
         } else {
           setMessage("Product found");
           //console.log(data);
@@ -36,7 +36,7 @@ function EnterId() {
           navigate("/admin/edit-product", { state: { product: productData } });
         }
       } else {
-        setMessage("Product not found damn");
+        setMessage("Please Enter Product ID.");
         console.error("Fetch error: ", response.statusText);
       }
     } catch (error: any) {
