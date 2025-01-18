@@ -141,9 +141,9 @@ const EditUserDetails: React.FC = () => {
       <div>
         <AdminNavBar />
       </div>
-      <div className="form-content">
+      <div className="content">
         <h1>Edit User Details</h1>
-        <form className="edit-form">
+        <form className="form-container">
           {Object.keys(userDetails).map((field) => {
             const id = useId();
             const typedField = field as keyof UserDetails;
