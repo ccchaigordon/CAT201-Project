@@ -144,7 +144,7 @@ const EditProduct: React.FC = () => {
 
   const handleCloseModal = () => {
     setSuccessMessage(null);
-    navigate("/profile");
+    navigate("/admin");
   };
 
   // Example condition to disable fields
@@ -169,7 +169,7 @@ const EditProduct: React.FC = () => {
       <div>
         <AdminNavBar />
       </div>
-      <div className="edit-product-content">
+      <div className="content">
         <div className="form-container">
           <form>
             <h1 style={{ color: "black", textAlign: "center" }}>

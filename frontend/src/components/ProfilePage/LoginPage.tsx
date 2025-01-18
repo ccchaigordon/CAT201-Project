@@ -13,19 +13,25 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = React.useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowModal(true);
-  };
+    console.log("Email:", email);
+    // setShowModal(true);
+    // await handleLogIn();
 
-  const handleSignUp = () => {
-    // Navigate to the sign up page
-    navigate("/profile/signup");
-  }
-
-  const handleLogIn = async () => {
     try {
-      const response = await fetch(`http://localhost:8083/backend/`); // Replace with the actual path to your CSV file
+      const response = await fetch(
+        `http://localhost:8083/backend/user?category=login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail: email,
+            password: password,
+          }),
+        }
+      ); // Replace with the actual path to your CSV file
       const user = await response.json();
       const userID = user.userId;
       const userRole = user.role;
@@ -33,18 +39,65 @@ const LoginPage = () => {
 
       // const user = users.find((user: any) => user.email === email && user.password === password);
 
+      console.log("User:", user);
+      console.log("User ID:", userID);
+
       if (user.success) {
-        if (userRole === 'admin') {
-          navigate('/admin');
-        } else if (userRole === 'user') {
-          navigate('/main');
+        if (userRole === "admin") {
+          navigate("/admin");
+        } else if (userRole === "user") {
+          navigate("/");
         }
       } else {
-        setErrorMessage('Invalid email or password');
+        setErrorMessage("Invalid email or password");
       }
     } catch (error) {
-      console.error('Error logging in:', error);
-      setErrorMessage('An error occurred. Please try again.');
+      console.error("Error logging in:", error);
+      setErrorMessage("An error occurred. Please try again.");
+    }
+  };
+
+  const handleSignUp = () => {
+    // Navigate to the sign up page
+    navigate("/profile/signup");
+  };
+
+  const handleLogIn = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8083/backend/user?category=login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      ); // Replace with the actual path to your CSV file
+      const user = await response.json();
+      const userID = user.userId;
+      const userRole = user.role;
+      // const users = parseCSV(csvText);
+
+      // const user = users.find((user: any) => user.email === email && user.password === password);
+
+      console.log("User:", user);
+      console.log("User ID:", userID);
+
+      if (user.success) {
+        if (userRole === "admin") {
+          navigate("/admin");
+        } else if (userRole === "user") {
+          navigate("/");
+        }
+      } else {
+        setErrorMessage("Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setErrorMessage("An error occurred. Please try again.");
     }
   };
 
@@ -68,10 +121,13 @@ const LoginPage = () => {
           <h1>Log In</h1>
         </div>
         <div className="login-container">
-          <form onSubmit={handleSubmit} className="login-form">
+          <form
+            onSubmit={handleSubmit}
+            className="login-form"
+          >
             <div className="form-field">
               <label>
-                Email 
+                Email
                 <span style={{ color: "red" }}> *</span>
                 <input
                   type="email"
@@ -96,19 +152,23 @@ const LoginPage = () => {
               </label>
             </div>
             <div className="form-field">
-              <button type="submit" onClick={handleLogIn}>Login</button>
+              <button type="submit" onClick={handleSubmit}>
+                Login
+              </button>
             </div>
             <div className="form-field">
-              <button type="button" onClick={handleSignUp}>Sign Up</button>
+              <button type="button" onClick={handleSignUp}>
+                Sign Up
+              </button>
             </div>
           </form>
         </div>
-        {showModal && (
+        {/* {showModal && (
           <SuccessMessageModal
             message="Login successful!"
             onClose={() => setShowModal(false)}
           />
-        )}
+        )} */}
       </div>
     </>
   );

@@ -128,7 +128,7 @@ const EditUserDetails: React.FC = () => {
 
   const handleCloseModal = () => {
     setSuccessMessage(null);
-    navigate("/profile");
+    navigate("/admin");
   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
@@ -171,7 +171,7 @@ const EditUserDetails: React.FC = () => {
         </form>
         {successMessage && (
           <SuccessMessageModal
-            message={successMessage}
+            message="User details updated successfully!"
             onClose={handleCloseModal}
           />
         )}

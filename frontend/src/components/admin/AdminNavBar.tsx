@@ -11,7 +11,7 @@ function AdminNavBar() {
             <div>
             </div>
             <div className="cart-profile">
-              <a href="/profile">
+              <a href="/profile/login">
                 <img src="/assets/profile.svg" alt="Add href profile" />
               </a>
             </div>
