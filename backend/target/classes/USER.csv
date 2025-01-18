@@ -1,9 +1,9 @@
-ID,Name,Email,Password,Address,PhoneNumber
-C001,New Name yh,newemail@example.com,newPassword,New Address,1234567890
-C002,yh,bobjohnson@example.com,password456,789 Oak St,6543210987
-C003,Alice Brown,alicebrown@example.com,password789,321 Pine St,3216549870
-C004,Darren,darrenfu076@gmail.com,123456,i don wan to say,0123456776
-C005,test,tested@gmail.com,123,teste,33566
-C006,test,est@gmail.com,123455,234,12412
-C007,test2,dest@gmail.com,1233,serwe,serw
-C008,Darren Fu,darrenfu666@gmail.com,whyiwantotellu?,Don wan to tell u,0234567884
+ID,Name,Email,Password,Address,PhoneNumber,Role
+C001,New Name,newemail@example.com,newPassword,New Address,1234567890,user
+C002,yh,yh@example.com,yheep,789 Oak St,6543210987,user
+C003,Alice Brown,alicebrown@example.com,password789,321 Pine St,3216549870,user
+C004,Darren,darrenfu076@gmail.com,123456,i don wan to say,0123456776,user
+C005,test,tested@gmail.com,123,teste,33566,user
+C006,test,est@gmail.com,123455,234,12412,user
+C007,test2,dest@gmail.com,1233,serwe,serw,user
+C008,Darren Fu,darrenfu666@gmail.com,whyiwantotellu?,Don wan to tell u,0234567884,admin

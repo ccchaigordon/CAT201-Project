@@ -1,5 +1,5 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AdminNavBar from "../admin/AdminNavBar";
 // import SuccessMessageModal from "../admin/SuccessMessageModal";
 import "../../style/LoginPage.css";
@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = React.useState("");
   const [showModal, setShowModal] = React.useState(false);
   const [rememberMe, setRememberMe] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,6 +18,15 @@ const LoginPage = () => {
     // For now, just show a success message
     setShowModal(true);
   };
+
+  const handleSignUp = () => {
+    // Navigate to the sign up page
+    navigate("/profile/signup");
+  }
+
+  const handleLogIn = () => {
+    
+  }
 
   return (
     <>
@@ -54,7 +64,10 @@ const LoginPage = () => {
               </label>
             </div>
             <div className="form-field">
-              <button type="submit">Login</button>
+              <button type="submit" onClick={handleLogIn}>Login</button>
+            </div>
+            <div className="form-field">
+              <button type="button" onClick={handleSignUp}>Sign Up</button>
             </div>
           </form>
         </div>

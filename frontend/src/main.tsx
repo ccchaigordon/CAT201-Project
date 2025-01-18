@@ -26,6 +26,7 @@ import AddProduct from "./components/admin/AddProduct";
 import LoginPage from "./components/ProfilePage/LoginPage";
 import EditUserDetails from "./components/admin/EditUserDetails";
 import EnterUserId from "./components/admin/EnterUserId";
+import SignUpPage from "./components/ProfilePage/SignUpPage";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path : "/profile/login",
     element: <LoginPage />,
+  },
+  {
+    path : "/profile/signup",
+    element: <SignUpPage />,
   },
   {
     path: "/admin/enter-user-id",
