@@ -1,11 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../userContext"; // Import the custom look
 import AdminNavBar from "../admin/AdminNavBar";
 // import SuccessMessageModal from "../admin/SuccessMessageModal";
 import "../../style/LoginPage.css";
 import SuccessMessageModal from "../admin/SuccessMessageModal";
 
 const LoginPage = () => {
+  //*
+  const { setUserId } = useUser();
+  //*
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showModal, setShowModal] = React.useState(false);
@@ -32,10 +37,15 @@ const LoginPage = () => {
           }),
         }
       ); // Replace with the actual path to your CSV file
+
+      
+
       const user = await response.json();
       const userID = user.userId;
       const userRole = user.role;
-      // const users = parseCSV(csvText);
+      setUserId(userID); //*
+  
+      // // const users = parseCSV(csvText);
 
       // const user = users.find((user: any) => user.email === email && user.password === password);
 
@@ -46,7 +56,7 @@ const LoginPage = () => {
         if (userRole === "admin") {
           navigate("/admin");
         } else if (userRole === "user") {
-          navigate("/");
+          navigate("/test");
         }
       } else {
         setErrorMessage("Invalid email or password");
@@ -62,44 +72,43 @@ const LoginPage = () => {
     navigate("/profile/signup");
   };
 
-  const handleLogIn = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8083/backend/user?category=login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      ); // Replace with the actual path to your CSV file
-      const user = await response.json();
-      const userID = user.userId;
-      const userRole = user.role;
-      // const users = parseCSV(csvText);
+  // const handleLogIn = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:8083/backend/user?category=login`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           email,
+  //           password,
+  //         }),
+  //       }
+  //     ); // Replace with the actual path to your CSV file
+  //     const user = await response.json();
+  //     const userID = user.userId;
+  //     const userRole = user.role;
 
-      // const user = users.find((user: any) => user.email === email && user.password === password);
+  //     setUserId(userID); //*
 
-      console.log("User:", user);
-      console.log("User ID:", userID);
+  //     console.log("User:", user);
+  //     console.log("User ID:", userID);
 
-      if (user.success) {
-        if (userRole === "admin") {
-          navigate("/admin");
-        } else if (userRole === "user") {
-          navigate("/");
-        }
-      } else {
-        setErrorMessage("Invalid email or password");
-      }
-    } catch (error) {
-      console.error("Error logging in:", error);
-      setErrorMessage("An error occurred. Please try again.");
-    }
-  };
+  //     if (user.success) {
+  //       if (userRole === "admin") {
+  //         navigate("/admin");
+  //       } else if (userRole === "user") {
+  //         navigate("/test");
+  //       }
+  //     } else {
+  //       setErrorMessage("Invalid email or password");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error logging in:", error);
+  //     setErrorMessage("An error occurred. Please try again.");
+  //   }
+  // };
 
   // const parseCSV = (csvText: string) => {
   //   const lines = csvText.split('\n');
