@@ -1,0 +1,6 @@
+OrderID,UserID,OrderDate,ItemsName,Quantity,Subtotal,TotalPrice,ShippingAddress,PaymentMethod,PaymentStatus
+OR001,C001,"2023-10-01","GuitarA, white cream;GuitarB, black","2;1","20.00;10.00",30.00,"123 Main St","Credit Card","Paid"
+OR002,C003,"2023-10-02","GuitarB, black","1","15.00",17.00,"456 Elm St","PayPal","Pending"
+OR003,C002,"2023-10-03","GuitarC, red;GuitarD, blue","3;2","30.00;20.00",50.00,"789 Oak St","Debit Card","Paid"
+OR004,C002,"2023-10-01","Product 1,green; Product 2,blue","2;3","20.0;30.0",50.00,"456 Another St","Credit Card","Paid"
+OR005,Darren Fu,"2025-01-18","","","",0.00,"D'TEKUN PARCEL HUB, M09 KAFETERIA TEKUN, DESASISWA TEKUN, UNIVERSITI SAINS MALAYSIA, 11800 USM PULAU PINANG, PULAU PINANG, Malaysia, GELUGOR, 11800","Credit Card","Paid"
