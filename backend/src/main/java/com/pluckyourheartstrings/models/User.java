@@ -114,7 +114,7 @@ public class User {
     }
 
     //login
-    public boolean login(String userID, String pw){
+    public String[] login(String userEmail, String pw){
         String csvFile = "USER.csv";
 
         // Read existing users from CSV file
@@ -130,21 +130,21 @@ public class User {
                 String[] userData = line.split(",");
                 
                 // Check if userID is in the file
-                String ID = userData[0].trim();
+                String email= userData[2].trim();
                 String PW = userData[3].trim();
-                if(userID.equals(ID) && pw.equals(PW)){
-                    return true;
+                if(userEmail.equals(email) && pw.equals(PW)){
+                    return new String[] { userData[0], userData[6] };
                 }
             }
 
-            return false;
+            return null;
 
         } catch (FileNotFoundException e) {
             System.out.println("CSV file not found. A new file will be created.");
         } catch (IOException e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
         }
-        return false;
+        return null;
     }
 
     //logout
