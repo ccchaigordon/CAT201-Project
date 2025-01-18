@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useUser } from "../userContext"; // Import the custom look
 import { useId } from "react";
-import AdminNavBar from "./AdminNavBar";
-import SuccessMessageModal from "./SuccessMessageModal";
-// import "../../style/AdminPage.css";
+import AdminNavBar from "../admin/AdminNavBar";
+// import NavBar from "../global/NavBar";
+import SuccessMessageModal from "../admin/SuccessMessageModal";
 import "../../style/EditProduct.css";
 import "../../style/SuccessMessageModal.css";
 
 interface UserDetails {
-  userID: string;
-  name: string;
-  email: string;
-  password: string;
-  address: string;
-  phoneNum: string;
-}
+    userID: string | null;
+    name: string | null;
+    email: string | null;
+    password: string | null;
+    address: string | null;
+    phoneNum: string | null;
+    role: string | null;
+  }
 
-const EditUserDetails: React.FC = () => {
-  const location = useLocation();
-  const user = location.state?.user as UserDetails;
-  const [userDetails, setUserDetails] = useState<UserDetails>(user);
+const AdminProfile: React.FC = () => {
+    const { userId, name, email, password, address, phoneNum, role } = useUser();
+
+//   const location = useLocation();
+//   const user = location.state?.user as UserDetails;
+  const [userDetails, setUserDetails] = useState<UserDetails>({
+    userID: "",
+    name: "",
+    email: "",
+    password: "",
+    address: "",
+    phoneNum: "",
+    role: "",
+  });
   const [editableFields, setEditableFields] = useState<{
     [key: string]: boolean;
   }>({});
@@ -31,33 +43,38 @@ const EditUserDetails: React.FC = () => {
   });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
-  const nonEditableFields: (keyof UserDetails)[] = ["userID"];
+  const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
   const navigate = useNavigate();
 
-  console.log("Product Data:", user);
-  console.log("Location state:", location.state);
-  console.log("UserID:", user.userID);
+  console.log("User Data:", name);
+  console.log("Address:", address);
+  console.log("User id:", userId);
 
-  if (user === null || user === undefined)
+  if (name === null || name === undefined)
     console.error("Product data is null or undefined");
 
+  useEffect(() => {
+    setUserDetails({ userID: userId, name, email, password, address, phoneNum, role });
+}, [userId, name, email, password, address, phoneNum, role]);
+
+
   const fieldDisplayedNames: { [key: string]: string } = {
-    id: "User ID",
+    userID: "User ID",
     name: "Name",
     email: "Email",
     password: "Password",
     address: "Address",
     phoneNum: "Phone Number",
+    role: "Role",
   };
 
   const handleInputChange = (field: keyof UserDetails, value: string) => {
     if (field === "email") {
-      const ratingValue = parseFloat(value);
-      if (ratingValue < 1 || ratingValue > 5) {
+    //   const ratingValue = parseFloat(value);
+      if (value === "") {
         setWarningMessage((prev) => ({
           ...prev,
-          rating: "Email cannot be empty.",
-          //   price: "Price must be positive value."
+          email: "Email cannot be empty.",
         }));
         setUserDetails((prevDetails) => ({
           ...prevDetails,
@@ -75,8 +92,13 @@ const EditUserDetails: React.FC = () => {
     }));
   };
 
+
+  
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
+    // console.log("User details:", userDetails);
+    console.log("User ID:", userDetails.userID);
+
     try {
       const response = await fetch(`http://localhost:8083/backend/updateUser`, {
         method: "POST",
@@ -118,7 +140,7 @@ const EditUserDetails: React.FC = () => {
   };
 
   // Check if productDetails is null
-  if (!user) {
+  if (!name) {
     return <p style={{ color: "red" }}>user not found</p>;
   }
 
@@ -128,7 +150,7 @@ const EditUserDetails: React.FC = () => {
   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
-    const nonEditableFields: (keyof UserDetails)[] = ["userID"];
+    const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
     return nonEditableFields.includes(field);
   };
 
@@ -137,9 +159,9 @@ const EditUserDetails: React.FC = () => {
       <div>
         <AdminNavBar />
       </div>
-      <div className="form-content">
+      <div className="content">
         <h1>Edit User Details</h1>
-        <form className="edit-form">
+        <form className="form-container">
           {Object.keys(userDetails).map((field) => {
             const id = useId();
             const typedField = field as keyof UserDetails;
@@ -151,7 +173,7 @@ const EditUserDetails: React.FC = () => {
                 <input
                   id={id}
                   type="text"
-                  value={userDetails[typedField]}
+                  value={userDetails[typedField] ?? ""}
                   onChange={(e) =>
                     handleInputChange(typedField, e.target.value)
                   }
@@ -167,7 +189,7 @@ const EditUserDetails: React.FC = () => {
         </form>
         {successMessage && (
           <SuccessMessageModal
-            message={successMessage}
+            message="User details updated successfully!"
             onClose={handleCloseModal}
           />
         )}
@@ -176,4 +198,4 @@ const EditUserDetails: React.FC = () => {
   );
 };
 
-export default EditUserDetails;
+export default AdminProfile;

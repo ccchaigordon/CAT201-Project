@@ -1,0 +1,15 @@
+
+button {
+  display: block;
+  width: min-content;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  align-items: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; /* Increase font size */
+  margin-top: 20px; /* Add margin to separate from other elements */
+  text-align: center; /* Center the text */
+}

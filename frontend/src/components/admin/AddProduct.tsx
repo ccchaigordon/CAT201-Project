@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AdminNavBar from "./AdminNavBar";
+import SuccessMessageModal from "./SuccessMessageModal";
 import "../../style/AdminPage.css";
 import "../../style/EditProduct.css";
 
@@ -18,8 +19,8 @@ interface ProductDetails {
 }
 
 const AddProduct: React.FC = () => {
-  const location = useLocation();
-  const product = location.state?.product as ProductDetails;
+  //const location = useLocation();
+  //const product = location.state?.product as ProductDetails;
   //   const [category, setCategory] = useState<string>("");
   const [productDetails, setProductDetails] = useState<ProductDetails>({
     id: "",
@@ -79,7 +80,43 @@ const AddProduct: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleInputChange = (field: keyof ProductDetails, value: string) => {
+  const checkProductIdExists = async (productId: string): Promise<boolean> => {
+    try {
+      const response = await fetch("http://localhost:8083/backend/checkProductId", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: JSON.stringify({
+          id: productId,
+        }),
+      });
+      const data = await response.json();
+      return data.status; // true if ProductID exists, false otherwise
+    } catch (error) {
+      console.error("Error checking ProductID:", error);
+      return false; // Default to false on error
+    }
+  };
+
+  const handleInputChange = async (field: keyof ProductDetails, value: string) => {
+    if (field === "id") {
+      const exists = await checkProductIdExists(value);
+      if (exists) {
+        setWarningMessage((prev) => ({
+          ...prev,
+          id: "ProductID already exists. Please use a unique ID.",
+        }));
+        setProductDetails((prevDetails) => ({
+          ...prevDetails,
+          [field]: "", // Clear the input field
+        }));
+        return;
+      } else {
+        setWarningMessage((prev) => ({ ...prev, id: null })); // Clear warning
+      }
+    }
+
     if (field === "rating") {
       const ratingValue = parseFloat(value);
       if (ratingValue < 1 || ratingValue > 5) {
@@ -113,10 +150,12 @@ const AddProduct: React.FC = () => {
 
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
+    //console.log("Product Details:", productDetails);
+    console.log("Sending payload:", JSON.stringify(productDetails));
 
     try {
       const response = await fetch(
-        `http://localhost:8083/backend/updateProducts?category=${product.category}&action=add`,
+        `http://localhost:8083/backend/updateProducts?category=${productDetails.category}&action=add`,
         {
           method: "POST",
           headers: {
@@ -137,9 +176,19 @@ const AddProduct: React.FC = () => {
         }
       );
       if (response.ok) {
-        setSuccessMessage(
-          `New product with ID ${productDetails.id} successfully added.`
-        );
+        const data = await response.json();
+
+        if (data.status) {
+          console.log(data.status);
+          console.log("Product INSERTED successfully");
+          // setMessage("Product updated successfully");
+          setSuccessMessage(`Product with ID ${productDetails.id} successfully inserted.`);
+        } else {
+          console.error("Failed to insert product");
+          // setMessage("Failed to update product. Please try again.");
+          setSuccessMessage("Failed to insert product. Please try again.");
+        }
+        
       } else {
         setWarningMessage((prev) => ({
           ...prev,
@@ -171,108 +220,88 @@ const AddProduct: React.FC = () => {
 
   const handleClosePopup = () => {
     setSuccessMessage(null);
-    navigate("/profile");
+    navigate("/admin");
   };
+
+  //   // Check if productDetails is null
+  //   if (!product) {
+  //     return (
+  //       <p style={{ color: "white" }}>
+  //         No product data found. Please go back and try again.
+  //       </p>
+  //     );
+  //   }
 
   // Display the product details
   return (
     <>
-      <div>
+      <div
+        style={{
+          textAlign: "left",
+          display: "block",
+          margin: "0 auto",
+          backgroundColor: "#FFFFFF",
+          color: "#000000",
+        }}
+      >
         <AdminNavBar />
       </div>
-      <div className="content">
-        <div className="form-container">
-          <form>
-            <h1 style={{ color: "black", textAlign: "center" }}>Add Product</h1>
+      <div className="form-container">
+        <form>
+          <h1 style={{ color: "black" , textAlign: "center" }}>Add Product</h1>
 
-            {Object.keys(productDetails).map((field) => {
-              const typedField = field as keyof ProductDetails;
-              return (
-                <div
-                  key={field}
-                  className="form-field"
-                  style={{ color: "black" }}
-                >
-                  <label htmlFor={field}>
-                    {fieldDisplayNames[typedField]}
-                    <span style={{ color: "red" }}> *</span>
-                  </label>
-                  {field === "brand" ? (
-                    <select
-                      className="custom-select"
-                      id={field}
-                      value={productDetails[typedField]}
-                      onChange={(e) =>
-                        handleInputChange(typedField, e.target.value)
-                      }
-                      required
-                    >
-                      <option value="" disabled>
-                        Select a brand
+          {Object.keys(productDetails).map((field) => {
+            const typedField = field as keyof ProductDetails;
+            return (
+              <div
+                key={field}
+                className="form-field"
+                style={{ color: "black" }}
+              >
+                <label htmlFor={field}>
+                  {fieldDisplayNames[typedField]}
+                  <span style={{ color: "red" }}> *</span>
+                </label>
+                {field === "brand" ? (
+                  <select
+                    className="custom-select"
+                    id={field}
+                    value={productDetails[typedField]}
+                    onChange={(e) =>
+                      handleInputChange(typedField, e.target.value)
+                    }
+                    required
+                  >
+                    <option value="" disabled>
+                      Select a brand
+                    </option>
+                    {brandOptions.map((brand) => (
+                      <option key={brand} value={brand}>
+                        {brand}
                       </option>
-                      {brandOptions.map((brand) => (
-                        <option key={brand} value={brand}>
-                          {brand}
-                        </option>
-                      ))}
-                    </select>
-                  ) : field === "category" ? (
-                    <select
-                      id={field}
-                      value={productDetails[typedField]}
-                      onChange={(e) =>
-                        handleInputChange(typedField, e.target.value)
-                      }
-                      required
-                      className="custom-select"
-                    >
-                      <option value="" disabled>
-                        Select a category
+                    ))}
+                  </select>
+                ) : field === "category" ? (
+                  <select
+                    id={field}
+                    value={productDetails[typedField]}
+                    onChange={(e) =>
+                      handleInputChange(typedField, e.target.value)
+                    }
+                    required
+                    className="custom-select"
+                  >
+                    <option value="" disabled>
+                      Select a category
+                    </option>
+                    {categoryOptions.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
                       </option>
-                      {categoryOptions.map((category) => (
-                        <option key={category} value={category}>
-                          {category}
-                        </option>
-                      ))}
-                    </select>
-                  ) : field === "price" ? (
-                    <>
-                      <input
-                        id={field}
-                        type="number"
-                        value={productDetails[typedField] || ""}
-                        onChange={(e) =>
-                          handleInputChange(typedField, e.target.value)
-                        }
-                        required
-                        className="custom-input"
-                        step="0.01" // Allow decimal values
-                        min="0.00" // Minimum value
-                      />
-                      {/* {warningMessage.price && (
-                      <p style={{ color: "red" }}>{warningMessage.price}</p>
-                    )} */}
-                    </>
-                  ) : field === "rating" ? (
-                    <>
-                      <input
-                        id={field}
-                        type="number"
-                        value={productDetails[typedField] || ""}
-                        onChange={(e) =>
-                          handleInputChange(typedField, e.target.value)
-                        }
-                        required
-                        className="custom-input"
-                        step="1"
-                        min="1"
-                        max="5"
-                      />
-                      {warningMessage.rating && (
-                        <p style={{ color: "red" }}>{warningMessage.rating}</p>
-                      )}
-                    </>
-                  ) : field === "quantity" ? (
+                    ))}
+                  </select>
+                ) : field === "price" ? (
+                  <>
                     <input
                       id={field}
                       type="number"
@@ -282,10 +311,47 @@ const AddProduct: React.FC = () => {
                       }
                       required
                       className="custom-input"
-                      step={1}
-                      min="0"
+                      step="0.01" // Allow decimal values
+                      min="0.00" // Minimum value
                     />
-                  ) : (
+                    {/* {warningMessage.price && (
+                      <p style={{ color: "red" }}>{warningMessage.price}</p>
+                    )} */}
+                  </>
+                ) : field === "rating" ? (
+                  <>
+                    <input
+                      id={field}
+                      type="number"
+                      value={productDetails[typedField] || ""}
+                      onChange={(e) =>
+                        handleInputChange(typedField, e.target.value)
+                      }
+                      required
+                      className="custom-input"
+                      step="1"
+                      min="1"
+                      max="5"
+                    />
+                    {warningMessage.rating && (
+                      <p style={{ color: "red" }}>{warningMessage.rating}</p>
+                    )}
+                  </>
+                ) : field === "quantity" ? (
+                  <input
+                    id={field}
+                    type="number"
+                    value={productDetails[typedField] || ""}
+                    onChange={(e) =>
+                      handleInputChange(typedField, e.target.value)
+                    }
+                    required
+                    className="custom-input"
+                    step={1}
+                    min="0"
+                  />
+                ) : field === "id" ? (
+                  <>
                     <input
                       id={field}
                       type="text"
@@ -294,24 +360,36 @@ const AddProduct: React.FC = () => {
                         handleInputChange(typedField, e.target.value)
                       }
                       required
+                      className="custom-input"
                     />
-                  )}
-                </div>
-              );
-            })}
-            <button type="submit" onClick={handleSaveChangesClick}>
-              Save Changes
-            </button>
-          </form>
-          {successMessage && (
-            <div className="popup">
-              <div className="popup-content">
-                <p>{successMessage}</p>
-                <button onClick={handleClosePopup}>Close</button>
+                    {warningMessage.id && (
+                      <p style={{ color: "red" }}>{warningMessage.id}</p>
+                    )}
+                  </>
+                ) : (
+                  <input
+                    id={field}
+                    type="text"
+                    value={productDetails[typedField] || ""}
+                    onChange={(e) =>
+                      handleInputChange(typedField, e.target.value)
+                    }
+                    required
+                  />
+                )}
               </div>
-            </div>
+            );
+          })}
+          <button type="submit" onClick={handleSaveChangesClick}>
+            Save Changes
+          </button>
+        </form>
+        {successMessage && (
+            <SuccessMessageModal
+              message={successMessage}
+              onClose={handleClosePopup}
+            />
           )}
-        </div>
       </div>
     </>
   );

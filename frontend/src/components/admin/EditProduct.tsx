@@ -90,7 +90,7 @@ const EditProduct: React.FC = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8083/backend/updateProducts?category=${product.category}`,
+        `http://localhost:8083/backend/updateProducts?category=${product.category}&action=update`,
         {
           method: "POST",
           headers: {

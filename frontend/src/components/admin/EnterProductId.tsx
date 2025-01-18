@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminNavBar from "./AdminNavBar";
-import "../../style/AdminPage.css";
+import "../../style/EnterId.css";
+// import "../../style/AdminPage.css";
 
 function EnterProductId() {
   const [productID, setProductID] = useState("");
@@ -79,7 +80,10 @@ function EnterProductId() {
       }}
     >
       <AdminNavBar />
-      <div className="admin-content" style={{ height: "50vh" }}>
+      <div
+        className="admin-content"
+        style={{ height: "50vh", alignContent: "center", alignItems: "center" }}
+      >
         <h1>Enter Product ID</h1>
         <input
           type="text"
@@ -88,7 +92,24 @@ function EnterProductId() {
           onChange={(e) => setProductID(e.target.value)}
           required
         />
-        <button onClick={() => handleSubmitProductID()}>Submit</button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button
+            type="button"
+            style={{
+              width: "100px",
+              padding: "8px",
+              alignItems: "center",
+              backgroundColor: "#007BFF",
+              color: "#fff",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+            onClick={() => handleSubmitProductID()}
+          >
+            Submit
+          </button>
+        </div>
         {message && <p style={{ color: "red" }}>{message}</p>}
       </div>
     </div>

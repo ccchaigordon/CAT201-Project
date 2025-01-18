@@ -18,7 +18,7 @@ interface UserDetails {
     role: string | null;
   }
 
-const EditUserDetails: React.FC = () => {
+const UserProfile: React.FC = () => {
     const { userId, name, email, password, address, phoneNum, role } = useUser();
 
 //   const location = useLocation();
@@ -43,7 +43,7 @@ const EditUserDetails: React.FC = () => {
   });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
-  const nonEditableFields: (keyof UserDetails)[] = ["userID"];
+  const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
   const navigate = useNavigate();
 
   console.log("User Data:", name);
@@ -150,7 +150,7 @@ const EditUserDetails: React.FC = () => {
   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
-    const nonEditableFields: (keyof UserDetails)[] = ["userID"];
+    const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
     return nonEditableFields.includes(field);
   };
 
@@ -198,4 +198,4 @@ const EditUserDetails: React.FC = () => {
   );
 };
 
-export default EditUserDetails;
+export default UserProfile;

@@ -69,11 +69,10 @@ function AdminNavBar() {
     // const userData = data.user;
     // Navigate to the profile page if logged in
     if (isLoggedIn) {
-      navigate("/profile/user");
+      navigate("/profile/admin");
       // navigate("/profile/user", { state : { user: userData }});
     } else {
-      // Optionally, navigate to login page if not logged in
-      navigate("/");
+      navigate("/profile/login");
     }
   };
 

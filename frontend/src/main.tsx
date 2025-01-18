@@ -12,7 +12,7 @@ import Nux from "./components/Brands/Nux";
 import Focusrite from "./components/Brands/Focusrite";
 import ProductPage from "./components/global/ProductPage";
 import CartPage from "./components/Cart/CartPage";
-import CheckOutPage from "./components/CheckOut/CheckOutPage";
+import CheckOutPage from "./components/Cart/CheckOutPage";
 import Guitars from "./components/Categories/Guitars";
 import Basses from "./components/Categories/Basses";
 import Drums from "./components/Categories/Drums";
@@ -30,6 +30,7 @@ import EnterUserId from "./components/admin/EnterUserId";
 import SignUpPage from "./components/ProfilePage/SignUpPage";
 import Test from "./components/Test";
 import UserProfile from "./components/ProfilePage/UserProfile";
+import AdminProfile from "./components/admin/AdminProfile";
 import Invoice from "./components/Cart/Invoice";
 import AboutUsPage from "./components/AboutUs/AboutUs";
 import DealsPage from "./components/Deals/DealsPage";
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
   {
     path: "/profile/signup",
     element: <SignUpPage />,
+  },
+  {
+    path: "/profile/admin",
+    element: <AdminProfile />,
   },
   {
     path: "/profile/user",
