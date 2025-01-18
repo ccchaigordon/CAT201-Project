@@ -9,13 +9,12 @@ const LoginPage = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showModal, setShowModal] = React.useState(false);
-  const [rememberMe, setRememberMe] = React.useState(false);
+  // const [rememberMe, setRememberMe] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Perform login logic here
-    // For now, just show a success message
     setShowModal(true);
   };
 
@@ -24,9 +23,42 @@ const LoginPage = () => {
     navigate("/profile/signup");
   }
 
-  const handleLogIn = () => {
-    
-  }
+  const handleLogIn = async () => {
+    try {
+      const response = await fetch(`http://localhost:8083/backend/`); // Replace with the actual path to your CSV file
+      const user = await response.json();
+      const userID = user.userId;
+      const userRole = user.role;
+      // const users = parseCSV(csvText);
+
+      // const user = users.find((user: any) => user.email === email && user.password === password);
+
+      if (user.success) {
+        if (userRole === 'admin') {
+          navigate('/admin');
+        } else if (userRole === 'user') {
+          navigate('/main');
+        }
+      } else {
+        setErrorMessage('Invalid email or password');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      setErrorMessage('An error occurred. Please try again.');
+    }
+  };
+
+  // const parseCSV = (csvText: string) => {
+  //   const lines = csvText.split('\n');
+  //   const headers = lines[0].split(',');
+  //   return lines.slice(1).map(line => {
+  //     const values = line.split(',');
+  //     return headers.reduce((object, header, index) => {
+  //       object[header.trim()] = values[index].trim();
+  //       return object;
+  //     }, {} as any);
+  //   });
+  // };
 
   return (
     <>

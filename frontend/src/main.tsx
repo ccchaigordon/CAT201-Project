@@ -46,16 +46,16 @@ const router = createBrowserRouter([
     element: <CartPage />,
   },
   {
-    path : "/profile",
-    element: <AdminPage />,
-  },
-  {
-    path : "/profile/login",
+    path: "/profile/login",
     element: <LoginPage />,
   },
   {
-    path : "/profile/signup",
+    path: "/profile/signup",
     element: <SignUpPage />,
+  },
+  {
+    path: "/admin",
+    element: <AdminPage />,
   },
   {
     path: "/admin/enter-user-id",
