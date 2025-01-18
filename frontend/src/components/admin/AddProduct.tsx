@@ -177,91 +177,102 @@ const AddProduct: React.FC = () => {
   // Display the product details
   return (
     <>
-      <div
-        style={{
-          textAlign: "left",
-          display: "block",
-          margin: "0 auto",
-          backgroundColor: "#FFFFFF",
-          color: "#000000",
-        }}
-      >
+      <div>
         <AdminNavBar />
       </div>
-      <div className="form-container">
-        <form>
-          <h1 style={{ color: "black" , textAlign: "center" }}>Add Product</h1>
+      <div className="content">
+        <div className="form-container">
+          <form>
+            <h1 style={{ color: "black", textAlign: "center" }}>Add Product</h1>
 
-          {Object.keys(productDetails).map((field) => {
-            const typedField = field as keyof ProductDetails;
-            return (
-              <div
-                key={field}
-                className="form-field"
-                style={{ color: "black" }}
-              >
-                <label htmlFor={field}>
-                  {fieldDisplayNames[typedField]}
-                  <span style={{ color: "red" }}> *</span>
-                </label>
-                {field === "brand" ? (
-                  <select
-                    className="custom-select"
-                    id={field}
-                    value={productDetails[typedField]}
-                    onChange={(e) =>
-                      handleInputChange(typedField, e.target.value)
-                    }
-                    required
-                  >
-                    <option value="" disabled>
-                      Select a brand
-                    </option>
-                    {brandOptions.map((brand) => (
-                      <option key={brand} value={brand}>
-                        {brand}
-                      </option>
-                    ))}
-                  </select>
-                ) : field === "category" ? (
-                  <select
-                    id={field}
-                    value={productDetails[typedField]}
-                    onChange={(e) =>
-                      handleInputChange(typedField, e.target.value)
-                    }
-                    required
-                    className="custom-select"
-                  >
-                    <option value="" disabled>
-                      Select a category
-                    </option>
-                    {categoryOptions.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
-                      </option>
-                    ))}
-                  </select>
-                ) : field === "price" ? (
-                  <>
-                    <input
+            {Object.keys(productDetails).map((field) => {
+              const typedField = field as keyof ProductDetails;
+              return (
+                <div
+                  key={field}
+                  className="form-field"
+                  style={{ color: "black" }}
+                >
+                  <label htmlFor={field}>
+                    {fieldDisplayNames[typedField]}
+                    <span style={{ color: "red" }}> *</span>
+                  </label>
+                  {field === "brand" ? (
+                    <select
+                      className="custom-select"
                       id={field}
-                      type="number"
-                      value={productDetails[typedField] || ""}
+                      value={productDetails[typedField]}
                       onChange={(e) =>
                         handleInputChange(typedField, e.target.value)
                       }
                       required
-                      className="custom-input"
-                      step="0.01" // Allow decimal values
-                      min="0.00" // Minimum value
-                    />
-                    {/* {warningMessage.price && (
+                    >
+                      <option value="" disabled>
+                        Select a brand
+                      </option>
+                      {brandOptions.map((brand) => (
+                        <option key={brand} value={brand}>
+                          {brand}
+                        </option>
+                      ))}
+                    </select>
+                  ) : field === "category" ? (
+                    <select
+                      id={field}
+                      value={productDetails[typedField]}
+                      onChange={(e) =>
+                        handleInputChange(typedField, e.target.value)
+                      }
+                      required
+                      className="custom-select"
+                    >
+                      <option value="" disabled>
+                        Select a category
+                      </option>
+                      {categoryOptions.map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </select>
+                  ) : field === "price" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="number"
+                        value={productDetails[typedField] || ""}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        required
+                        className="custom-input"
+                        step="0.01" // Allow decimal values
+                        min="0.00" // Minimum value
+                      />
+                      {/* {warningMessage.price && (
                       <p style={{ color: "red" }}>{warningMessage.price}</p>
                     )} */}
-                  </>
-                ) : field === "rating" ? (
-                  <>
+                    </>
+                  ) : field === "rating" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="number"
+                        value={productDetails[typedField] || ""}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        required
+                        className="custom-input"
+                        step="1"
+                        min="1"
+                        max="5"
+                      />
+                      {warningMessage.rating && (
+                        <p style={{ color: "red" }}>{warningMessage.rating}</p>
+                      )}
+                    </>
+                  ) : field === "quantity" ? (
                     <input
                       id={field}
                       type="number"
@@ -271,53 +282,36 @@ const AddProduct: React.FC = () => {
                       }
                       required
                       className="custom-input"
-                      step="1"
-                      min="1"
-                      max="5"
+                      step={1}
+                      min="0"
                     />
-                    {warningMessage.rating && (
-                      <p style={{ color: "red" }}>{warningMessage.rating}</p>
-                    )}
-                  </>
-                ) : field === "quantity" ? (
-                  <input
-                    id={field}
-                    type="number"
-                    value={productDetails[typedField] || ""}
-                    onChange={(e) =>
-                      handleInputChange(typedField, e.target.value)
-                    }
-                    required
-                    className="custom-input"
-                    step={1}
-                    min="0"
-                  />
-                ) : (
-                  <input
-                    id={field}
-                    type="text"
-                    value={productDetails[typedField] || ""}
-                    onChange={(e) =>
-                      handleInputChange(typedField, e.target.value)
-                    }
-                    required
-                  />
-                )}
+                  ) : (
+                    <input
+                      id={field}
+                      type="text"
+                      value={productDetails[typedField] || ""}
+                      onChange={(e) =>
+                        handleInputChange(typedField, e.target.value)
+                      }
+                      required
+                    />
+                  )}
+                </div>
+              );
+            })}
+            <button type="submit" onClick={handleSaveChangesClick}>
+              Save Changes
+            </button>
+          </form>
+          {successMessage && (
+            <div className="popup">
+              <div className="popup-content">
+                <p>{successMessage}</p>
+                <button onClick={handleClosePopup}>Close</button>
               </div>
-            );
-          })}
-          <button type="submit" onClick={handleSaveChangesClick}>
-            Save Changes
-          </button>
-        </form>
-        {successMessage && (
-          <div className="popup">
-            <div className="popup-content">
-              <p>{successMessage}</p>
-              <button onClick={handleClosePopup}>Close</button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

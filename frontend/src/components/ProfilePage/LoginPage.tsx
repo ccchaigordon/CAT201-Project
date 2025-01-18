@@ -56,7 +56,8 @@ const LoginPage = () => {
         if (userRole === "admin") {
           navigate("/admin");
         } else if (userRole === "user") {
-          navigate("/test");
+          // navigate("/test");
+          navigate("/");
         }
       } else {
         setErrorMessage("Invalid email or password");
@@ -108,18 +109,6 @@ const LoginPage = () => {
   //     console.error("Error logging in:", error);
   //     setErrorMessage("An error occurred. Please try again.");
   //   }
-  // };
-
-  // const parseCSV = (csvText: string) => {
-  //   const lines = csvText.split('\n');
-  //   const headers = lines[0].split(',');
-  //   return lines.slice(1).map(line => {
-  //     const values = line.split(',');
-  //     return headers.reduce((object, header, index) => {
-  //       object[header.trim()] = values[index].trim();
-  //       return object;
-  //     }, {} as any);
-  //   });
   // };
 
   return (

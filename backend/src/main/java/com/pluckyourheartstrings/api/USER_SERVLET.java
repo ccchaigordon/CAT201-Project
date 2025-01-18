@@ -111,6 +111,7 @@ public class USER_SERVLET extends HttpServlet {
             String password = requestMap.get("password");
             String address = requestMap.get("address");
             String phoneNum = requestMap.get("phoneNum");
+            String role = requestMap.get("role");
 
             // if (userId == null) {
             //     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing required parameter: userId");
@@ -127,8 +128,9 @@ public class USER_SERVLET extends HttpServlet {
             users.setpw(password);
             users.setaddress(address);
             users.setphonenum(phoneNum);
+            users.setrole(role);
 
-            boolean isAuthenticated = users.register(name, email, password, address, phoneNum);
+            boolean isAuthenticated = users.register(name, email, password, address, phoneNum, role);
 
             //Prepare the response JSON            
             responseMap.put("success", isAuthenticated);
