@@ -169,12 +169,12 @@ const EditUserDetails: React.FC = () => {
             Save Changes
           </button>
         </form>
-        {/* {successMessage && (
+        {successMessage && (
           <SuccessMessageModal
             message={successMessage}
             onClose={handleCloseModal}
           />
-        )} */}
+        )}
       </div>
     </>
   );

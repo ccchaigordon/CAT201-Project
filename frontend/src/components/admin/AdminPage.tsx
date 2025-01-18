@@ -33,26 +33,27 @@ const AdminPage: React.FC = () => {
         <h3>Hello, Admin.</h3>
         <h2>Manage Products</h2>
         <div className="update-products">
-            <AdminCard
-              title="Update Products"
-              content="Accessories, Basses, Drums, Guitars, Keyboards"
-              width="500px"
-              color="#f0f0f0"
-              onClick={handleCardClick}
-            />
-            <AdminCard
-              title="Create New Products"
-              content="Accessories, Basses, Drums, Guitars, Keyboards"
-              width="500px"
-              color="#f0f0f0"
-              onClick={handleAddCardClick}
-            />
+          <AdminCard
+            title="Update Products"
+            content="Accessories, Basses, Drums, Guitars, Keyboards"
+            width="500px"
+            color="#f0f0f0"
+            onClick={handleCardClick}
+          />
+          <AdminCard
+            title="Create New Products"
+            content="Accessories, Basses, Drums, Guitars, Keyboards"
+            width="500px"
+            color="#f0f0f0"
+            onClick={handleAddCardClick}
+          />
         </div>
+        <h2>Manage Users</h2>
         <div className="update-users">
           <div>
             <AdminCard
               title="Update Users Details"
-              // content="Accessories, Basses, Drums, Guitars, Keyboards"
+              content="Email, Password, Address, Phone Number"
               width="500px"
               color="#f0f0f0"
               onClick={handleUserCardClick}
