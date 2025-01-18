@@ -241,54 +241,58 @@ public class Product {
         return null;
     }
 
-    public static boolean updateProductInCSV(String csvFile, String id, String name, String productCategory,
+    public static boolean updateProductInCSV(String id, String name, String productCategory,
             String brand,
-            String description, String price, String rating, String quantity, String imgSrc, String specs) {
-        List<String[]> products = new ArrayList<>();
+            String description, String price, String rating, String quantity, String imgSrc, String specs, String ...csvFile) {        
         boolean productFound = false;
+        boolean success = false;
 
-        try (BufferedReader br = new BufferedReader(new FileReader("../backend/src/main/resources/" + csvFile))) {
-            String line;
-            boolean isFirstLine = true;
-            while ((line = br.readLine()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false; // Add header to the list
-                    products.add(line.split(","));
-                    continue;
+        for (String csv_File : csvFile) {
+            List<String[]> products = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader("../backend/src/main/resources/" + csv_File))) {
+                String line;
+                boolean isFirstLine = true;
+                while ((line = br.readLine()) != null) {
+                    if (isFirstLine) {
+                        isFirstLine = false; // Add header to the list
+                        products.add(line.split(","));
+                        continue;
+                    }
+                    String[] productData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Handle commas inside quotes
+                    if (productData[0].trim().equals(id)) {
+                        productData = new String[] {
+                                id,
+                                "\"" + name + "\"",
+                                "\"" + productCategory + "\"",
+                                "\"" + brand + "\"",
+                                "\"" + description + "\"",
+                                price, rating, quantity,
+                                "\"" + imgSrc + "\"",
+                                "\"" + specs + "\""
+                        };
+                        productFound = true;
+                    }
+                    products.add(productData);
                 }
-                String[] productData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Handle commas inside quotes
-                if (productData[0].trim().equals(id)) {
-                    productData = new String[] {
-                            id,
-                            "\"" + name + "\"",
-                            "\"" + productCategory + "\"",
-                            "\"" + brand + "\"",
-                            "\"" + description + "\"",
-                            price, rating, quantity,
-                            "\"" + imgSrc + "\"",
-                            "\"" + specs + "\""
-                    };
-                    productFound = true;
-                }
-                products.add(productData);
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading CSV file: " + e.getMessage());
-        }
-
-        if (productFound) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("../backend/src/main/resources/" + csvFile))) {
-                for (String[] productData : products) {
-                    System.out.println("productData: " + productData[3]);
-                    bw.write(String.join(",", productData));
-                    bw.newLine();
-                }
-                return true;
             } catch (IOException e) {
-                System.err.println("Error writing to CSV file: " + e.getMessage());
+                System.err.println("Error reading CSV file: " + e.getMessage());
             }
-        }
-        return false;
+
+            if (productFound) {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter("../backend/src/main/resources/" + csv_File))) {
+                    for (String[] productData : products) {
+                        System.out.println("productData: " + productData[3]);
+                        bw.write(String.join(",", productData));
+                        bw.newLine();
+                    }
+                    success = true;
+                } catch (IOException e) {
+                    System.err.println("Error writing to CSV file: " + e.getMessage());
+                    success = false;
+                }
+            }
+        }         
+        return success;
     }
 
     // new method: add new product to CSV
@@ -296,7 +300,6 @@ public class Product {
             String brand,
             String description, String price, String rating, String quantity, String imgSrc, String specs) {
         List<String[]> products = new ArrayList<>();
-        boolean productFound = false;
 
         try (BufferedReader br = new BufferedReader(new FileReader("../backend/src/main/resources/" + csvFile))) {
             String line;
@@ -341,7 +344,51 @@ public class Product {
             System.err.println("Error writing to CSV file: " + e.getMessage());
             return false;
         }
+    }
 
+    public static List<Product> getProductByName_Brand(String query, String... csvFiles) {
+
+        query = query.toLowerCase();
+        List<Product> matches = new ArrayList<>();
+
+        for (String csvFile : csvFiles) {
+            InputStream inputStream = Product.class.getClassLoader().getResourceAsStream(csvFile);
+            if (inputStream == null) {
+                System.err.println("File not found in resources");
+                continue;
+            }
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                    CSVReader csvReader = new CSVReader(br)) {
+                List<String[]> allRows = csvReader.readAll();// Read all rows
+
+                for (int i = 1; i < allRows.size(); i++) { // Skip the header
+                    String[] productData = allRows.get(i);
+                    String name = productData[1].toLowerCase();
+                    String brand = productData[3].toLowerCase();
+                    if (name.contains(query) || brand.contains(query)) {
+                        matches.add(new Product(
+                                productData[0], productData[8], productData[2], productData[3],
+                                productData[4], productData[5],
+                                productData[6], productData[7],
+                                productData[1], productData[9]));                        
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading CSV file: " + e.getMessage());
+                return null;
+            } catch (CsvException e) {
+                System.err.println("Error parsing CSV file: " + e.getMessage());
+                return null;
+            }
+        }
+        
+        if(matches.isEmpty()) {
+            return null;
+        }
+        else {
+            return matches;
+        }
     }
 
 }

@@ -3,7 +3,11 @@
     top: 0;
     left: 0;
     width: 100%;
+<<<<<<< HEAD
     height: 115vh;
+=======
+    height: 100%;
+>>>>>>> origin/Darren
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
@@ -12,7 +16,10 @@
   
   .modal-content {
     background: white;
+<<<<<<< HEAD
     color: black;
+=======
+>>>>>>> origin/Darren
     padding: 20px;
     border-radius: 8px;
     text-align: center;

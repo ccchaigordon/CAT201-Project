@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\yihan\Documents\USM\CS Y2\y2s1\CAT-Project2\backend\src\main\java\com\pluckyourheartstrings\api\GETPRODUCTSBYID.java
 C:\Users\yihan\Documents\USM\CS Y2\y2s1\CAT-Project2\backend\src\main\java\com\pluckyourheartstrings\api\UPDATEPRODUCTS.java
 C:\Users\yihan\Documents\USM\CS Y2\y2s1\CAT-Project2\backend\src\main\java\com\pluckyourheartstrings\api\GETALLPRODUCTS.java
@@ -9,3 +10,22 @@ C:\Users\yihan\Documents\USM\CS Y2\y2s1\CAT-Project2\backend\src\main\java\com\p
 C:\Users\yihan\Documents\USM\CS Y2\y2s1\CAT-Project2\backend\src\main\java\com\pluckyourheartstrings\api\UPDATEUSER.java
 C:\Users\yihan\Documents\USM\CS Y2\y2s1\CAT-Project2\backend\src\main\java\com\pluckyourheartstrings\models\Product.java
 C:\Users\yihan\Documents\USM\CS Y2\y2s1\CAT-Project2\backend\src\main\java\com\pluckyourheartstrings\models\Cart.java
+=======
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\GETPRODUCTS.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\UPDATEUSER.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\models\Order.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\GETINVOICE.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\models\User.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\CHECKOUT.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\CHECKPRODUCTID.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\UPDATEPRODUCTS.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\GETPRODUCTSBYNAME_BRAND.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\GETWHATSNEWPRODUCT.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\models\Product.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\models\Test.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\GETUSERBYID.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\models\Cart.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\GETALLPRODUCTS.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\USER_SERVLET.java
+C:\Users\darre\Documents\CAT201 FROM YIHAN\backend\src\main\java\com\pluckyourheartstrings\api\GETPRODUCTSBYID.java
+>>>>>>> origin/Darren

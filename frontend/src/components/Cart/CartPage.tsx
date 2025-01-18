@@ -11,7 +11,7 @@ type ProductInfo = {
   description: string;
   price: number;
   quantity: number; // Quantity in cart
-  maxQuantity: number; //Quantity in stock
+  maxQuantity: number; // Quantity in stock
   specs: string;
 };
 
@@ -198,7 +198,7 @@ const CartPage: React.FC = () => {
                 <p className="summary-title">Tax (10% incl.):</p>{" "}
                 <p className="summary-value">
                   RM{" "}
-                  {((total / 1.1) * 0.1).toLocaleString("en-US", {
+                  {((total / 1) * 0.1).toLocaleString("en-US", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
@@ -211,13 +211,18 @@ const CartPage: React.FC = () => {
                 </p>{" "}
                 <p className="summary-value" style={{ fontWeight: "600" }}>
                   RM{" "}
-                  {total.toLocaleString("en-US", {
+                  {((total / 1) * 1.1).toLocaleString("en-US", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
                 </p>
               </div>
-              <button className="payment-btn">Proceed to Payment</button>
+              <button
+                className="payment-btn"
+                onClick={() => (window.location.href = "/checkout")}
+              >
+                Proceed to Payment
+              </button>
               <hr style={{ margin: "1rem 2rem" }} />
               <div className="payment-methods">
                 <h3 style={{ fontWeight: "700", margin: "0.5rem 2rem" }}>

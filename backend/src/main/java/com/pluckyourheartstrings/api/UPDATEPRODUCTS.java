@@ -49,13 +49,23 @@ public class UPDATEPRODUCTS extends HttpServlet {
         // Product updatedProduct = gson.fromJson(reader, Product.class);
 
         // Update the product in the CSV file
-        String guitar_csv = "Guitar.csv", bass_csv = "Bass.csv", drum_csv = "Drum.csv", keyboard_csv = "Keyboard.csv",
-                accessories_csv = "Accessories.csv";
+        String guitar_csv = "GUITAR.csv", bass_csv = "BASS.csv", drum_csv = "DRUM.csv", keyboard_csv = "KEYBOARD.csv",
+                accessories_csv = "ACCESSORIES.csv";
 
         String category = request.getParameter("category"); // Get the type from frontend (e.g., "guitars")
+        String action = request.getParameter("action"); // Get the action from frontend (e.g., "update")
+
+        
 
         if(category == null) {
+            System.out.println("Category parameter missing");
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Category parameter is missing.");
+            return;
+        }
+
+        if(action == null) {
+            System.out.println("Action parameter missing");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action parameter is missing.");
             return;
         }
 
@@ -74,7 +84,7 @@ public class UPDATEPRODUCTS extends HttpServlet {
             case "Keyboard":
                 csvFile = keyboard_csv;
                 break;
-            case "Accessory":
+            case "Accessories":
                 csvFile = accessories_csv;
                 break;
             default:
@@ -85,52 +95,104 @@ public class UPDATEPRODUCTS extends HttpServlet {
 
         Gson gson = new Gson();
 
-        // Parse JSON body
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        try (BufferedReader reader = request.getReader()) {
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
+        if(action.equals("update")) {
+            System.out.println("Action: " + action);
+            // Parse JSON body
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            try (BufferedReader reader = request.getReader()) {
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
             }
+            String requestBody = stringBuilder.toString();
+
+            // Convert JSON to a map using Gson
+            Map<String, String> requestMap = gson.fromJson(requestBody, new TypeToken<Map<String, String>>() {}.getType());
+            Map<String, Object> responseMap = new HashMap<>();
+
+            String id = requestMap.get("id");
+            String name = requestMap.get("name");
+            String productCategory = category;
+            String brand = requestMap.get("brand");
+            String description = requestMap.get("description");
+            String price = requestMap.get("price");
+            String rating = requestMap.get("rating");
+            String quantity = requestMap.get("quantity");
+            String imgSrc = requestMap.get("imgSrc");
+            String specs = requestMap.get("specs");
+
+            boolean productFound = Product.updateProductInCSV(id, name, productCategory, brand, description, price, rating, quantity, imgSrc, specs, csvFile, "TOPSELLER.csv");
+
+            if(productFound) {
+                System.out.println("Product updated successfully.");
+            }
+
+            responseMap.put("status", productFound);
+
+            
+
+
+            // Set the response type to JSON
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+        //     Map<String, Object> responseMap = new HashMap<>();
+        //     responseMap.put("status", "success");
+        //     responseMap.put("message", "Product updated successfully.");
+        //     response.setStatus(HttpServletResponse.SC_OK); // 200 OK
+        //     response.getWriter().write(new Gson().toJson(responseMap));
+            String jsonResponse = gson.toJson(responseMap);
+            response.getWriter().write(jsonResponse);
         }
-        String requestBody = stringBuilder.toString();
 
-        // Convert JSON to a map using Gson
-        Map<String, String> requestMap = gson.fromJson(requestBody, new TypeToken<Map<String, String>>() {}.getType());
-        Map<String, Object> responseMap = new HashMap<>();
+        else {
+            // Parse JSON body
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            try (BufferedReader reader = request.getReader()) {
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+            }
+            String requestBody = stringBuilder.toString();
 
-        String id = requestMap.get("id");
-        String name = requestMap.get("name");
-        String productCategory = category;
-        String brand = requestMap.get("brand");
-        String description = requestMap.get("description");
-        String price = requestMap.get("price");
-        String rating = requestMap.get("rating");
-        String quantity = requestMap.get("quantity");
-        String imgSrc = requestMap.get("imgSrc");
-        String specs = requestMap.get("specs");
+            // Convert JSON to a map using Gson
+            Map<String, String> requestMap = gson.fromJson(requestBody, new TypeToken<Map<String, String>>() {}.getType());
+            Map<String, Object> responseMap = new HashMap<>();
 
-        boolean productFound = Product.updateProductInCSV(csvFile, id, name, productCategory, brand, description, price, rating, quantity, imgSrc, specs);
+            String id = requestMap.get("id");
+            String name = requestMap.get("name");
+            String productCategory = requestMap.get("category");
+            String brand = requestMap.get("brand");
+            String description = requestMap.get("description");
+            String price = requestMap.get("price");
+            String rating = requestMap.get("rating");
+            String quantity = requestMap.get("quantity");
+            String imgSrc = requestMap.get("imgSrc");
+            String specs = requestMap.get("specs");
 
-        if(productFound) {
-            System.out.println("Product updated successfully.");
+            boolean addSuccess = Product.addNewProductToCsv(csvFile, id, name, productCategory, brand, description, price, rating, quantity, imgSrc, specs);
+            
+            if(addSuccess) {
+                System.out.println("Product added successfully.");
+            }
+
+            responseMap.put("status", addSuccess);
+
+            // Set the response type to JSON
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+        //     Map<String, Object> responseMap = new HashMap<>();
+        //     responseMap.put("status", "success");
+        //     responseMap.put("message", "Product updated successfully.");
+        //     response.setStatus(HttpServletResponse.SC_OK); // 200 OK
+        //     response.getWriter().write(new Gson().toJson(responseMap));
+            String jsonResponse = gson.toJson(responseMap);
+            response.getWriter().write(jsonResponse);
         }
-
-        responseMap.put("status", productFound);
 
         
-
-
-        // Set the response type to JSON
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-    //     Map<String, Object> responseMap = new HashMap<>();
-    //     responseMap.put("status", "success");
-    //     responseMap.put("message", "Product updated successfully.");
-    //     response.setStatus(HttpServletResponse.SC_OK); // 200 OK
-    //     response.getWriter().write(new Gson().toJson(responseMap));
-        String jsonResponse = gson.toJson(responseMap);
-        response.getWriter().write(jsonResponse);
     }
 }

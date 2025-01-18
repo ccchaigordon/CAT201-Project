@@ -60,7 +60,7 @@ public class GETPRODUCTSBYID extends HttpServlet {
             
         if(product == null) {
             System.out.println("Product not found");
-            responseMap.put("status", "error");
+            responseMap.put("status", false);
             responseMap.put("message", "Product not found");
             
         }
@@ -68,7 +68,7 @@ public class GETPRODUCTSBYID extends HttpServlet {
             System.out.println("Product ID entered: "+ product.getid());
             System.out.println("Product Name: " + product.getName());
             System.out.println("Product brand: " + product.getBrand());
-            responseMap.put("status", "success");
+            responseMap.put("status", true);
             responseMap.put("message", "Product found");
             responseMap.put("product", product); 
         }

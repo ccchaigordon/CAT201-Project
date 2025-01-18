@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .content {
   background-color: #ffffff;
   display: flex;
@@ -13,6 +14,8 @@
   border-bottom: 1px solid #ccc;
 }
 
+=======
+>>>>>>> origin/Darren
 .form-container {
   /* max-width: 600px; */
   min-width: 600px; /* Set a minimum width */
@@ -41,7 +44,10 @@
 
 .form-field {
   margin-bottom: 16px;
+<<<<<<< HEAD
   width: 97%;
+=======
+>>>>>>> origin/Darren
   display: flex;
   justify-content: space-between;
   flex-direction: column; /* Stack label and input vertically */
@@ -55,7 +61,11 @@
 
 .form-field input {
   flex-grow: 1;
+<<<<<<< HEAD
   width: 80%;
+=======
+  width: 95%;
+>>>>>>> origin/Darren
   padding: 8px;
   margin-right: 8px;
   border: 1px solid #ccc;
@@ -96,6 +106,7 @@ button[type="submit"]:hover {
 
 .custom-select {
   flex-grow: 1;
+<<<<<<< HEAD
   width: 103%; /* Make it longer */
   padding: 10px;
   border: 1px solid #ccc; 
@@ -103,6 +114,15 @@ button[type="submit"]:hover {
   appearance: none; /* Remove default arrow */
   background-color: #ffffff; /* Light background color */
   background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://wwwwww.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="%23000" stroke-width=".75" d="M2 0L0 2.5h4z"/></svg>'); /* Custom arrow */
+=======
+  width: 100%; /* Make it longer */
+  padding: 12px; /* Add padding for a luxurious look */
+  border: 2px solid #ccc; /* Slightly thicker border */
+  border-radius: 8px; /* Rounded corners for elegance */
+  appearance: none; /* Remove default arrow */
+  background-color: #ffffff; /* Light background color */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="%23000" stroke-width=".75" d="M2 0L0 2.5h4z"/></svg>'); /* Custom arrow */
+>>>>>>> origin/Darren
   background-repeat: no-repeat;
   background-position: right 12px center; /* Adjust arrow position */
   background-size: 12px 12px; /* Adjust arrow size */
