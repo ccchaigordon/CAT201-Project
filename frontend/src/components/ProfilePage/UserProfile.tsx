@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useId } from "react";
-import AdminNavBar from "./AdminNavBar";
-import SuccessMessageModal from "./SuccessMessageModal";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import { useId } from "react";
+import AdminNavBar from "../admin/AdminNavBar";
 import "../../style/EditProduct.css";
-import "../../style/SuccessMessageModal.css";
 
 interface UserDetails {
   userID: string;
@@ -15,10 +13,17 @@ interface UserDetails {
   phoneNum: string;
 }
 
-const EditUserDetails: React.FC = () => {
-  const location = useLocation();
-  const user = location.state?.user as UserDetails;
-  const [userDetails, setUserDetails] = useState<UserDetails>(user);
+const UserProfile: React.FC = () => {
+  //   const location = useLocation();
+  //   const user = location.state?.user as UserDetails;
+  const [userDetails, setUserDetails] = useState<UserDetails>({
+    userID: "1",
+    name: "John Doe",
+    email: "john@gmail.com",
+    password: "password",
+    address: "123 Main St",
+    phoneNum: "123-456-7890",
+  });
   const [editableFields, setEditableFields] = useState<{
     [key: string]: boolean;
   }>({});
@@ -31,14 +36,10 @@ const EditUserDetails: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
   const nonEditableFields: (keyof UserDetails)[] = ["userID"];
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
-  console.log("User Data:", user);
-  console.log("Location state:", location.state);
-  console.log("User id:", userDetails.userID);
-
-  if (user === null || user === undefined)
-    console.error("Product data is null or undefined");
+  //   if (user === null || user === undefined)
+  //     console.error("Product data is null or undefined");
 
   const fieldDisplayedNames: { [key: string]: string } = {
     userID: "User ID",
@@ -51,7 +52,6 @@ const EditUserDetails: React.FC = () => {
 
   const handleInputChange = (field: keyof UserDetails, value: string) => {
     if (field === "email") {
-    //   const ratingValue = parseFloat(value);
       if (value === "") {
         setWarningMessage((prev) => ({
           ...prev,
@@ -73,8 +73,6 @@ const EditUserDetails: React.FC = () => {
     }));
   };
 
-
-  
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
     // console.log("User details:", userDetails);
@@ -120,20 +118,19 @@ const EditUserDetails: React.FC = () => {
     }
   };
 
-  // Check if productDetails is null
-  if (!user) {
-    return <p style={{ color: "red" }}>user not found</p>;
-  }
-
-  const handleCloseModal = () => {
-    setSuccessMessage(null);
-    navigate("/admin");
-  };
+  //   const handleCloseModal = () => {
+  //     setSuccessMessage(null);
+  //     navigate("/");
+  //   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
     const nonEditableFields: (keyof UserDetails)[] = ["userID"];
     return nonEditableFields.includes(field);
   };
+
+  //   if (!userDetails) {
+  //     return <div>Loading...</div>;
+  //   }
 
   return (
     <>
@@ -141,42 +138,48 @@ const EditUserDetails: React.FC = () => {
         <AdminNavBar />
       </div>
       <div className="content">
-        <h1>Edit User Details</h1>
-        <form className="form-container">
-          {Object.keys(userDetails).map((field) => {
-            const id = useId();
-            const typedField = field as keyof UserDetails;
-            return (
-              <div className="form-field" key={field}>
-                <label htmlFor={id} className="from-label">
-                  {fieldDisplayedNames[typedField]}
-                </label>
-                <input
-                  id={id}
-                  type="text"
-                  value={userDetails[typedField]}
-                  onChange={(e) =>
-                    handleInputChange(typedField, e.target.value)
-                  }
-                  className="custom-input"
-                  disabled={isFieldDisabled(typedField)}
-                />
-              </div>
-            );
-          })}
-          <button type="submit" onClick={handleSaveChangesClick}>
-            Save Changes
-          </button>
-        </form>
-        {successMessage && (
-          <SuccessMessageModal
-            message="User details updated successfully!"
-            onClose={handleCloseModal}
-          />
-        )}
+        <div className="header">
+          <h1 style={{color: "black"}}>User Profile</h1>
+        </div>
+
+        <div className="form-container">
+          {/* <form className="form-container">
+            {Object.keys(userDetails).map((field) => {
+              const id = useId();
+              const typedField = field as keyof UserDetails;
+              return (
+                <div className="form-field" key={field}>
+                  <label htmlFor={id} className="from-label">
+                    {fieldDisplayedNames[typedField]}
+                  </label>
+                  <input
+                    id={id}
+                    type="text"
+                    value={userDetails[typedField]}
+                    onChange={(e) =>
+                      handleInputChange(typedField, e.target.value)
+                    }
+                    className="custom-input"
+                    disabled={isFieldDisabled(typedField)}
+                  />
+                </div>
+              );
+            })}
+            <button type="submit" onClick={handleSaveChangesClick}>
+              Save Changes
+            </button>
+          </form>
+          <div>
+            <button onClick={handleCloseModal}>Close</button>
+          </div>
+          <div className="message">
+            {successMessage && <p>{successMessage}</p>}
+            {message && <p>{message}</p>}
+          </div> */}
+        </div>
       </div>
     </>
   );
 };
 
-export default EditUserDetails;
+export default UserProfile;

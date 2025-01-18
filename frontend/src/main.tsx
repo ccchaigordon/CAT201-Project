@@ -185,7 +185,8 @@ import LoginPage from "./components/ProfilePage/LoginPage";
 import EditUserDetails from "./components/admin/EditUserDetails";
 import EnterUserId from "./components/admin/EnterUserId";
 import SignUpPage from "./components/ProfilePage/SignUpPage";
-import Test from "./components/test";
+import Test from "./components/Test";
+import UserProfile from "./components/ProfilePage/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -215,6 +216,10 @@ const router = createBrowserRouter([
   {
     path: "/profile/signup",
     element: <SignUpPage />,
+  },
+  {
+    path: "/profile/user",
+    element: <UserProfile />,
   },
   {
     path: "/admin",

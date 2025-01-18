@@ -26,7 +26,8 @@ const LoginPage = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8083/backend/user?category=login`, {
+        `http://localhost:8083/backend/user?category=login`,
+        {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -38,13 +39,11 @@ const LoginPage = () => {
         }
       ); // Replace with the actual path to your CSV file
 
-      
-
       const user = await response.json();
       const userID = user.userId;
       const userRole = user.role;
       setUserId(userID); //*
-  
+
       // // const users = parseCSV(csvText);
 
       // const user = users.find((user: any) => user.email === email && user.password === password);
@@ -53,6 +52,9 @@ const LoginPage = () => {
       console.log("User ID:", userID);
 
       if (user.success) {
+        // Update the login state in localStorage
+        localStorage.setItem("isLoggedIn", "true");
+
         if (userRole === "admin") {
           navigate("/admin");
         } else if (userRole === "user") {
@@ -119,10 +121,7 @@ const LoginPage = () => {
           <h1>Log In</h1>
         </div>
         <div className="login-container">
-          <form
-            onSubmit={handleSubmit}
-            className="login-form"
-          >
+          <form onSubmit={handleSubmit} className="login-form">
             <div className="form-field">
               <label>
                 Email
