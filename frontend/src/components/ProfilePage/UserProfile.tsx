@@ -1,28 +1,35 @@
-import React, { useState } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { useId } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useUser } from "../userContext"; // Import the custom look
+import { useId } from "react";
 import AdminNavBar from "../admin/AdminNavBar";
+import SuccessMessageModal from "../admin/SuccessMessageModal";
 import "../../style/EditProduct.css";
+import "../../style/SuccessMessageModal.css";
 
 interface UserDetails {
-  userID: string;
-  name: string;
-  email: string;
-  password: string;
-  address: string;
-  phoneNum: string;
-}
+    userID: string | null;
+    name: string | null;
+    email: string | null;
+    password: string | null;
+    address: string | null;
+    phoneNum: string | null;
+    role: string | null;
+  }
 
-const UserProfile: React.FC = () => {
-  //   const location = useLocation();
-  //   const user = location.state?.user as UserDetails;
+const EditUserDetails: React.FC = () => {
+    const { userId, name, email, password, address, phoneNum, role } = useUser();
+
+//   const location = useLocation();
+//   const user = location.state?.user as UserDetails;
   const [userDetails, setUserDetails] = useState<UserDetails>({
-    userID: "1",
-    name: "John Doe",
-    email: "john@gmail.com",
-    password: "password",
-    address: "123 Main St",
-    phoneNum: "123-456-7890",
+    userID: "",
+    name: "",
+    email: "",
+    password: "",
+    address: "",
+    phoneNum: "",
+    role: "",
   });
   const [editableFields, setEditableFields] = useState<{
     [key: string]: boolean;
@@ -36,10 +43,19 @@ const UserProfile: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
   const nonEditableFields: (keyof UserDetails)[] = ["userID"];
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  //   if (user === null || user === undefined)
-  //     console.error("Product data is null or undefined");
+  console.log("User Data:", name);
+  console.log("Address:", address);
+  console.log("User id:", userId);
+
+  if (name === null || name === undefined)
+    console.error("Product data is null or undefined");
+
+  useEffect(() => {
+    setUserDetails({ userID: userId, name, email, password, address, phoneNum, role });
+}, [userId, name, email, password, address, phoneNum, role]);
+
 
   const fieldDisplayedNames: { [key: string]: string } = {
     userID: "User ID",
@@ -48,10 +64,12 @@ const UserProfile: React.FC = () => {
     password: "Password",
     address: "Address",
     phoneNum: "Phone Number",
+    role: "Role",
   };
 
   const handleInputChange = (field: keyof UserDetails, value: string) => {
     if (field === "email") {
+    //   const ratingValue = parseFloat(value);
       if (value === "") {
         setWarningMessage((prev) => ({
           ...prev,
@@ -73,6 +91,8 @@ const UserProfile: React.FC = () => {
     }));
   };
 
+
+  
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
     // console.log("User details:", userDetails);
@@ -118,19 +138,20 @@ const UserProfile: React.FC = () => {
     }
   };
 
-  //   const handleCloseModal = () => {
-  //     setSuccessMessage(null);
-  //     navigate("/");
-  //   };
+  // Check if productDetails is null
+  if (!name) {
+    return <p style={{ color: "red" }}>user not found</p>;
+  }
+
+  const handleCloseModal = () => {
+    setSuccessMessage(null);
+    navigate("/admin");
+  };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
     const nonEditableFields: (keyof UserDetails)[] = ["userID"];
     return nonEditableFields.includes(field);
   };
-
-  //   if (!userDetails) {
-  //     return <div>Loading...</div>;
-  //   }
 
   return (
     <>
@@ -138,48 +159,42 @@ const UserProfile: React.FC = () => {
         <AdminNavBar />
       </div>
       <div className="content">
-        <div className="header">
-          <h1 style={{color: "black"}}>User Profile</h1>
-        </div>
-
-        <div className="form-container">
-          {/* <form className="form-container">
-            {Object.keys(userDetails).map((field) => {
-              const id = useId();
-              const typedField = field as keyof UserDetails;
-              return (
-                <div className="form-field" key={field}>
-                  <label htmlFor={id} className="from-label">
-                    {fieldDisplayedNames[typedField]}
-                  </label>
-                  <input
-                    id={id}
-                    type="text"
-                    value={userDetails[typedField]}
-                    onChange={(e) =>
-                      handleInputChange(typedField, e.target.value)
-                    }
-                    className="custom-input"
-                    disabled={isFieldDisabled(typedField)}
-                  />
-                </div>
-              );
-            })}
-            <button type="submit" onClick={handleSaveChangesClick}>
-              Save Changes
-            </button>
-          </form>
-          <div>
-            <button onClick={handleCloseModal}>Close</button>
-          </div>
-          <div className="message">
-            {successMessage && <p>{successMessage}</p>}
-            {message && <p>{message}</p>}
-          </div> */}
-        </div>
+        <h1>Edit User Details</h1>
+        <form className="form-container">
+          {Object.keys(userDetails).map((field) => {
+            const id = useId();
+            const typedField = field as keyof UserDetails;
+            return (
+              <div className="form-field" key={field}>
+                <label htmlFor={id} className="from-label">
+                  {fieldDisplayedNames[typedField]}
+                </label>
+                <input
+                  id={id}
+                  type="text"
+                  value={userDetails[typedField] ?? ""}
+                  onChange={(e) =>
+                    handleInputChange(typedField, e.target.value)
+                  }
+                  className="custom-input"
+                  disabled={isFieldDisabled(typedField)}
+                />
+              </div>
+            );
+          })}
+          <button type="submit" onClick={handleSaveChangesClick}>
+            Save Changes
+          </button>
+        </form>
+        {successMessage && (
+          <SuccessMessageModal
+            message="User details updated successfully!"
+            onClose={handleCloseModal}
+          />
+        )}
       </div>
     </>
   );
 };
 
-export default UserProfile;
+export default EditUserDetails;

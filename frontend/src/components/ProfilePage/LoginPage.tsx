@@ -9,6 +9,12 @@ import SuccessMessageModal from "../admin/SuccessMessageModal";
 const LoginPage = () => {
   //*
   const { setUserId } = useUser();
+  const { setName } = useUser();
+  const { setemail } = useUser();
+  const { setpassword } = useUser();
+  const {setAddress} = useUser();
+  const {setPhoneNum} = useUser();
+  const {setRole} = useUser();
   //*
 
   const [email, setEmail] = React.useState("");
@@ -40,15 +46,26 @@ const LoginPage = () => {
       ); // Replace with the actual path to your CSV file
 
       const user = await response.json();
-      const userID = user.userId;
+      const userID = user.user_Id;
+      const userName = user.name;
+      const userEmail = user.email;
+      const userPassword = user.password;
+      const userAddress = user.address;
+      const userPhoneNum = user.phoneNum;
       const userRole = user.role;
       setUserId(userID); //*
+      setName(userName);
+      setemail(userEmail);
+      setpassword(userPassword);
+      setAddress(userAddress);
+      setPhoneNum(userPhoneNum);
+      setRole(userRole);
 
       // // const users = parseCSV(csvText);
 
       // const user = users.find((user: any) => user.email === email && user.password === password);
 
-      console.log("User:", user);
+      console.log("User Name:", userName);
       console.log("User ID:", userID);
 
       if (user.success) {

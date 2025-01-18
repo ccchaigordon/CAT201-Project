@@ -84,8 +84,13 @@ public class USER_SERVLET extends HttpServlet {
             String[] userDetails = users.login(userEmail, password);
 
             if(userDetails != null) {
-                responseMap.put("userId", userDetails[0]);
-                responseMap.put("role", userDetails[1]);
+                responseMap.put("user_Id", userDetails[0]);
+                responseMap.put("name", userDetails[1]);
+                responseMap.put("email", userDetails[2]);
+                responseMap.put("password", userDetails[3]);
+                responseMap.put("address", userDetails[4]);
+                responseMap.put("phoneNum", userDetails[5]);
+                responseMap.put("role", userDetails[6]);
                 isAuthenticated = true;
             }
             

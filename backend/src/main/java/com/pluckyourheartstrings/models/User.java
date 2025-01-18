@@ -179,7 +179,7 @@ public class User {
                 String email = userData[2].trim();
                 String PW = userData[3].trim();
                 if (userEmail.equals(email) && pw.equals(PW)) {
-                    return new String[] { userData[0], userData[6] };
+                    return new String[] { userData[0], userData[1], userData[2], userData[3], userData[4], userData[5], userData[6]};
                 }
             }
 
