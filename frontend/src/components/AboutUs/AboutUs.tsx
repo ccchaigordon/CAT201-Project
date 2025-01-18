@@ -72,7 +72,7 @@ const AboutUsPage: React.FC = () => {
           className="about-us-image"
           src="/assets/about_man.jpg"
           alt="About Us" />
-        <div className="about-us-content">
+        <div className={`about-us-content ${aboutUsFadeIn ? "fade-in" : ""}`}>
           <h1 className={`Title ${aboutUsFadeIn ? "fade-in" : ""}`}>About Us</h1>
           <h2 className={`Subtitle ${aboutUsFadeIn ? "fade-in" : ""}`}>Where Music Meets Passion</h2>
           <div className="Description-container">
@@ -89,17 +89,13 @@ const AboutUsPage: React.FC = () => {
 
     {/* our story */}
     <div className="story-section" ref={storyRef}>
-      <div className="story-page">
-        <img
-          className="story-image"
-          src="/assets/about_bass.jpg"
-          alt="Our Story" />
-        <div className="our-story-content">
+        <img className="story-image" src="/assets/about_bass.jpg" alt="Our Story" />
+        <div className={`our-story-content ${ourStoryFadeIn ? "fade-in" : ""}`}>
           <div className="story-title-box">
-          <h1 className={`our-story-title ${ourStoryFadeIn ? "fade-in" : ""}`}>Our Story</h1>
+          <h1 className="our-story-title">Our Story</h1>
           </div>
         <div className="story-content-box">
-          <p className={`Description ${ourStoryFadeIn ? "fade-in" : ""}`}>
+          <p className="Description">
           Every great endeavor starts with a spark. Ours was born from a small jam session in a cozy garage where a group of friends, 
           united by their love for music, struggled to find quality instruments and accessories at an affordable price. Frustrated by 
           limited options and uninspired by what was available in the market, we decided to take matters into our own hands. <br></br><br></br>
@@ -108,30 +104,24 @@ const AboutUsPage: React.FC = () => {
           </p>
         </div>
         </div>
-      </div>
     </div>
 
     {/* last section */}
     <div className="last-section" ref={lastRef}>
-      <div className="last-page">
-        <img
-          className="last-image"
-          src="/assets/about_guitar.jpg"
-          alt="Choose Us" />
-        <div className="last-content">
+        <img className="last-image" src="/assets/about_guitar.jpg" alt="Choose Us" />
+        <div className={`last-content ${lastFadeIn ? "fade-in" : ""}`}>
           <div className="last-title-box">
-          <h1 className={`last-title ${lastFadeIn ? "fade-in" : ""}`}>
-            Unleash your sound.<br></br> Inspire the world. <br></br>Let’s create magic together.</h1>
+          <h1 className="last-title">
+            Unleash your sound<br></br> Inspire the world <br></br>We create magic together</h1>
           </div>
         <div className="last-content-box">
-          <p className={`Description ${lastFadeIn ? "fade-in" : ""}`}>
+          <p className="Description">
           At Pluck Your Heart String Music Co., you’re not just a customer—you’re part of our musical family. 
           Whether you’re strumming your first chord, shredding on a solo, or laying down a groove, 
           we’re here to help you find your rhythm. Together, let’s make music that touches hearts and transcends time.
           </p>
         </div>
         </div>
-      </div>
     </div>
     
       <Footer />
