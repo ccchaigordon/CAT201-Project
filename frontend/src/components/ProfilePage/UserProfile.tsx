@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../userContext"; // Import the custom look
 import { useId } from "react";
-import AdminNavBar from "../admin/AdminNavBar";
+// import AdminNavBar from "../admin/AdminNavBar";
+import NavBar from "../global/NavBar";
 import SuccessMessageModal from "../admin/SuccessMessageModal";
 import "../../style/EditProduct.css";
 import "../../style/SuccessMessageModal.css";
@@ -145,7 +146,7 @@ const EditUserDetails: React.FC = () => {
 
   const handleCloseModal = () => {
     setSuccessMessage(null);
-    navigate("/admin");
+    navigate("/");
   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
@@ -156,7 +157,7 @@ const EditUserDetails: React.FC = () => {
   return (
     <>
       <div>
-        <AdminNavBar />
+        <NavBar />
       </div>
       <div className="content">
         <h1>Edit User Details</h1>

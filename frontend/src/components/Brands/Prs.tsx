@@ -63,7 +63,7 @@ function PRS() {
     const fetchProducts = async () => {
       try {
         // Fetch data from the servlet
-        const response = await fetch("http://localhost:8080/backend/getAllProducts");
+        const response = await fetch("http://localhost:8083/backend/getAllProducts");
         if (!response.ok) {
           throw new Error("Failed to fetch guitar data");
         }

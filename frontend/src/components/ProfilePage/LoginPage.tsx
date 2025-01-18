@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../userContext"; // Import the custom look
-import AdminNavBar from "../admin/AdminNavBar";
+// import AdminNavBar from "../admin/AdminNavBar";
+import NavBar from "../global/NavBar";
 // import SuccessMessageModal from "../admin/SuccessMessageModal";
 import "../../style/LoginPage.css";
 import SuccessMessageModal from "../admin/SuccessMessageModal";
@@ -132,7 +133,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <AdminNavBar />
+      <NavBar />
       <div className="login-page">
         <div className="login-header">
           <h1>Log In</h1>
