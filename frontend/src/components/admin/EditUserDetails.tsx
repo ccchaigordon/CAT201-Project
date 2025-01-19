@@ -13,6 +13,7 @@ interface UserDetails {
   password: string;
   address: string;
   phoneNum: string;
+  role: string;
 }
 
 const EditUserDetails: React.FC = () => {
@@ -30,7 +31,7 @@ const EditUserDetails: React.FC = () => {
   });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
-  const nonEditableFields: (keyof UserDetails)[] = ["userID"];
+  const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
   const navigate = useNavigate();
 
   console.log("User Data:", user);
@@ -47,6 +48,7 @@ const EditUserDetails: React.FC = () => {
     password: "Password",
     address: "Address",
     phoneNum: "Phone Number",
+    role: "Role",
   };
 
   const handleInputChange = (field: keyof UserDetails, value: string) => {
@@ -91,6 +93,7 @@ const EditUserDetails: React.FC = () => {
           password: userDetails.password,
           address: userDetails.address,
           phoneNum: userDetails.phoneNum,
+          role: userDetails.role,
         }),
       });
       if (response.ok) {
@@ -129,7 +132,7 @@ const EditUserDetails: React.FC = () => {
   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
-    const nonEditableFields: (keyof UserDetails)[] = ["userID"];
+    const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
     return nonEditableFields.includes(field);
   };
 

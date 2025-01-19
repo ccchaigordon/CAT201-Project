@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../style/NavBar.css";
+// import logo from '../../../backend/src/main/resources/logo.svg';
 
 function AdminNavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -56,7 +57,7 @@ function AdminNavBar() {
         <div className="header-container">
           <div className="logo">
             <a href="/admin">
-              <img src="/assets/logo.svg" alt="Logo" />
+              <img src="/public/logo.svg" alt="Logo" style={{ width: "120px", margin: "0.25rem 0" }}/>
             </a>
           </div>
           <div></div>

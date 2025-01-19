@@ -7,6 +7,7 @@ import "../../style/AdminPage.css";
 import "../../style/EditProduct.css";
 import "../../style/SuccessMessageModal.css";
 
+
 interface ProductDetails {
   id: string;
   name: string;

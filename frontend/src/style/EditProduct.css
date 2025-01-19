@@ -114,8 +114,10 @@ button:hover {
 
 .custom-select {
   flex-grow: 1;
-  width: 103%; /* Make it longer */
+  width: 83%; /* Make it longer */
   padding: 10px;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #ccc; 
   border-radius: 8px; /* Rounded corners for elegance */
   appearance: none; /* Remove default arrow */
