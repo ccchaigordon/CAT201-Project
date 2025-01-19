@@ -140,13 +140,6 @@ const AddProduct: React.FC = () => {
       [field]: value, // Explicitly update the field
     }));
   };
-  // const handleEditClick = (field: string) => {
-  //   setEditableFields((prev) => ({ ...prev, [field]: true }));
-  // };
-
-  //   const handleEditClick = (field: keyof ProductDetails) => {
-  //     setEditableFields((prev) => ({ ...prev, [field]: !prev[field] }));
-  //   };
 
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,20 +195,6 @@ const AddProduct: React.FC = () => {
         ...prev,
         form: "Network error. Please try again.",
       }));
-      //     const data = await response.json();
-
-      //     if (data.status) {
-      //       console.log(data.status);
-      //       console.log("Product updated successfully");
-      //       //navigate("/profile");
-      //     } else {
-      //       console.error("Failed to update product");
-      //     }
-      //   } else {
-      //     console.error("Failed to update product oho");
-      //   }
-      // } catch (error) {
-      //   console.error("Unable to connect to server", error);
     }
   };
 
@@ -223,15 +202,6 @@ const AddProduct: React.FC = () => {
     setSuccessMessage(null);
     navigate("/admin");
   };
-
-  //   // Check if productDetails is null
-  //   if (!product) {
-  //     return (
-  //       <p style={{ color: "white" }}>
-  //         No product data found. Please go back and try again.
-  //       </p>
-  //     );
-  //   }
 
   // Display the product details
   return (
@@ -257,7 +227,15 @@ const AddProduct: React.FC = () => {
               <div
                 key={field}
                 className="form-field"
-                style={{ color: "black" }}
+                style={{
+                  color: "black",
+                  backgroundColor: "white",
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "30px",
+                  alignItems: "center",
+                  marginBottom: "20px",
+                }}
               >
                 <label htmlFor={field}>
                   {fieldDisplayNames[typedField]}

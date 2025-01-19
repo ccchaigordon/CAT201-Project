@@ -170,7 +170,7 @@ const EditProduct: React.FC = () => {
         <AdminNavBar />
       </div>
       <div className="content">
-        <div className="form-container">
+        <div className="form-container" style={{ backgroundColor: "white" }}>
           <form>
             <h1 style={{ color: "black", textAlign: "center" }}>
               Edit Product
@@ -183,7 +183,15 @@ const EditProduct: React.FC = () => {
                 <div
                   key={field}
                   className="form-field"
-                  style={{ color: "black" }}
+                  style={{
+                    color: "black",
+                    backgroundColor: "white",
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "30px",
+                    alignItems: "center",
+                    marginBottom: "20px",
+                  }}
                 >
                   <label htmlFor={id} className="form-label">
                     {fieldDisplayNames[typedField]}:
