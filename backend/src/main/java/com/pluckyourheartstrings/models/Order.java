@@ -142,9 +142,13 @@ public class Order {
 
     public void calculateTotalPrice() {
         totalPrice = 0;
-        for (String price : subtotal) {
-            totalPrice += Double.parseDouble(price);
+
+        for (int i = 0; i < subtotal.size(); i++) {
+            totalPrice += Double.parseDouble(subtotal.get(i)) * Double.parseDouble(quantity.get(i));
         }
+        // for (String price : subtotal) {
+        //     totalPrice += Double.parseDouble(price);
+        // }
         totalPrice = 1.10 * totalPrice;
     }
 
@@ -156,8 +160,8 @@ public class Order {
         List<String> productQuantity = new ArrayList<>();
         List<String> productSubtotal = new ArrayList<>();
         List<String> productFiles = Arrays.asList("GUITAR.csv", "BASS.csv", "ACCESSORIES.csv", "DEALS.csv", "DRUM.csv",
-                "KEYBOARD.csv", "NEWARRIVALS.csv", "TOPSELLER.csv");
-
+                "KEYBOARD.csv", "NEWARRIVALS.csv");
+       
         // Map cartItems to product details
         for (Product cartItem : products) {
             String productId = cartItem.getid();
@@ -177,13 +181,18 @@ public class Order {
                         }
 
                         // System.out.println(subtotal);
-                        String[] productData = line.split(","); // Assuming CSV columns are id,name,price,etc.
+                        String[] productData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Assuming CSV columns are id,name,price,etc.
+                        for (int i = 0; i < productData.length; i++) {
+                            productData[i] = productData[i].replaceAll("^\"|\"$", "");
+                        }
                         // System.out.println(productData[0]);
                         // System.out.println(productId);
-                        if (productData[0].trim().equals(productId)) {
+                        if ((productData[0].trim().equals(productId))) {
                             productNames.add(productData[1]); // Add product name
+                            System.out.println(productData[1]);
                             productQuantity.add(quantity);
                             productSubtotal.add(subtotal);
+                           
                             break;
                         }
                         // else
@@ -211,6 +220,7 @@ public class Order {
         calculateTotalPrice();
 
         System.out.println(shippingAddress);
+        //System.out.println(itemsName);
 
         // order.setUserId(userId);
         // order.setOrderDate(orderDate);
@@ -246,7 +256,11 @@ public class Order {
                 }
 
                 String[] orderData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Handle commas inside quotes
+                // Remove the double quotes around each element
+    
                 orders.add(orderData);
+
+                //System.out.println(itemsName);
 
                 // Determine the highest OrderID in the file
                 String orderID = orderData[0].trim();
@@ -267,7 +281,7 @@ public class Order {
                 newOrderId,
                 userName,
                 "\"" + orderDate + "\"",
-                "\"" + String.join("; ", itemsName) + "\"", // Join items with semicolon and wrap in quotes
+                "\""+ String.join(";", itemsName) + "\"", // Join items with semicolon and wrap in quotes
                 "\"" + String.join(";", quantity) + "\"", // Join quantities with semicolon and wrap in quotes
                 "\"" + String.join(";", subtotal) + "\"", // Join subtotals with semicolon and wrap in quotes
                 String.format("%.2f", totalPrice), // Format total price as 2 decimal places

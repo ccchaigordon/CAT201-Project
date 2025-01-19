@@ -97,6 +97,7 @@ function CheckOutPage() {
           console.log("Checkout successfully");
           // setMessage("Product updated successfully");
           setSuccessMessage(`Checkout successfully`);
+          navigate("/invoice");
         } else {
           console.error("Failed to checkout");
           // setMessage("Failed to update product. Please try again.");
@@ -113,7 +114,7 @@ function CheckOutPage() {
       );
     }
 
-    navigate("/invoice");
+    
   };
 
   // const validateForm = () => {

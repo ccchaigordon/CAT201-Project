@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import NavBar from "../global/NavBar";
 
 type InvoiceItem = {
@@ -22,6 +23,7 @@ const Invoice: React.FC = () => {
   const [invoice, setInvoice] = useState<InvoiceData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const location = useLocation(); // Detect navigation changes
 
   useEffect(() => {
     // Fetch the JSON file from the backend.
@@ -61,7 +63,7 @@ const Invoice: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [location]);
 
   if (loading) {
     return <p>Loading...</p>;

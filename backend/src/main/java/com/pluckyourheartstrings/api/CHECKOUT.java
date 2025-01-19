@@ -59,7 +59,7 @@ public class CHECKOUT extends HttpServlet {
             }
             String requestBody = stringBuilder.toString();
             // Log the incoming request body
-            System.out.println("Request Body: " + requestBody);
+            //System.out.println("Request Body: " + requestBody);
 
             // Convert JSON to a map using Gson
             // Convert the JSON to a Map<String, Object> to support various data types
@@ -81,6 +81,8 @@ public class CHECKOUT extends HttpServlet {
             Type productListType = new TypeToken<List<Product>>() {
             }.getType();
             List<Product> cartItems = gson.fromJson(gson.toJson(requestMap.get("cartItems")), productListType);
+
+            System.out.println(cartItems);
 
             // Combine shipping address components
             String shippingAddress = address + ", " + country + ", " + city + ", " + postCode;

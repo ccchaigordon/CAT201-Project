@@ -216,12 +216,21 @@ public class Product {
                 continue;
             }
 
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-                    CSVReader csvReader = new CSVReader(br)) {
-                List<String[]> allRows = csvReader.readAll();// Read all rows
+            try (BufferedReader br = new BufferedReader(
+                        new FileReader("../backend/src/main/resources/" + csvFile))) {
+                    String line;
+                    boolean isFirstLine = true;
+                    while ((line = br.readLine()) != null) {
+                        if (isFirstLine) {
+                            isFirstLine = false; // Skip header
+                            continue;
+                        }
 
-                for (int i = 1; i < allRows.size(); i++) { // Skip the header
-                    String[] productData = allRows.get(i);
+                    // System.out.println(subtotal);
+                    String[] productData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Assuming CSV columns are id,name,price,etc.
+                    for (int i = 0; i < productData.length; i++) {
+                        productData[i] = productData[i].replaceAll("^\"|\"$", "");
+                    }
                     if (productData[0].trim().equals(id)) {
                         return new Product(
                                 productData[0], productData[8], productData[2], productData[3],
@@ -232,9 +241,6 @@ public class Product {
                 }
             } catch (IOException e) {
                 System.err.println("Error reading CSV file: " + e.getMessage());
-                return null;
-            } catch (CsvException e) {
-                System.err.println("Error parsing CSV file: " + e.getMessage());
                 return null;
             }
         }
@@ -259,6 +265,11 @@ public class Product {
                         continue;
                     }
                     String[] productData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Handle commas inside quotes
+                    // for (int i = 0; i < productData.length; i++) {
+                    //     productData[i] = productData[i].replaceAll("^\"|\"$", "");
+                    // }
+
+                    System.out.println(productData[2]);
                     if (productData[0].trim().equals(id)) {
                         productData = new String[] {
                                 id,
@@ -281,7 +292,7 @@ public class Product {
             if (productFound) {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter("../backend/src/main/resources/" + csv_File))) {
                     for (String[] productData : products) {
-                        System.out.println("productData: " + productData[3]);
+                        //System.out.println("productData: " + productData[3]);
                         bw.write(String.join(",", productData));
                         bw.newLine();
                     }
