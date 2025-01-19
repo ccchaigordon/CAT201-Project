@@ -39,14 +39,9 @@ function NavBar() {
   };
 
   const handleViewProfileClick = () => {
-    // const data = await response.json();
-    // const userData = data.user;
-    // Navigate to the profile page if logged in
     if (isLoggedIn) {
       navigate("/profile/user");
-      // navigate("/profile/user", { state : { user: userData }});
     } else {
-      // Optionally, navigate to login page if not logged in
       navigate("/profile/login");
     }
   };
@@ -57,7 +52,11 @@ function NavBar() {
         <div className="header-container">
           <div className="logo">
             <a href="/">
-              <img src="/assets/logo.svg" alt="Logo" />
+              <img
+                src="/logo.svg"
+                alt="Logo"
+                style={{ width: "120px", margin: "0.25rem 0" }}
+              />
             </a>
           </div>
           <nav className="navbar">
@@ -83,9 +82,6 @@ function NavBar() {
             <a href="/cart">
               <img src="/assets/cart.svg" alt="Add href cart" />
             </a>
-            {/* <a href="/profile/login">
-              <img src="/assets/profile.svg" alt="Profile" />
-            </a> */}
             <div className="profile-dropdown">
               <img
                 src="/assets/profile.svg"
@@ -100,8 +96,8 @@ function NavBar() {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
-                   {/* View Profile Button */}
-                   {isLoggedIn && (
+                  {/* View Profile Button */}
+                  {isLoggedIn && (
                     <button onClick={handleViewProfileClick}>
                       View Profile
                     </button>

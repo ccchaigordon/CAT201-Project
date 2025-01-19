@@ -62,13 +62,7 @@ const AddProduct: React.FC = () => {
     "Prs",
     "Squier",
   ];
-  const categoryOptions = [
-    "Accessories",
-    "Basses",
-    "Drums",
-    "Guitars",
-    "Keyboards",
-  ];
+  const categoryOptions = ["Accessories", "Bass", "Drum", "Guitar", "Keyboard"];
 
   const [warningMessage, setWarningMessage] = useState<{
     [key: string]: string | null;
@@ -82,15 +76,18 @@ const AddProduct: React.FC = () => {
 
   const checkProductIdExists = async (productId: string): Promise<boolean> => {
     try {
-      const response = await fetch("http://localhost:8083/backend/checkProductId", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: JSON.stringify({
-          id: productId,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8083/backend/checkProductId",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: JSON.stringify({
+            id: productId,
+          }),
+        }
+      );
       const data = await response.json();
       return data.status; // true if ProductID exists, false otherwise
     } catch (error) {
@@ -99,7 +96,10 @@ const AddProduct: React.FC = () => {
     }
   };
 
-  const handleInputChange = async (field: keyof ProductDetails, value: string) => {
+  const handleInputChange = async (
+    field: keyof ProductDetails,
+    value: string
+  ) => {
     if (field === "id") {
       const exists = await checkProductIdExists(value);
       if (exists) {
@@ -182,13 +182,14 @@ const AddProduct: React.FC = () => {
           console.log(data.status);
           console.log("Product INSERTED successfully");
           // setMessage("Product updated successfully");
-          setSuccessMessage(`Product with ID ${productDetails.id} successfully inserted.`);
+          setSuccessMessage(
+            `Product with ID ${productDetails.id} successfully inserted.`
+          );
         } else {
           console.error("Failed to insert product");
           // setMessage("Failed to update product. Please try again.");
           setSuccessMessage("Failed to insert product. Please try again.");
         }
-        
       } else {
         setWarningMessage((prev) => ({
           ...prev,
@@ -248,7 +249,7 @@ const AddProduct: React.FC = () => {
       </div>
       <div className="form-container">
         <form>
-          <h1 style={{ color: "black" , textAlign: "center" }}>Add Product</h1>
+          <h1 style={{ color: "black", textAlign: "center" }}>Add Product</h1>
 
           {Object.keys(productDetails).map((field) => {
             const typedField = field as keyof ProductDetails;
@@ -385,11 +386,11 @@ const AddProduct: React.FC = () => {
           </button>
         </form>
         {successMessage && (
-            <SuccessMessageModal
-              message={successMessage}
-              onClose={handleClosePopup}
-            />
-          )}
+          <SuccessMessageModal
+            message={successMessage}
+            onClose={handleClosePopup}
+          />
+        )}
       </div>
     </>
   );

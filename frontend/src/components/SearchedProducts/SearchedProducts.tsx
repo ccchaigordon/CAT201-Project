@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-//import Papa from "papaparse";
-import { Link, useLocation } from "react-router-dom";
-
+import { useLocation, Link } from "react-router-dom";
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
@@ -47,14 +45,10 @@ function getStockStatus(quantity: number) {
 
 function SearchedProducts() {
   const location = useLocation();
-  const product = location.state?.product as ProductInfo;
-  const [products, setProducts] = useState<ProductInfo[]>([]);
+  const products = (location.state?.products as ProductInfo[]) || [];
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState("Latest"); // Default to 'Latest'
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [sortOrder, setSortOrder] = useState("Latest");
   const productSectionRef = useRef<HTMLDivElement>(null);
-
-  console.log(product);
 
   useEffect(() => {
     const savedSortOrder = localStorage.getItem("sortOrder");
@@ -63,60 +57,35 @@ function SearchedProducts() {
     }
   }, []);
 
-  setProducts([product]);
-  console.log(products);
-
-//   useEffect(() => {
-//       const fetchProducts = async () => {
-//         try {
-//           // Fetch data from the servlet
-//           const response = await fetch("http://localhost:8083/backend/getProducts?category=bass");
-//           if (!response.ok) {
-//             throw new Error("Failed to fetch bass data");
-//           }
-//           const fetchedProducts: ProductInfo[] = await response.json();
-        
-//           setProducts(fetchedProducts);
-//         } catch (error) {
-//           console.error("Error fetching products:", error);
-//         }
-//       };
-    
-//       fetchProducts();
-//     }, []);
-
   useEffect(() => {
-    if (buttonClicked && productSectionRef.current) {
+    // Scroll to product section top
+    if (productSectionRef.current) {
       productSectionRef.current.scrollIntoView({ behavior: "smooth" });
-      setButtonClicked(false); // Reset after scrolling
     }
-  }, [currentPage, buttonClicked]);
+  }, [currentPage, products]);
 
   const sortedProducts = useMemo(() => {
     const sorted = [...products];
-
-    if (sortOrder === "Latest") {
-      sorted.reverse();
-    } else if (sortOrder === "Price (Low to High)") {
-      sorted.sort((a, b) => a.price - b.price);
-    } else if (sortOrder === "Price (High to Low)") {
-      sorted.sort((a, b) => b.price - a.price);
-    } else if (sortOrder === "Most Popular") {
-      sorted.sort((a, b) => b.rating - a.rating);
+    switch (sortOrder) {
+      case "Latest":
+        sorted.reverse();
+        break;
+      case "Price (Low to High)":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+      case "Price (High to Low)":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+      case "Most Popular":
+        sorted.sort((a, b) => b.rating - a.rating);
+        break;
     }
     return sorted;
   }, [products, sortOrder]);
 
-  const handleChangeSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newSortOrder = e.target.value;
-    setSortOrder(newSortOrder);
-    localStorage.setItem("sortOrder", newSortOrder);
-  };
-
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-      setButtonClicked(true);
     }
   };
 
@@ -124,7 +93,6 @@ function SearchedProducts() {
     const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
-      setButtonClicked(true);
     }
   };
 
@@ -139,83 +107,87 @@ function SearchedProducts() {
     <>
       <NavBar />
       <SearchBar />
-      <h2 style={{ marginTop: "3rem" }}>Category: Basses</h2>
-      <div className="intro-container">
-        <img
-          src="/assets/category_bass.jpg"
-          alt="A person playing bass"
-          style={{ width: "30%", height: "auto" }}
-        />
+      <div className="intro-container" style={{ margin: "2rem auto" }}>
         <p>
-          Dive deep into the groove with our diverse selection of bass guitars.
-          Whether you're a beginner laying down your first bass line or a
-          seasoned pro looking to expand your sonic palette, our collection has
-          something for everyone. Each bass is designed to offer robust tones,
-          durable construction, and comfortable playability. Elevate your rhythm
-          section and define your sound with our carefully curated bass guitars.
-          Perfect for any genre, from jazz and blues to rock and pop.
+          Browse through our selection based on your search. Find products
+          tailored to your preferences.
         </p>
       </div>
-      <div className="product-section" ref={productSectionRef}>
-        <div className="filter">
-          <p style={{ textAlign: "right" }}>Sort by</p>
-          <select
-            value={sortOrder}
-            onChange={handleChangeSortOrder}
-            className="sort"
-          >
-            <option value="Price (Low to High)">Price (Low to High)</option>
-            <option value="Price (High to Low)">Price (High to Low)</option>
-            <option value="Most Popular">Most Popular</option>
-            <option value="Latest">Latest</option>
-          </select>
-        </div>
-        <div className="product-grid">
-          {currentPageProducts.map((product, index) => (
-            <Link
-              to={`/product/${product.name.replace(/ /g, "-").toLowerCase()}`}
-              state={{ product }}
-              key={index}
-              style={{ textDecoration: "none", color: "#000000" }}
+      {products.length > 0 ? (
+        <div className="product-section" ref={productSectionRef}>
+          <div className="filter">
+            <p style={{ textAlign: "right" }}>Sort by</p>
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="sort"
             >
-              <div className="product-section-card">
-                <img
-                  src={product.imgSrc}
-                  alt={product.name || "Default name"}
-                  style={{ width: "100%", height: "auto" }}
-                />
-                <div className="product-grid-info">
-                  <h2>{product.name || "No name available"}</h2>
-                  <h3>
-                    RM{" "}
-                    {product.price.toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }) || "No price available"}
-                  </h3>
-                  <div className="rating">{renderStars(product.rating)}</div>
+              <option value="Most Popular">Most Popular</option>
+              <option value="Latest">Latest</option>
+              <option value="Price (Low to High)">Price (Low to High)</option>
+              <option value="Price (High to Low)">Price (High to Low)</option>
+            </select>
+          </div>
+          <div className="product-grid">
+            {currentPageProducts.map((product, index) => (
+              <Link
+                to={`/product/${product.name.replace(/ /g, "-").toLowerCase()}`}
+                state={{ product }}
+                key={index}
+                style={{ textDecoration: "none", color: "#000000" }}
+              >
+                <div className="product-section-card">
+                  <img
+                    src={product.imgSrc}
+                    alt={product.name}
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                  <div className="product-grid-info">
+                    <h2>{product.name}</h2>
+                    <h3>
+                      RM{" "}
+                      {Number(product.price)
+                        .toFixed(2)
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </h3>
+                    <div className="rating">{renderStars(product.rating)}</div>
+                    <div
+                      className="stock-status"
+                      style={{ color: getStockStatus(product.quantity).color }}
+                    >
+                      {getStockStatus(product.quantity).text}
+                    </div>
+                  </div>
                 </div>
-                <div
-                  className="stock-status"
-                  style={{
-                    color: getStockStatus(product.quantity).color,
-                  }}
-                >
-                  {getStockStatus(product.quantity).text}
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
+          <div className="pagination">
+            <button onClick={handlePrevious} disabled={currentPage <= 1}>
+              Previous
+            </button>
+            <button onClick={handleNext} disabled={currentPage >= totalPages}>
+              Next
+            </button>
+          </div>
         </div>
-        <div className="pagination">
-          <button onClick={handlePrevious} disabled={currentPage <= 1}>
-            Previous
-          </button>
-          <button onClick={handleNext} disabled={currentPage >= totalPages}>
-            Next
-          </button>
+      ) : (
+        <div
+          className="product-not-found"
+          style={{
+            display: "flex",
+            textAlign: "center",
+            justifyContent: "center",
+            margin: "0",
+            height: "calc(50vh - 5rem)",
+            color: "#000000",
+            backgroundColor: "#FFFFFF",
+            alignItems: "center",
+          }}
+        >
+          No products found
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );

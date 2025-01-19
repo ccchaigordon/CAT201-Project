@@ -34,25 +34,16 @@ function Footer() {
                   <a href="/brand/prs">PRS</a>
                 </li>
                 <li>
-                  <a href="/brand/">Marshall</a>
+                  <a href="/brand/squier">Squier</a>
                 </li>
                 <li>
-                  <a href="/brand/">NUX</a>
+                  <a href="/brand/ibanez">Ibanez</a>
                 </li>
                 <li>
-                  <a href="/brand/">Focusrite</a>
+                  <a href="/brand/roland">Roland</a>
                 </li>
                 <li>
-                  <a
-                    href="/"
-                    style={{
-                      color: "#FFFFFF",
-                      textDecoration: "underline",
-                      fontSize: "12px",
-                    }}
-                  >
-                    See more
-                  </a>
+                  <a href="/brand/focusrite">Focusrite</a>
                 </li>
               </ul>
             </div>
@@ -64,15 +55,6 @@ function Footer() {
                 </li>
                 <li>
                   <a href="/legal/privacy-policy">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="/">Return & Exchange Policy</a>
-                </li>
-                <li>
-                  <a href="/">Contact Us</a>
-                </li>
-                <li>
-                  <a href="/">Warranty</a>
                 </li>
               </ul>
             </div>

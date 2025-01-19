@@ -165,9 +165,9 @@ function ProductPage() {
                 style={{ fontFamily: "Poppins", fontSize: "1.85rem" }}
               >
                 RM{" "}
-                {product.price.toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                })}
+                {Number(product.price)
+                  .toFixed(2)
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </h2>
               <div
                 className="stock-status"
@@ -179,7 +179,11 @@ function ProductPage() {
                 {getStockStatus(product.quantity).text}
               </div>
               <div className="quantity-control">
-                <button className="decrease" onClick={handleDecrease}>
+                <button
+                  className="decrease"
+                  onClick={handleDecrease}
+                  style={{ width: "30px" }}
+                >
                   <i className="minus-icon">-</i>
                 </button>
                 <input
@@ -188,7 +192,11 @@ function ProductPage() {
                   readOnly
                   className="quantity-input"
                 />
-                <button className="increase" onClick={handleIncrease}>
+                <button
+                  className="increase"
+                  onClick={handleIncrease}
+                  style={{ width: "30px" }}
+                >
                   <i className="plus-icon">+</i>
                 </button>
               </div>

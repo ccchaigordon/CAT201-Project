@@ -22,13 +22,17 @@ function ShopByBrand() {
                 style={{ filter: "invert(100%)" }}
               />
             </a>
-            <a href="/brand/marshall" className="brand-link">
-              <img src="/assets/marshall.png" alt="Marshall" />
-            </a>
-            <a href="/brand/nux" className="brand-link">
+            <a href="/brand/ibanez" className="brand-link">
               <img
-                src="/assets/nux.jpg"
-                alt="Nux"
+                src="/assets/ibanez.png"
+                alt="Ibanez"
+                style={{ filter: "invert(100%)" }}
+              />
+            </a>
+            <a href="/brand/roland" className="brand-link">
+              <img
+                src="/assets/roland.png"
+                alt="Roland"
                 style={{ filter: "invert(100%)" }}
               />
             </a>

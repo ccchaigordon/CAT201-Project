@@ -36,23 +36,25 @@ function TopSellers() {
   const itemsPerSlide = 4;
 
   useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          // Fetch data from the servlet
-          const response = await fetch("http://localhost:8083/backend/getProducts?category=topseller");
-          if (!response.ok) {
-            throw new Error("Failed to fetch top seller data");
-          }
-          const fetchedProducts: ProductInfo[] = await response.json();
-        
-          setProducts(fetchedProducts);
-        } catch (error) {
-          console.error("Error fetching products:", error);
+    const fetchProducts = async () => {
+      try {
+        // Fetch data from the servlet
+        const response = await fetch(
+          "http://localhost:8083/backend/getProducts?category=topseller"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch top seller data");
         }
-      };
-    
-      fetchProducts();
-    }, []);
+        const fetchedProducts: ProductInfo[] = await response.json();
+
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const moveSlideLeft = () => {
     setCurrentIndex((prevIndex) => {
@@ -111,9 +113,9 @@ function TopSellers() {
                     <h3>{product.name}</h3>
                     <h4>
                       RM{" "}
-                      {product.price.toLocaleString("en-US", {
-                        minimumFractionDigits: 2,
-                      })}
+                      {Number(product.price)
+                        .toFixed(2)
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </h4>
                     <div className="rating">{renderStars(product.rating)}</div>
                   </div>

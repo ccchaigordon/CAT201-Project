@@ -31,11 +31,10 @@ function TermsOfUse() {
           </h1>
           <p className="tou-p">
             These terms and conditions outline the rules and regulations for the
-            use of Pluck Your Heart String Music Co.'s Website, located at
-            pluckyourheartstringmusic.com. By accessing this website we assume
-            you accept these terms and conditions. Do not continue to use
-            pluckyourheartstringmusic.com if you do not agree to take all of the
-            terms and conditions stated on this page.
+            use of Music Emporium's Website, located at musicemporium.com. By
+            accessing this website we assume you accept these terms and
+            conditions. Do not continue to use musicemporium.com if you do not
+            agree to take all of the terms and conditions stated on this page.
             <br />
             <br />
             The following terminology applies to these Terms and Conditions,
@@ -56,9 +55,8 @@ function TermsOfUse() {
           </p>
           <h3 className="tou-subheader">Cookies</h3>
           <p className="tou-p">
-            We employ the use of cookies. By accessing
-            pluckyourheartstringmusic.com, you agreed to use cookies in
-            agreement with the Pluck Your Heart String Music Co.'s Privacy
+            We employ the use of cookies. By accessing musicemporium.com, you
+            agreed to use cookies in agreement with the Music Emporium's Privacy
             Policy. Most interactive websites use cookies to let us retrieve the
             user's details for each visit. Cookies are used by our website to
             enable the functionality of certain areas to make it easier for
@@ -67,42 +65,36 @@ function TermsOfUse() {
           </p>
           <h3 className="tou-subheader">License</h3>
           <p className="tou-p">
-            Unless otherwise stated, Pluck Your Heart String Music Co. and/or
-            its licensors own the intellectual property rights for all material
-            on pluckyourheartstringmusic.com. All intellectual property rights
-            are reserved. You may access this from pluckyourheartstringmusic.com
-            for your own personal use subjected to restrictions set in these
-            terms and conditions.
+            Unless otherwise stated, Music Emporium and/or its licensors own the
+            intellectual property rights for all material on musicemporium.com.
+            All intellectual property rights are reserved. You may access this
+            from musicemporium.com for your own personal use subjected to
+            restrictions set in these terms and conditions.
             <br />
             <br />
             You must not:
           </p>
           <p className="tou-p">
             <ul>
-              <li>Republish material from pluckyourheartstringmusic.com</li>
+              <li>Republish material from musicemporium.com</li>
+              <li>Sell, rent or sub-license material from musicemporium.com</li>
               <li>
-                Sell, rent or sub-license material from
-                pluckyourheartstringmusic.com
+                Reproduce, duplicate or copy material from musicemporium.com
               </li>
-              <li>
-                Reproduce, duplicate or copy material from
-                pluckyourheartstringmusic.com
-              </li>
-              <li>Redistribute content from pluckyourheartstringmusic.com</li>
+              <li>Redistribute content from musicemporium.com</li>
             </ul>
             <br />
             Parts of this website offer an opportunity for users to post and
             exchange opinions and information in certain areas of the website.
-            Pluck Your Heart String Music Co.does not filter, edit, publish or
-            review Comments prior to their presence on the website. Comments do
-            not reflect the views and opinions ofPluck Your Heart String Music
-            Co., its agents and/or affiliates. Comments reflect the views and
-            opinions of the person who post their views and opinions. To the
-            extent permitted by applicable laws, Pluck Your Heart String Music
-            Co. shall not be liable for the Comments or for any liability,
-            damages or expenses caused and/or suffered as a result of any use of
-            and/or posting of and/or appearance of the Comments on this website.
-            Pluck Your Heart String Music Co. reserves the right to monitor all
+            Music Emporiumdoes not filter, edit, publish or review Comments
+            prior to their presence on the website. Comments do not reflect the
+            views and opinions of Music Emporium, its agents and/or affiliates.
+            Comments reflect the views and opinions of the person who post their
+            views and opinions. To the extent permitted by applicable laws,
+            Music Emporium shall not be liable for the Comments or for any
+            liability, damages or expenses caused and/or suffered as a result of
+            any use of and/or posting of and/or appearance of the Comments on
+            this website. Music Emporium reserves the right to monitor all
             Comments and to remove any Comments which can be considered
             inappropriate, offensive or causes breach of these Terms and
             Conditions.
@@ -130,10 +122,9 @@ function TermsOfUse() {
               </li>
             </ul>
             <br />
-            You hereby grant Pluck Your Heart String Music Co. a non-exclusive
-            license to use, reproduce, edit and authorize others to use,
-            reproduce and edit any of your Comments in any and all forms,
-            formats or media.
+            You hereby grant Music Emporium a non-exclusive license to use,
+            reproduce, edit and authorize others to use, reproduce and edit any
+            of your Comments in any and all forms, formats or media.
           </p>
         </div>
       </div>

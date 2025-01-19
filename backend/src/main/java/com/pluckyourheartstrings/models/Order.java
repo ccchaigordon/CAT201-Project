@@ -44,8 +44,9 @@ public class Order {
     }
 
     public Order(String orderID, String userName, String orderDate, List<String> itemsName,
-    List<String> quantity, List<String> subtotal, double totalPrice, String shippingAddress, String paymentMethod,
-    String paymentStatus) {
+            List<String> quantity, List<String> subtotal, double totalPrice, String shippingAddress,
+            String paymentMethod,
+            String paymentStatus) {
         this.orderID = orderID;
         this.userName = userName;
         this.orderDate = orderDate;
@@ -82,7 +83,6 @@ public class Order {
     public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
-
 
     public List<String> getItemsName() {
         return itemsName;
@@ -122,7 +122,7 @@ public class Order {
 
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
-    }   
+    }
 
     public String getPaymentMethod() {
         return paymentMethod;
@@ -139,33 +139,35 @@ public class Order {
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-    
+
     public void calculateTotalPrice() {
         totalPrice = 0;
         for (String price : subtotal) {
             totalPrice += Double.parseDouble(price);
         }
-        totalPrice = 1.10*totalPrice;
+        totalPrice = 1.10 * totalPrice;
     }
 
-    public boolean checkOut(String userName, List<Product> products, String orderDate, String shippingAddress, String paymentMethod, String paymentStatus) {
-        //List<String[]> productDataList = new ArrayList<>(); // To store product data from files
+    public boolean checkOut(String userName, List<Product> products, String orderDate, String shippingAddress,
+            String paymentMethod, String paymentStatus) {
+        // List<String[]> productDataList = new ArrayList<>(); // To store product data
+        // from files
         List<String> productNames = new ArrayList<>();
         List<String> productQuantity = new ArrayList<>();
         List<String> productSubtotal = new ArrayList<>();
-        List<String> productFiles = Arrays.asList("GUITAR.csv", "BASS.csv", "ACCESSORIES.csv", "DEALS.csv", "DRUM.csv", "KEYBOARD.csv", "NEWARRIVALS.csv", "TOPSELLER.csv");
-    
+        List<String> productFiles = Arrays.asList("GUITAR.csv", "BASS.csv", "ACCESSORIES.csv", "DEALS.csv", "DRUM.csv",
+                "KEYBOARD.csv", "NEWARRIVALS.csv", "TOPSELLER.csv");
+
         // Map cartItems to product details
         for (Product cartItem : products) {
             String productId = cartItem.getid();
             String quantity = cartItem.getQuantity();
             String subtotal = cartItem.getPrice();
 
-            
-    
             // Read product data from files to find matching product names
             for (String filename : productFiles) {
-                try (BufferedReader br = new BufferedReader(new FileReader("../backend/src/main/resources/" + filename))) {
+                try (BufferedReader br = new BufferedReader(
+                        new FileReader("../backend/src/main/resources/" + filename))) {
                     String line;
                     boolean isFirstLine = true;
                     while ((line = br.readLine()) != null) {
@@ -174,7 +176,7 @@ public class Order {
                             continue;
                         }
 
-                        //System.out.println(subtotal);
+                        // System.out.println(subtotal);
                         String[] productData = line.split(","); // Assuming CSV columns are id,name,price,etc.
                         // System.out.println(productData[0]);
                         // System.out.println(productId);
@@ -184,8 +186,8 @@ public class Order {
                             productSubtotal.add(subtotal);
                             break;
                         }
-                        // else 
-                        //     System.out.println("Product not found");
+                        // else
+                        // System.out.println("Product not found");
                     }
                 } catch (IOException e) {
                     System.err.println("Error reading file: " + e.getMessage());
@@ -193,10 +195,10 @@ public class Order {
                 }
             }
         }
-    
+
         // Create Order and Payment objects
-        //Order order = new Order();
-        //Payment payment = new Payment();
+        // Order order = new Order();
+        // Payment payment = new Payment();
 
         this.userName = userName;
         this.orderDate = orderDate;
@@ -208,9 +210,8 @@ public class Order {
         this.paymentStatus = paymentStatus;
         calculateTotalPrice();
 
-
         System.out.println(shippingAddress);
-    
+
         // order.setUserId(userId);
         // order.setOrderDate(orderDate);
         // order.setItemsName(productNames);
@@ -218,37 +219,35 @@ public class Order {
         // order.setSubtotal(productSubtotal);
         // order.calculateTotalPrice();
         // order.setShippingAddress(shippingAddress);
-        //payment.setPaymentMethod(paymentMethod);
-        //payment.setPaymentStatus(paymentStatus);
+        // payment.setPaymentMethod(paymentMethod);
+        // payment.setPaymentStatus(paymentStatus);
 
         append();
-    
+
         // Process and save order
         System.out.println("Order placed successfully for userName: " + userName);
         return true;
     }
-        
+
     public void append() {
         String csvFile = "ORDER.csv";
         List<String[]> orders = new ArrayList<>(); // Store the rows of orders
         int newOrderIdNum = 1; // Default starting ID
 
-        
-    
         // Read existing orders from CSV file
         try (BufferedReader br = new BufferedReader(new FileReader("../backend/src/main/resources/" + csvFile))) {
             String line;
             boolean isFirstLine = true;
-    
+
             while ((line = br.readLine()) != null) {
                 if (isFirstLine) {
                     isFirstLine = false;
                     continue;
                 }
-    
+
                 String[] orderData = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Handle commas inside quotes
                 orders.add(orderData);
-    
+
                 // Determine the highest OrderID in the file
                 String orderID = orderData[0].trim();
                 if (orderID.startsWith("OR")) {
@@ -261,27 +260,29 @@ public class Order {
         } catch (IOException e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
         }
-    
+
         // Create the new order record
         String newOrderId = String.format("OR%03d", newOrderIdNum); // Format as OR001, OR002, etc.
         String[] newOrder = {
-            newOrderId,
-            userName,
-            "\"" + orderDate + "\"",
-            "\"" + String.join("; ", itemsName) + "\"", // Join items with semicolon and wrap in quotes
-            "\"" + String.join(";", quantity) + "\"", // Join quantities with semicolon and wrap in quotes
-            "\"" + String.join(";", subtotal) + "\"", // Join subtotals with semicolon and wrap in quotes
-            String.format("%.2f", totalPrice), // Format total price as 2 decimal places
-            "\"" + shippingAddress + "\"", // Wrap in quotes
-            "\"" + paymentMethod + "\"", // Wrap in quotes
-            "\"" + paymentStatus + "\"" // Wrap in quotes
+                newOrderId,
+                userName,
+                "\"" + orderDate + "\"",
+                "\"" + String.join("; ", itemsName) + "\"", // Join items with semicolon and wrap in quotes
+                "\"" + String.join(";", quantity) + "\"", // Join quantities with semicolon and wrap in quotes
+                "\"" + String.join(";", subtotal) + "\"", // Join subtotals with semicolon and wrap in quotes
+                String.format("%.2f", totalPrice), // Format total price as 2 decimal places
+                "\"" + shippingAddress + "\"", // Wrap in quotes
+                "\"" + paymentMethod + "\"", // Wrap in quotes
+                "\"" + paymentStatus + "\"" // Wrap in quotes
         };
         orders.add(newOrder);
-    
+
         // Write updated order list back to the CSV file
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("../backend/src/main/resources/" + csvFile))) {
             if (new File("../backend/src/main/resources/" + csvFile).length() == 0) {
-                bw.write("OrderID,UserID,OrderDate,ItemsName,Quantity,Subtotal,TotalPrice,ShippingAddress,PaymentMethod,PaymentStatus\n"); // Write header
+                bw.write(
+                        "OrderID,UserID,OrderDate,ItemsName,Quantity,Subtotal,TotalPrice,ShippingAddress,PaymentMethod,PaymentStatus\n"); // Write
+                                                                                                                                          // header
             }
             for (String[] order : orders) {
                 bw.write(String.join(",", order));
@@ -294,23 +295,23 @@ public class Order {
     }
 
     public static Order getOrder(String csvFile) {
-        
-            InputStream inputStream = Product.class.getClassLoader().getResourceAsStream(csvFile);
-            if (inputStream == null) {
-                System.err.println("File not found in resources");
-            }
 
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-                    CSVReader csvReader = new CSVReader(br)) {
-                List<String[]> allRows = csvReader.readAll();// Read all rows
+        InputStream inputStream = Product.class.getClassLoader().getResourceAsStream(csvFile);
+        if (inputStream == null) {
+            System.err.println("File not found in resources");
+        }
 
-                String[] orderData = allRows.get(allRows.size() - 1);
-                
-                return new Order(orderData[0], orderData[1], orderData[2], 
-                Arrays.asList(orderData[3].split(";")), Arrays.asList(orderData[4].split(";")), 
-                Arrays.asList(orderData[5].split(";")), Double.parseDouble(orderData[6]), 
-                orderData[7], orderData[8], orderData[9]);
-                
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                CSVReader csvReader = new CSVReader(br)) {
+            List<String[]> allRows = csvReader.readAll();// Read all rows
+
+            String[] orderData = allRows.get(allRows.size() - 1);
+
+            return new Order(orderData[0], orderData[1], orderData[2],
+                    Arrays.asList(orderData[3].split(";")), Arrays.asList(orderData[4].split(";")),
+                    Arrays.asList(orderData[5].split(";")), Double.parseDouble(orderData[6]),
+                    orderData[7], orderData[8], orderData[9]);
+
         } catch (IOException e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
             return null;
@@ -319,10 +320,5 @@ public class Order {
             return null;
         }
     }
-    
-    
-        
-    
-
 
 }

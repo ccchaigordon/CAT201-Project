@@ -1,29 +1,3 @@
-// function AdminNavBar() {
-//     return (
-//       <>
-//         <header>
-//           <div className="header-container">
-//             <div className="logo">
-//               <a href="/admin">
-//                 <img src="/assets/logo.svg" alt="Logo" />
-//               </a>
-//             </div>
-//             <div>
-//             </div>
-//             <div className="cart-profile">
-//               <a href="/profile/login">
-//                 <img src="/assets/profile.svg" alt="Add href profile" />
-//               </a>
-//             </div>
-//           </div>
-//         </header>
-//       </>
-//     );
-//   }
-
-//   export default AdminNavBar;
-
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../style/NavBar.css";

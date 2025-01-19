@@ -20,18 +20,6 @@ function Privacy() {
           </div>
           Terms of Use
         </Link>
-        <Link
-          className="legalLink"
-          to="/legal/privacy-policy"
-          style={{ color: "#FFFFFF" }}
-        >
-          Privacy Policy
-          <div className="md-footer_button_right md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path>
-            </svg>
-          </div>
-        </Link>
       </div>
       <div
         className="section-3"
@@ -70,8 +58,7 @@ function Privacy() {
               <p className="tou-p">
                 <strong>Company</strong> (referred to as either &#x27;the
                 Company&#x27;, &#x27;We&#x27;, &#x27;Us&#x27; or &#x27;Our&#x27;
-                in this Agreement) refers to Pluck Your Heart String Music Co.,
-                a.
+                in this Agreement) refers to Music Emporium, a.
               </p>
             </li>
             <li>

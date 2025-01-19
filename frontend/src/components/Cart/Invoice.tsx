@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../global/NavBar";
-import Footer from "../global/Footer";
 
 type InvoiceItem = {
-    name: string;
-    quantity: number;
-    subtotal: number;
-  };
-  
-type InvoiceData = {
-    orderID: string;
-    userName: string;
-    orderDate: string;
-    items: InvoiceItem[];
-    totalPrice: number;
-    shippingAddress: string;
-    paymentMethod: string;
-    paymentStatus: string;
+  name: string;
+  quantity: number;
+  subtotal: number;
 };
 
+type InvoiceData = {
+  orderID: string;
+  userName: string;
+  orderDate: string;
+  items: InvoiceItem[];
+  totalPrice: number;
+  shippingAddress: string;
+  paymentMethod: string;
+  paymentStatus: string;
+};
 
 const Invoice: React.FC = () => {
   const [invoice, setInvoice] = useState<InvoiceData | null>(null);
@@ -29,7 +27,9 @@ const Invoice: React.FC = () => {
     // Fetch the JSON file from the backend.
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8083/backend/getInvoice");
+        const response = await fetch(
+          "http://localhost:8083/backend/getInvoice"
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -72,43 +72,112 @@ const Invoice: React.FC = () => {
   }
 
   return (
-    <div> <NavBar />
-    <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "600px", margin: "0 auto", padding: "1rem" }}>
-      <h1 style={{ textAlign: "center" }}>Invoice</h1>
-      <hr />
-      <div style={{ marginBottom: "1rem" }}>
-        <p><strong>Order ID:</strong> {invoice?.orderID}</p>
-        <p><strong>Customer Name:</strong> {invoice?.userName}</p>
-        <p><strong>Order Date:</strong> {invoice?.orderDate}</p>
-        <p><strong>Payment Method:</strong> {invoice?.paymentMethod}</p>
-        <p><strong>Payment Status:</strong> {invoice?.paymentStatus}</p>
-      </div>
-      <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "1rem" }}>
-        <thead>
-          <tr>
-            <th style={{ borderBottom: "2px solid #ddd", padding: "0.5rem", textAlign: "left" }}>Item Name</th>
-            <th style={{ borderBottom: "2px solid #ddd", padding: "0.5rem", textAlign: "right" }}>Quantity</th>
-            <th style={{ borderBottom: "2px solid #ddd", padding: "0.5rem", textAlign: "right" }}>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          {invoice?.items.map((item, index) => (
-            <tr key={index}>
-              <td style={{ borderBottom: "1px solid #eee", padding: "0.5rem" }}>{item.name}</td>
-              <td style={{ borderBottom: "1px solid #eee", padding: "0.5rem", textAlign: "right" }}>{item.quantity}</td>
-              <td style={{ borderBottom: "1px solid #eee", padding: "0.5rem", textAlign: "right" }}>RM {item.subtotal.toFixed(2)}</td>
+    <div>
+      {" "}
+      <NavBar />
+      <div
+        style={{
+          fontFamily: "Arial, sans-serif",
+          maxWidth: "600px",
+          margin: "0 auto",
+          padding: "1rem",
+        }}
+      >
+        <h1 style={{ textAlign: "center" }}>Invoice</h1>
+        <hr />
+        <div style={{ marginBottom: "1rem" }}>
+          <p>
+            <strong>Order ID:</strong> {invoice?.orderID}
+          </p>
+          <p>
+            <strong>Customer Name:</strong> {invoice?.userName}
+          </p>
+          <p>
+            <strong>Order Date:</strong> {invoice?.orderDate}
+          </p>
+          <p>
+            <strong>Payment Method:</strong> {invoice?.paymentMethod}
+          </p>
+          <p>
+            <strong>Payment Status:</strong> {invoice?.paymentStatus}
+          </p>
+        </div>
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            marginBottom: "1rem",
+          }}
+        >
+          <thead>
+            <tr>
+              <th
+                style={{
+                  borderBottom: "2px solid #ddd",
+                  padding: "0.5rem",
+                  textAlign: "left",
+                }}
+              >
+                Item Name
+              </th>
+              <th
+                style={{
+                  borderBottom: "2px solid #ddd",
+                  padding: "0.5rem",
+                  textAlign: "right",
+                }}
+              >
+                Quantity
+              </th>
+              <th
+                style={{
+                  borderBottom: "2px solid #ddd",
+                  padding: "0.5rem",
+                  textAlign: "right",
+                }}
+              >
+                Subtotal
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div style={{ textAlign: "right", marginTop: "1rem" }}>
-        <h3>Total: RM {invoice?.totalPrice.toFixed(2)}</h3>
+          </thead>
+          <tbody>
+            {invoice?.items.map((item, index) => (
+              <tr key={index}>
+                <td
+                  style={{ borderBottom: "1px solid #eee", padding: "0.5rem" }}
+                >
+                  {item.name}
+                </td>
+                <td
+                  style={{
+                    borderBottom: "1px solid #eee",
+                    padding: "0.5rem",
+                    textAlign: "right",
+                  }}
+                >
+                  {item.quantity}
+                </td>
+                <td
+                  style={{
+                    borderBottom: "1px solid #eee",
+                    padding: "0.5rem",
+                    textAlign: "right",
+                  }}
+                >
+                  RM {item.subtotal.toFixed(2)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ textAlign: "right", marginTop: "1rem" }}>
+          <h3>Total: RM {invoice?.totalPrice.toFixed(2)}</h3>
+        </div>
+        <div style={{ marginTop: "2rem" }}>
+          <h3>Shipping Address</h3>
+          <p>{invoice?.shippingAddress}</p>
+        </div>
       </div>
-      <div style={{ marginTop: "2rem" }}>
-        <h3>Shipping Address</h3>
-        <p>{invoice?.shippingAddress}</p>
-      </div>
-    </div>
     </div>
   );
 };

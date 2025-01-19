@@ -59,24 +59,26 @@ function Keyboards() {
     }
   }, []);
 
-   useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          // Fetch data from the servlet
-          const response = await fetch("http://localhost:8083/backend/getProducts?category=keyboard");
-          if (!response.ok) {
-            throw new Error("Failed to fetch keyboard data");
-          }
-          const fetchedProducts: ProductInfo[] = await response.json();
-        
-          setProducts(fetchedProducts);
-        } catch (error) {
-          console.error("Error fetching products:", error);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Fetch data from the servlet
+        const response = await fetch(
+          "http://localhost:8083/backend/getProducts?category=keyboard"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch keyboard data");
         }
-      };
-    
-      fetchProducts();
-    }, []);
+        const fetchedProducts: ProductInfo[] = await response.json();
+
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     if (buttonClicked && productSectionRef.current) {
@@ -182,10 +184,9 @@ function Keyboards() {
                   <h2>{product.name || "No name available"}</h2>
                   <h3>
                     RM{" "}
-                    {product.price.toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }) || "No price available"}
+                    {Number(product.price)
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </h3>
                   <div className="rating">{renderStars(product.rating)}</div>
                 </div>

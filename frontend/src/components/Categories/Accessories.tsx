@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-//import Papa from "papaparse";
 import { Link } from "react-router-dom";
 
 import NavBar from "../global/NavBar";
 import SearchBar from "../global/SearchBar";
 import Footer from "../global/Footer";
-import "../../style/Products.css"; 
+import "../../style/Products.css";
 
 type ProductInfo = {
   id: string;
@@ -60,23 +59,25 @@ function Accessories() {
   }, []);
 
   useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          // Fetch data from the servlet
-          const response = await fetch("http://localhost:8083/backend/getProducts?category=accessories");
-          if (!response.ok) {
-            throw new Error("Failed to fetch accessories data");
-          }
-          const fetchedProducts: ProductInfo[] = await response.json();
-        
-          setProducts(fetchedProducts);
-        } catch (error) {
-          console.error("Error fetching products:", error);
+    const fetchProducts = async () => {
+      try {
+        // Fetch data from the servlet
+        const response = await fetch(
+          "http://localhost:8083/backend/getProducts?category=accessories"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch accessories data");
         }
-      };
-    
-      fetchProducts();
-    }, []);
+        const fetchedProducts: ProductInfo[] = await response.json();
+
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     if (buttonClicked && productSectionRef.current) {
@@ -181,10 +182,9 @@ function Accessories() {
                   <h2>{product.name || "No name available"}</h2>
                   <h3>
                     RM{" "}
-                    {product.price.toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }) || "No price available"}
+                    {Number(product.price)
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </h3>
                   <div className="rating">{renderStars(product.rating)}</div>
                 </div>

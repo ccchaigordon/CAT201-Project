@@ -51,7 +51,7 @@ const EditUserDetails: React.FC = () => {
 
   const handleInputChange = (field: keyof UserDetails, value: string) => {
     if (field === "email") {
-    //   const ratingValue = parseFloat(value);
+      //   const ratingValue = parseFloat(value);
       if (value === "") {
         setWarningMessage((prev) => ({
           ...prev,
@@ -73,8 +73,6 @@ const EditUserDetails: React.FC = () => {
     }));
   };
 
-
-  
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
     // console.log("User details:", userDetails);

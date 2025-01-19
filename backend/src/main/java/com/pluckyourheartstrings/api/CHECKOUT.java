@@ -63,7 +63,8 @@ public class CHECKOUT extends HttpServlet {
 
             // Convert JSON to a map using Gson
             // Convert the JSON to a Map<String, Object> to support various data types
-            Map<String, Object> requestMap = gson.fromJson(requestBody, new TypeToken<Map<String, Object>>() {}.getType());
+            Map<String, Object> requestMap = gson.fromJson(requestBody, new TypeToken<Map<String, Object>>() {
+            }.getType());
             Map<String, Object> responseMap = new HashMap<>();
 
             // Extract fields that are strings
@@ -77,36 +78,35 @@ public class CHECKOUT extends HttpServlet {
             String paymentStatus = (String) requestMap.get("paymentStatus");
 
             // Extract cartItems as a list of Product objects
-            Type productListType = new TypeToken<List<Product>>() {}.getType();
+            Type productListType = new TypeToken<List<Product>>() {
+            }.getType();
             List<Product> cartItems = gson.fromJson(gson.toJson(requestMap.get("cartItems")), productListType);
 
             // Combine shipping address components
             String shippingAddress = address + ", " + country + ", " + city + ", " + postCode;
-            //System.out.println("Shipping Address: " + shippingAddress);
+            // System.out.println("Shipping Address: " + shippingAddress);
 
             Order order = new Order();
-            boolean checkoutSuccess = order.checkOut(userName, cartItems, orderDate, shippingAddress, paymentMethod, paymentStatus);
+            boolean checkoutSuccess = order.checkOut(userName, cartItems, orderDate, shippingAddress, paymentMethod,
+                    paymentStatus);
 
             System.out.println("checkoutSuccess: " + checkoutSuccess);
 
-            if(checkoutSuccess) {
+            if (checkoutSuccess) {
                 System.out.println("Checked out successfully.");
             }
 
             responseMap.put("status", checkoutSuccess);
 
-            
-
-
             // Set the response type to JSON
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
 
-        //     Map<String, Object> responseMap = new HashMap<>();
-        //     responseMap.put("status", "success");
-        //     responseMap.put("message", "Product updated successfully.");
-        //     response.setStatus(HttpServletResponse.SC_OK); // 200 OK
-        //     response.getWriter().write(new Gson().toJson(responseMap));
+            // Map<String, Object> responseMap = new HashMap<>();
+            // responseMap.put("status", "success");
+            // responseMap.put("message", "Product updated successfully.");
+            // response.setStatus(HttpServletResponse.SC_OK); // 200 OK
+            // response.getWriter().write(new Gson().toJson(responseMap));
             String jsonResponse = gson.toJson(responseMap);
             response.getWriter().write(jsonResponse);
 
@@ -119,7 +119,7 @@ public class CHECKOUT extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Internal server error: " + e.getMessage());
         }
-        
+
     }
 
 }

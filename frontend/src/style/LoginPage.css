@@ -1,27 +1,14 @@
 .login-page {
   display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  height: 100vh;
+  height: calc(100vh - 5rem);
   background-color: #f0f0f0;
   color: black;
-  position: relative; /* To enable absolute positioning of the header */
-}
-
-.login-header {
-  position: absolute; /* Place the header at the top of the page */
-  top: 180px; /* Distance from the top of the page */
-  width: 100%; /* Make the header span the full width */
-  text-align: center; /* Center the text horizontally */
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
 }
 
 .login-container {
-  max-width: 400px;
-  width: 100%;
+  margin: auto;
+  width: 400px;
   text-align: left;
   align-items: center;
   background-color: #f9f9f9;
@@ -30,27 +17,28 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-field {
-  display: block;
-  margin: 10px 0;
-  /* margin-bottom: 20px; */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.form-field label {
-  display: block;
-  margin-bottom: 20px;
+.form-field {
+  margin: 0;
 }
 
 .form-field input {
-  width: 100%;
+  width: 370px;
+  margin: 0 auto;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .login-container button {
-  width: 102%;
-  margin-top: 15px;
+  width: 100%;
+  margin: 0 auto;
   padding: 10px;
   align-items: center;
   font-size: 15px;
@@ -64,18 +52,4 @@
 .login-container button:hover {
   background-color: #0056b3;
   color: white;
-}
-
-.form-field.remember-me {
-  display: flex;
-  margin-top: 10px;
-  align-items: start;
-}
-
-.form-field.remember-me label {
-  display: flex;
-  font-size: small;
-  color: #313131;
-  align-items: center;
-  margin-bottom: 0;
 }

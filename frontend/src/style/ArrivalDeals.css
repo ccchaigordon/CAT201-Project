@@ -1,45 +1,52 @@
 .deals-section {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    margin: 0 auto;
-    background-image: url('assets/bg_1.jpg');
-    background-size: cover;
-    min-height: 600px;
-    background-color: rgba(0, 0, 0, 0.7);
-    background-blend-mode: overlay;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 0 auto;
+  background-image: url("assets/bg_1.jpg");
+  background-size: cover;
+  min-height: 600px;
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode: overlay;
 }
 
-.deals-banner, .arrival-banner{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
+.deals-banner,
+.arrival-banner {
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .banner-image {
-    width: 45%; 
-    object-fit: cover;  /* Ensures the image covers the area without distorting aspect ratio */
-    height: 200px;  
+  width: 40%;
+  object-fit: cover;
+  height: 200px;
 }
 
 .banner-info {
-    width: 60%;
-    max-width: 700px;
-    padding: 0 20px 0 20px;
-    background: #000000;
-    font-family: 'Poppins', sans-serif; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 200px;  
+  max-width: 700px;
+  padding: 0 30px 0 30px;
+  background: #000000;
+  font-size: 0.85rem;
+  font-family: "Poppins", sans-serif;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  gap: 20px;
 }
 
-.deals-banner, .arrival-banner {
-    height: auto;  
-    max-height: 300px; 
+.deals-banner,
+.arrival-banner {
+  height: auto;
+  max-height: 300px;
 }
 
-.hot-deals, .new-arrivals{
-    margin: 0px;
+.hot-deals,
+.new-arrivals {
+  margin: 0px;
 }

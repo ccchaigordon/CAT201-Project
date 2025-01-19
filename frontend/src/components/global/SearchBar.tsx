@@ -16,67 +16,55 @@ type ProductInfo = {
 
 function SearchBar() {
   const navigate = useNavigate();
-  const [query, setQuery] = useState(""); // State for search query
-  const [results, setResults] = useState<ProductInfo[]>([]); // State for search results
-  const [message, setMessage] = useState(""); // State for message
+  const [query, setQuery] = useState("");
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value); // Update query state when input changes
+    setQuery(event.target.value);
   };
 
-  const handleSearchSubmit = async (event: React.FormEvent) => {
-    event.preventDefault(); // Prevent form submission
-
-    if (query.trim() === "")
-      return; // Ignore if query is empty
+  const handleSearchSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault(); // Correct event type used here
+    if (query.trim() === "") {
+      console.log("Search query is empty.");
+      return; // Return early if the query is empty
+    }
 
     try {
-      const response = await fetch(`http://localhost:8083/backend/getProductsByNameBrand?query=${query}`);     
-
+      const response = await fetch(
+        `http://localhost:8083/backend/getProductsByNameBrand?query=${query}`
+      );
       if (response.ok) {
         const data = await response.json();
-        const productData = data.products;
-
-        if (!data.status) {
-          setMessage("Product not found");
-          // navigate("/admin/enterId", { state: { product: productData } });
-        } else {
-          setMessage("Product found");
-          //console.log(data);
-          //jsonContainer.textContent = JSON.stringify(data, null, 2)
-          console.log(productData);
-          navigate("/searchedproducts", { state: { product: productData } });
-        }
-
-        setResults(data); // Update state with search results
+        const productData: ProductInfo[] = data.products;
+        navigate("/searchedproducts", { state: { products: productData } });
       } else {
-        setResults([]); // Handle errors or no results
+        console.error("No results found or error fetching data");
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      setResults([]); // Handle error
     }
   };
 
   return (
-    <div>
-      <form className="search-container" onSubmit={handleSearchSubmit}>
-        <input
-          type="text"
-          id="search-bar"
-          placeholder="Search item or brand"
-          value={query}
-          onChange={handleSearchChange}
+    <form className="search-container" onSubmit={handleSearchSubmit}>
+      <input
+        type="text"
+        id="search-bar"
+        placeholder="Search item or brand"
+        value={query}
+        onChange={handleSearchChange}
+        style={{ color: "#000000" }}
+      />
+      <div>
+        <img
+          className="search-icon"
+          src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
+          alt="Search"
         />
-        <a href="#" onClick={handleSearchSubmit}>
-          <img
-            className="search-icon"
-            src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
-            alt="search"
-          />
-        </a>
-      </form>      
-    </div>
+      </div>
+    </form>
   );
 }
 

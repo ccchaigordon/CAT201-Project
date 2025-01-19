@@ -93,7 +93,16 @@ const CartPage: React.FC = () => {
           <div className="cart-container">
             <div className="header-n-clear-all">
               <h1 className="cart-header">SHOPPING CART</h1>
-              <button onClick={handClearAll}>Clear All</button>
+              <button
+                onClick={handClearAll}
+                style={{
+                  width: "100px",
+                  textAlign: "right",
+                  backgroundColor: "#ffffff",
+                }}
+              >
+                Clear All
+              </button>
             </div>
 
             {cartItems.length > 0 ? (
@@ -118,10 +127,9 @@ const CartPage: React.FC = () => {
                     </h3>
                     <p className="price">
                       Price: RM{" "}
-                      {item.price.toLocaleString("en-US", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
+                      {Number(item.price)
+                        .toFixed(2)
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </p>
                     <p
                       style={{
