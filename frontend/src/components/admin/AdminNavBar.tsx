@@ -57,7 +57,11 @@ function AdminNavBar() {
         <div className="header-container">
           <div className="logo">
             <a href="/admin">
-              <img src="/public/logo.svg" alt="Logo" style={{ width: "120px", margin: "0.25rem 0" }}/>
+              <img
+                src="/logo.svg"
+                alt="Logo"
+                style={{ width: "120px", margin: "0.25rem 0" }}
+              />
             </a>
           </div>
           <div></div>

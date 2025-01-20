@@ -54,7 +54,7 @@ const AdminProfile: React.FC = () => {
     console.error("Product data is null or undefined");
 
   useEffect(() => {
-    setUserDetails({ userID: userId, name, email, password, address, phoneNum, role });
+    setUserDetails({ userID: userId, name: name, email, password, address, phoneNum, role });
 }, [userId, name, email, password, address, phoneNum, role]);
 
 
@@ -98,6 +98,7 @@ const AdminProfile: React.FC = () => {
     e.preventDefault();
     // console.log("User details:", userDetails);
     console.log("User ID:", userDetails.userID);
+    console.log("Name:", userDetails.name);
 
     try {
       const response = await fetch(`http://localhost:8083/backend/updateUser`, {
@@ -166,8 +167,8 @@ const AdminProfile: React.FC = () => {
             const id = useId();
             const typedField = field as keyof UserDetails;
             return (
-              <div className="form-field" key={field}>
-                <label htmlFor={id} className="from-label">
+              <div className="form-field" key={field} style={{marginBottom: "16px", justifyContent: "space-between"}}>
+                <label htmlFor={id} className="from-label" style={{marginBottom: "8px"}}>
                   {fieldDisplayedNames[typedField]}
                 </label>
                 <input

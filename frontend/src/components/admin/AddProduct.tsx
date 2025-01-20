@@ -140,13 +140,6 @@ const AddProduct: React.FC = () => {
       [field]: value, // Explicitly update the field
     }));
   };
-  // const handleEditClick = (field: string) => {
-  //   setEditableFields((prev) => ({ ...prev, [field]: true }));
-  // };
-
-  //   const handleEditClick = (field: keyof ProductDetails) => {
-  //     setEditableFields((prev) => ({ ...prev, [field]: !prev[field] }));
-  //   };
 
   const handleSaveChangesClick = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,20 +195,6 @@ const AddProduct: React.FC = () => {
         ...prev,
         form: "Network error. Please try again.",
       }));
-      //     const data = await response.json();
-
-      //     if (data.status) {
-      //       console.log(data.status);
-      //       console.log("Product updated successfully");
-      //       //navigate("/profile");
-      //     } else {
-      //       console.error("Failed to update product");
-      //     }
-      //   } else {
-      //     console.error("Failed to update product oho");
-      //   }
-      // } catch (error) {
-      //   console.error("Unable to connect to server", error);
     }
   };
 
@@ -223,15 +202,6 @@ const AddProduct: React.FC = () => {
     setSuccessMessage(null);
     navigate("/admin");
   };
-
-  //   // Check if productDetails is null
-  //   if (!product) {
-  //     return (
-  //       <p style={{ color: "white" }}>
-  //         No product data found. Please go back and try again.
-  //       </p>
-  //     );
-  //   }
 
   // Display the product details
   return (
@@ -252,71 +222,73 @@ const AddProduct: React.FC = () => {
           <form>
             <h1 style={{ color: "black", textAlign: "center" }}>Add Product</h1>
 
-            {Object.keys(productDetails).map((field) => {
-              const typedField = field as keyof ProductDetails;
-              return (
-                <div
-                  key={field}
-                  className="form-field"
-                  style={{ color: "black" }}
-                >
-                  <label htmlFor={field}>
-                    {fieldDisplayNames[typedField]}
-                    <span style={{ color: "red" }}> *</span>
-                  </label>
-                  {field === "brand" ? (
-                    <select
-                      className="custom-select"
+          {Object.keys(productDetails).map((field) => {
+            const typedField = field as keyof ProductDetails;
+            return (
+              <div
+                key={field}
+                className="form-field"
+                style={{ color: "black" }}
+              >
+                <label htmlFor={field}>
+                  {fieldDisplayNames[typedField]}
+                  <span style={{ color: "red" }}> *</span>
+                </label>
+                {field === "brand" ? (
+                  <select
+                    className="custom-select"
+                    id={field}
+                    value={productDetails[typedField]}
+                    onChange={(e) =>
+                      handleInputChange(typedField, e.target.value)
+                    }
+                    required
+                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%"}}
+                  >
+                    <option value="" disabled>
+                      Select a brand
+                    </option>
+                    {brandOptions.map((brand) => (
+                      <option key={brand} value={brand}>
+                        {brand}
+                      </option>
+                    ))}
+                  </select>
+                ) : field === "category" ? (
+                  <select
+                    id={field}
+                    value={productDetails[typedField]}
+                    onChange={(e) =>
+                      handleInputChange(typedField, e.target.value)
+                    }
+                    required
+                    className="custom-select"
+                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%"}}
+                  >
+                    <option value="" disabled>
+                      Select a category
+                    </option>
+                    {categoryOptions.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                ) : field === "price" ? (
+                  <>
+                    <input
                       id={field}
-                      value={productDetails[typedField]}
+                      type="number"
+                      value={productDetails[typedField] || ""}
                       onChange={(e) =>
                         handleInputChange(typedField, e.target.value)
                       }
                       required
-                    >
-                      <option value="" disabled>
-                        Select a brand
-                      </option>
-                      {brandOptions.map((brand) => (
-                        <option key={brand} value={brand}>
-                          {brand}
-                        </option>
-                      ))}
-                    </select>
-                  ) : field === "category" ? (
-                    <select
-                      id={field}
-                      value={productDetails[typedField]}
-                      onChange={(e) =>
-                        handleInputChange(typedField, e.target.value)
-                      }
-                      required
-                      className="custom-select"
-                    >
-                      <option value="" disabled>
-                        Select a category
-                      </option>
-                      {categoryOptions.map((category) => (
-                        <option key={category} value={category}>
-                          {category}
-                        </option>
-                      ))}
-                    </select>
-                  ) : field === "price" ? (
-                    <>
-                      <input
-                        id={field}
-                        type="number"
-                        value={productDetails[typedField] || ""}
-                        onChange={(e) =>
-                          handleInputChange(typedField, e.target.value)
-                        }
-                        required
-                        className="custom-input"
-                        step="0.01" // Allow decimal values
-                        min="0.00" // Minimum value
-                      />
-                      {/* {warningMessage.price && (
+                      className="custom-input"
+                      step="0.01" // Allow decimal values
+                      min="0.00" // Minimum value
+                    />
+                    {/* {warningMessage.price && (
                       <p style={{ color: "red" }}>{warningMessage.price}</p>
                     )} */}
                     </>

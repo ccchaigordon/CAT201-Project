@@ -51,11 +51,12 @@
 .form-field label {
   font-weight: bold;
   margin-right: 8px;
+  margin-bottom: auto;
 }
 
 .form-field input {
   flex-grow: 1;
-  width: 80%;
+  width: 88%;
   padding: 8px;
   margin-right: 8px;
   border: 1px solid #ccc;
@@ -64,6 +65,7 @@
 }
 
 .form-field button {
+  margin-left: auto;
   padding: 8px 12px;
   background-color: #007bff;
   color: white;
@@ -119,7 +121,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   border: 1px solid #ccc; 
-  border-radius: 8px; /* Rounded corners for elegance */
+  border-radius: 4px; /* Rounded corners for elegance */
   appearance: none; /* Remove default arrow */
   background-color: #ffffff; /* Light background color */
   background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://wwwwww.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="%23000" stroke-width=".75" d="M2 0L0 2.5h4z"/></svg>'); /* Custom arrow */
@@ -143,4 +145,3 @@ button:hover {
   border-color: #0056b3; /* Focus border color */
   box-shadow: 0 0 8px rgba(0, 86, 179, 0.5); /* Enhance focus visibility */
 }
-

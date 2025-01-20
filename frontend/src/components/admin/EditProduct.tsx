@@ -171,7 +171,7 @@ const EditProduct: React.FC = () => {
         <AdminNavBar />
       </div>
       <div className="content">
-        <div className="form-container">
+        <div className="form-container" style={{ backgroundColor: "white" }}>
           <form>
             <h1 style={{ color: "black", textAlign: "center" }}>
               Edit Product
@@ -184,7 +184,15 @@ const EditProduct: React.FC = () => {
                 <div
                   key={field}
                   className="form-field"
-                  style={{ color: "black" }}
+                  style={{
+                    color: "black",
+                    backgroundColor: "white",
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "30px",
+                    alignItems: "center",
+                    marginBottom: "20px",
+                  }}
                 >
                   <label htmlFor={id} className="form-label">
                     {fieldDisplayNames[typedField]}:
@@ -198,6 +206,7 @@ const EditProduct: React.FC = () => {
                       }
                       className="custom-select"
                       disabled={isFieldDisabled(typedField)}
+                      style={{ marginLeft: "52px", padding: "8px" }}
                     >
                       {brandOptions.map((brand) => (
                         <option key={brand} value={brand}>
@@ -218,6 +227,7 @@ const EditProduct: React.FC = () => {
                         disabled={isFieldDisabled(typedField)}
                         step={0.01}
                         min="0.00"
+                        style={{ marginLeft: "56px" }}
                       />
                     </>
                   ) : field === "rating" ? (
@@ -234,6 +244,7 @@ const EditProduct: React.FC = () => {
                         step={1}
                         min="1"
                         max="5"
+                        style={{ marginLeft: "45px" }}
                       />
                       {warningMessage.rating && (
                         <p style={{ color: "red" }}>{warningMessage.rating}</p>
@@ -252,6 +263,77 @@ const EditProduct: React.FC = () => {
                         disabled={isFieldDisabled(typedField)}
                         step={1}
                         min="0"
+                        style={{ marginLeft: "30px" }}
+                      />
+                    </>
+                  ) : field === "imgSrc" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="text"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        style={{ marginLeft: "-5px" }}
+                      />
+                    </>
+                  ) : field === "name" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="text"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        style={{ marginLeft: "55px" }}
+                      />
+                    </>
+                  ) : field === "category" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="text"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        style={{ marginLeft: "28px" }}
+                      />
+                    </>
+                  ) : field === "description" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="text"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        style={{ marginLeft: "8px" }}
+                      />
+                    </>
+                  ) : field === "specs" ? (
+                    <>
+                      <input
+                        id={field}
+                        type="text"
+                        value={productDetails[typedField]}
+                        onChange={(e) =>
+                          handleInputChange(typedField, e.target.value)
+                        }
+                        className="custom-input"
+                        disabled={isFieldDisabled(typedField)}
+                        style={{ marginLeft: "-14px" }}
                       />
                     </>
                   ) : (
@@ -264,6 +346,7 @@ const EditProduct: React.FC = () => {
                       }
                       className="custom-input"
                       disabled={isFieldDisabled(typedField)}
+                      style={{ marginLeft: "20px" , paddingLeft: "10px" }}
                     />
                   )}
                   {/* {!nonEditableFields.includes(typedField) && (
