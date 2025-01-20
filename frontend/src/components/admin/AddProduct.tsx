@@ -230,7 +230,7 @@ const AddProduct: React.FC = () => {
                 className="form-field"
                 style={{ color: "black" }}
               >
-                <label htmlFor={field}>
+                <label htmlFor={field} style={{ marginBottom: 5 }}>
                   {fieldDisplayNames[typedField]}
                   <span style={{ color: "red" }}> *</span>
                 </label>
@@ -243,7 +243,7 @@ const AddProduct: React.FC = () => {
                       handleInputChange(typedField, e.target.value)
                     }
                     required
-                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%"}}
+                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%", marginBottom: 5 , marginLeft: "22%"}}
                   >
                     <option value="" disabled>
                       Select a brand
@@ -263,7 +263,7 @@ const AddProduct: React.FC = () => {
                     }
                     required
                     className="custom-select"
-                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%"}}
+                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%", marginBottom: 5 , marginLeft: "22%"}}
                   >
                     <option value="" disabled>
                       Select a category
@@ -287,6 +287,7 @@ const AddProduct: React.FC = () => {
                       className="custom-input"
                       step="0.01" // Allow decimal values
                       min="0.00" // Minimum value
+                      style={{ marginBottom: 5 , marginLeft: "22%"}}
                     />
                     {/* {warningMessage.price && (
                       <p style={{ color: "red" }}>{warningMessage.price}</p>
@@ -306,6 +307,7 @@ const AddProduct: React.FC = () => {
                         step="1"
                         min="1"
                         max="5"
+                        style={{ marginBottom: 5 , marginLeft: "22%"}}
                       />
                       {warningMessage.rating && (
                         <p style={{ color: "red" }}>{warningMessage.rating}</p>
@@ -323,6 +325,21 @@ const AddProduct: React.FC = () => {
                       className="custom-input"
                       step={1}
                       min="0"
+                      style={{ marginBottom: 10 , marginLeft: "22%"}}
+                    />
+                  ) : field === "imgSrc" ? (
+                    <input
+                      id={field}
+                      type="number"
+                      value={productDetails[typedField] || ""}
+                      onChange={(e) =>
+                        handleInputChange(typedField, e.target.value)
+                      }
+                      required
+                      className="custom-input"
+                      step={1}
+                      min="0"
+                      style={{ marginBottom: 10 , marginLeft: "22%"}}
                     />
                   ) : field === "id" ? (
                     <>
@@ -335,6 +352,7 @@ const AddProduct: React.FC = () => {
                         }
                         required
                         className="custom-input"
+                        style={{ marginBottom: 5 , marginLeft: "22%"}}
                       />
                       {warningMessage.id && (
                         <p style={{ color: "red" }}>{warningMessage.id}</p>
@@ -349,6 +367,7 @@ const AddProduct: React.FC = () => {
                         handleInputChange(typedField, e.target.value)
                       }
                       required
+                      style={{ marginBottom: 5 , marginLeft: "22%" }}
                     />
                   )}
                 </div>
