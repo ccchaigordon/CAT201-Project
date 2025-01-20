@@ -243,7 +243,7 @@ const AddProduct: React.FC = () => {
                       handleInputChange(typedField, e.target.value)
                     }
                     required
-                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%", marginBottom: 5 , marginLeft: "22%"}}
+                    style={{ maxWidth: "66.7%", marginBottom: 5, marginLeft: "22%"}}
                   >
                     <option value="" disabled>
                       Select a brand
@@ -263,7 +263,7 @@ const AddProduct: React.FC = () => {
                     }
                     required
                     className="custom-select"
-                    style={{ marginLeft: "16.5%" ,maxWidth: "66.7%", marginBottom: 5 , marginLeft: "22%"}}
+                    style={{ maxWidth: "66.7%", marginBottom: 5, marginLeft: "22%"}}
                   >
                     <option value="" disabled>
                       Select a category
