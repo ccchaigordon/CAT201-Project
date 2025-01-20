@@ -31,7 +31,7 @@ const EditUserDetails: React.FC = () => {
   });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
-  const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
+  const nonEditableFields: (keyof UserDetails)[] = ["userID", "role"];
   const navigate = useNavigate();
 
   console.log("User Data:", user);
@@ -132,7 +132,7 @@ const EditUserDetails: React.FC = () => {
   };
 
   const isFieldDisabled = (field: keyof UserDetails) => {
-    const nonEditableFields: (keyof UserDetails)[] = ["userID","role"];
+    const nonEditableFields: (keyof UserDetails)[] = ["userID", "role"];
     return nonEditableFields.includes(field);
   };
 
@@ -148,9 +148,20 @@ const EditUserDetails: React.FC = () => {
             const id = useId();
             const typedField = field as keyof UserDetails;
             return (
-              <div className="form-field" key={field}>
-                <label htmlFor={id} className="from-label">
-                  {fieldDisplayedNames[typedField]}
+              <div
+                className="form-field"
+                key={field}
+                style={{ marginBottom: 10 }}
+              >
+                <label
+                  htmlFor={id}
+                  className="from-label"
+                  style={{ marginBottom: 5 }}
+                >
+                  {fieldDisplayedNames[typedField]}:
+                  {(field === "email" || field === "password") && (
+                    <span style={{ color: "red" }}> *</span>
+                  )}
                 </label>
                 <input
                   id={id}
@@ -161,6 +172,8 @@ const EditUserDetails: React.FC = () => {
                   }
                   className="custom-input"
                   disabled={isFieldDisabled(typedField)}
+                  style={{ marginLeft: 125, width: 456 }}
+                  required={field === "email" || field === "password"}
                 />
               </div>
             );

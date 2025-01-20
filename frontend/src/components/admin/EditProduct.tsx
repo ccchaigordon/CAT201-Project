@@ -349,14 +349,6 @@ const EditProduct: React.FC = () => {
                       style={{ marginLeft: "20px" , paddingLeft: "10px" }}
                     />
                   )}
-                  {/* {!nonEditableFields.includes(typedField) && (
-                  <button
-                    type="button"
-                    onClick={() => handleEditClick(typedField)}
-                  >
-                    {editableFields[typedField] ? "Lock" : "Edit"}
-                  </button>
-                )} */}
                 </div>
               );
             })}
